@@ -1,0 +1,90 @@
+---
+type Props = {
+    color: string;
+}
+
+const {color} = Astro.props
+
+---
+<section class="section-container">
+    <div class="cic">
+        <div class="scroll">
+            <p>OR START SCROLLING</p>
+        </div>
+        <img src="/images/synthscape.png" class="background-image" alt="">
+        <div class="content-container">
+            <h1 class="loveless-header">
+                MR.<br>
+                LOVELESS<br>
+                BRISBANE</h1>
+            <img src="/images/loveless-pink.png" class="loveless-logo" alt="">
+            <ul class="nav-list">
+                <li>EVENTS</li>
+                <li>GALLERY</li>
+                <li>TICKETS</li>
+                <li>MERCH</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<style>
+    .section-container {
+        width: 100vw;
+        min-height: 100vh;
+        padding: var(spa); 
+        display: flex;
+        flex-direction: column;
+        background-color: var(--loveless-pink);
+    }
+
+    .cic {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 1.5rem;
+        display: flex;
+        flex-grow: 1;
+        justify-content: center;
+        align-items: center;
+        border-radius: 1.5rem;
+        overflow: hidden;
+        color: var(--loveless-pink);
+        background-color: var(--loveless-black);
+    }
+
+    .scroll {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        z-index: 20;
+        margin-bottom: 3rem;
+    }
+
+    .background-image {
+        position: absolute;
+        z-index: 10;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .content-container {
+        display: flex;
+        justify-content: center;
+        z-index: 30;
+    }
+
+    .loveless-header {
+        text-align: right;
+        color: var(--loveless-black); /* Ensure you define this color in your CSS */
+        -webkit-text-stroke: 1px white; /* Text stroke effect */
+        font-size: 4rem; /* Adjust font size as needed */
+    }
+
+    .loveless-logo {
+        width: 300px; /* Adjust size as needed */
+    }
+</style>
