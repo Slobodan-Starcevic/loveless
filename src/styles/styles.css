@@ -1,19 +1,24 @@
 @font-face {
     font-family: 'Mortend';
-    src: url('/public/fonts/mortend.woff2') format('woff2'),
-         url('/public/fonts/mortend.woff') format('woff');
+    src: url('/fonts/mortend.woff2') format('woff2'),
+         url('/fonts/mortend.woff') format('woff');
     font-weight: normal;
     font-style: normal; 
 }
 @font-face {
     font-family: 'TT';
-    src: url('/public/fonts/TT.woff2') format('woff2'),
-            url('public/fonts/TT.woff2') format('woff');
+    src: url('/fonts/TT.woff2') format('woff2'),
+            url('/fonts/TT.woff2') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 * {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+
     font-family: 'TT', sans-serif;
 
     --loveless-pink: hsl(304,90%,67%,100%);
@@ -50,16 +55,79 @@
     --spacing-2xl: 2.5rem;
     --spacing-3xl: 3rem;
     --spacing-4xl: 4rem;
+
+    --radius-2xs: .125rem;
+    --radius-xs: .25rem;
+    --radius-s: .375rem;
+    --radius-m: .5rem;
+    --radius-l: .75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+
+    --font-size-s: 1rem;
+    --font-size-m: 2rem;
+    --font-size-l: 3rem;
+    --font-size-xl: 4rem;
+}
+
+h1, h2, h3, h4, h5, h6, p, li, a {
+    margin: 0; 
+    padding: 0;
 }
 
 h1{
     font-family: 'Mortend', sans-serif;
+    font-size: var(--font-size-xl);
+    line-height: 1.2;
+    margin-bottom: -13px;
 }
-
+/* MISCELLANEOUS STYLES */
+.bg-pink{
+    background-color: var(--loveless-pink);
+}
+.bg-blue{
+    background-color: var(--loveless-blue);
+}
+.color-pink{
+    color: var(--loveless-pink);
+}
+.color-blue{
+    color: var(--loveless-blue);
+}
 .stroke-pink{
     text-shadow: 
         1px 1px 0px var(--loveless-pink),
         -1px 1px 0px var(--loveless-pink),
         1px -1px 0px var(--loveless-pink),
         -1px -1px 0px var(--loveless-pink);
+}
+
+/* SECTION BASE STYLING */
+.section-wrapper {
+    width: 100vw;
+    min-height: 100vh;
+    padding: var(--spacing-s);
+    display: flex;
+    flex-direction: column;
+}
+
+.cic {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--radius-2xl);
+    background-color: var(--loveless-black);
+
+    .background-image {
+        z-index: 0;
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 }

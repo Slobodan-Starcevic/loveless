@@ -1,0 +1,44 @@
+---
+type Props = {
+
+}
+
+const {} = Astro.props
+
+---
+<section class="section-wrapper bg-blue color-blue">
+    <div class="cic">
+        <div class="content-wrapper">
+            <div class="text-wrapper">
+
+            </div>
+            <div class="image-wrapper">
+                <img src="/images/poster.png" class="small-image" alt="">
+                <img src="/images/poster.png" class="big-image" alt="">
+                <img src="/images/poster.png" class="small-image" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+<style lang="scss">
+    .content.wrapper{
+        display: flex;
+    }
+
+    .text-wrapper{
+        flex: 1;
+    }
+
+    .image-wrapper{
+        flex: 1;
+
+        .big-image{
+            width: 400px;
+            border: 1px solid var(--loveless-blue);
+        }
+
+        .small-image{
+            width: 250px;
+        }
+    }
+</style>
