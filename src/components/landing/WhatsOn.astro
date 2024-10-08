@@ -1,4 +1,5 @@
 ---
+import { links } from '../../utils/links'
 type Props = {
 
 }
@@ -9,36 +10,134 @@ const {} = Astro.props
 <section class="section-wrapper bg-blue color-blue">
     <div class="cic">
         <div class="content-wrapper">
-            <div class="text-wrapper">
-
+            <div class="helper-wrapper">
+                <div class="text-wrapper">
+                    <div class="header-wrapper">
+                        <h1 class="back-1 stroke-blue">WHAT'S ON</h1>
+                        <h1 class="back-2 stroke-blue">WHAT'S ON</h1>
+                        <h1 class="front">WHAT'S ON</h1>
+                    </div>
+                    <div class="p-wrapper">
+                        <p>MARK YOUR CALENDERS FOR <span id="date">OCTOBER 26TH</span> – IT’S GONNA BE A HELLOWEEN NIGHT YOU WON’T FORGET</p>
+                    </div>
+                    <a href={links.tickets} class="button">GET TICKETS NOW</a>
+                </div>
             </div>
-            <div class="image-wrapper">
-                <img src="/images/poster.png" class="small-image" alt="">
-                <img src="/images/poster.png" class="big-image" alt="">
-                <img src="/images/poster.png" class="small-image" alt="">
+            <div class="helper-wrapper">
+                <div class="image-wrapper">
+                    <div class="small-image">
+                        <img src="/images/poster.png" alt="">
+                    </div>
+                    <div class="big-image">
+                        <img src="/images/poster.png" alt="">
+                    </div>
+                    <div class="small-image">
+                        <img src="/images/poster.png" alt="">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 <style lang="scss">
-    .content.wrapper{
+    .content-wrapper{
         display: flex;
+        overflow: visible;
+    }
+
+    .helper-wrapper{
+        overflow: visible;
+        flex: 50%;
     }
 
     .text-wrapper{
-        flex: 1;
+        overflow: visible;
+        margin-left: 15rem;
+        .header-wrapper{
+            z-index: 0;
+            position: relative;
+            overflow: visible;
+            margin-bottom: var(--spacing-4xl);
+            .back-1{
+                z-index: 10;
+                color: var(--loveless-black);
+                position: absolute;
+                transform: translateY(var(--spacing-2xl));
+            }
+            .back-2{
+                z-index: 10;
+                color: var(--loveless-black);
+                position: absolute;
+                transform: translateY(calc(-1 * var(--spacing-l)));
+            }
+            .front{
+                position: relative;
+                z-index: 20;
+                font-family: 'Mortend', 'sans-serif';
+                font-size: var(--font-size-6xl);
+                display: inline-block;
+                padding-top: 10px;
+                background-color: var(--loveless-black);
+            }
+        }
+
+        .p-wrapper{
+            color: var(--loveless-white);
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--spacing-l);
+            margin-right: var(--spacing-7xl);
+            #date{
+                color: var(--loveless-blue);
+            }
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--loveless-blue);
+            color: var(--loveless-black);
+            font-size: var(--font-size-m);
+            font-weight: 700;
+            border-radius: var(--radius-m);
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s ease-in-out;
+
+            &:hover {
+                background-color: var(--loveless-blue-dark);
+                transform: translateY(calc( -1 * var(--spacing-2xs)));
+            }
+        }
     }
 
     .image-wrapper{
         flex: 1;
+        display: flex;
 
         .big-image{
             width: 400px;
             border: 1px solid var(--loveless-blue);
+            height: 100vh;
+            background-image: url('/images/poster.png');
+            background-repeat: repeat-y;
+            background-position: center;
+            background-size: cover;
+            animation: scrollAnimation 10s linear infinite;
         }
 
         .small-image{
-            width: 250px;
+            img{
+                width: 250px;
+            }
+        }
+    }
+
+    @keyframes scrollAnimation {
+        0%{
+            background-position: center 0;
+        }
+        100%{
+            background-position: center 100%;
         }
     }
 </style>
