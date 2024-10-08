@@ -7,47 +7,74 @@ type Props = {
 const {} = Astro.props
 
 ---
+<script lang="">
+    function addAnimation() {
+    const scrollers = document.querySelectorAll(".scroller");
+    scrollers.forEach((scroller) => {
+      const scrollerInner = scroller.querySelector(".scroller-inner");
+      const scrollerContent = Array.from(scrollerInner.children);
+
+      scrollerContent.forEach((item) => {
+        const duplicatedItem = item.cloneNode(true);
+        duplicatedItem.setAttribute("aria-hidden", true);
+        scrollerInner.appendChild(duplicatedItem);
+      });
+    });
+  }
+  
+  document.addEventListener('DOMContentLoaded', addAnimation);
+</script>
+</script>
 <section class="section-wrapper bg-blue color-blue">
     <div class="cic">
         <div class="content-wrapper">
-            <div class="helper-wrapper">
-                <div class="text-wrapper">
-                    <div class="header-wrapper">
-                        <h1 class="back-1 stroke-blue">WHAT'S ON</h1>
-                        <h1 class="back-2 stroke-blue">WHAT'S ON</h1>
-                        <h1 class="front">WHAT'S ON</h1>
-                    </div>
-                    <div class="p-wrapper">
-                        <p>MARK YOUR CALENDERS FOR <span id="date">OCTOBER 26TH</span> – IT’S GONNA BE A HELLOWEEN NIGHT YOU WON’T FORGET</p>
-                    </div>
-                    <a href={links.tickets} class="button">GET TICKETS NOW</a>
+            <!-- <div class="text-wrapper">
+                <div class="header-wrapper">
+                    <h1 class="back-1 stroke-blue">WHAT'S ON</h1>
+                    <h1 class="back-2 stroke-blue">WHAT'S ON</h1>
+                    <h1 class="front">WHAT'S ON</h1>
                 </div>
-            </div>
-            <div class="helper-wrapper">
-                <div class="image-wrapper">
-                    <div class="small-image">
-                        <img src="/images/poster.png" alt="">
-                    </div>
-                    <div class="big-image">
-                        <img src="/images/poster.png" alt="">
-                    </div>
-                    <div class="small-image">
-                        <img src="/images/poster.png" alt="">
-                    </div>
+                <div class="p-wrapper">
+                    <p>MARK YOUR CALENDERS FOR <span id="date">OCTOBER 26TH</span> – IT’S GONNA BE A HELLOWEEN NIGHT YOU WON’T FORGET</p>
+                </div>
+                <a href={links.tickets} class="button">GET TICKETS NOW</a>
+            </div> -->
+            <div class="scroller">
+                <div class="scroller-inner">
+                    <img src="/images/poster.png" alt="">
+                    <img src="/images/poster.png" alt="">
+                    <img src="/images/poster.png" alt="">
                 </div>
             </div>
         </div>
     </div>
 </section>
 <style lang="scss">
+
     .content-wrapper{
         display: flex;
+        width: 100%;
         overflow: visible;
+        height: 100%;
     }
 
-    .helper-wrapper{
-        overflow: visible;
-        flex: 50%;
+    .scroller{
+        overflow: hidden;
+        max-width: 300px;
+        max-height: 100%;
+    }
+
+    .scroller-inner{
+        display: flex;
+        flex-direction: column;
+        height: max-content;
+        animation: scroll 10s linear infinite;
+    }
+
+    .small-scroller{
+        img{
+            width: 250px;
+        }
     }
 
     .text-wrapper{
@@ -109,35 +136,10 @@ const {} = Astro.props
             }
         }
     }
-
-    .image-wrapper{
-        flex: 1;
-        display: flex;
-
-        .big-image{
-            width: 400px;
-            border: 1px solid var(--loveless-blue);
-            height: 100vh;
-            background-image: url('/images/poster.png');
-            background-repeat: repeat-y;
-            background-position: center;
-            background-size: cover;
-            animation: scrollAnimation 10s linear infinite;
-        }
-
-        .small-image{
-            img{
-                width: 250px;
-            }
-        }
+    @keyframes scroll {
+    to {
+        transform: translateY(calc(-50%));
     }
-
-    @keyframes scrollAnimation {
-        0%{
-            background-position: center 0;
-        }
-        100%{
-            background-position: center 100%;
-        }
-    }
+}
+    
 </style>

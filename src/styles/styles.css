@@ -129,7 +129,7 @@ h1{
 /* SECTION BASE STYLING */
 .section-wrapper {
     width: 100vw;
-    min-height: 100vh;
+    height: 100vh;
     padding: var(--spacing-s);
     display: flex;
     flex-direction: column;
