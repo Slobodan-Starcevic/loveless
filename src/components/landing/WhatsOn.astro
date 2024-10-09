@@ -7,7 +7,7 @@ type Props = {
 const {} = Astro.props
 
 ---
-<script lang="">
+<script lang="ts">
     function addAnimation() {
     const scrollers = document.querySelectorAll(".scroller");
     scrollers.forEach((scroller) => {
@@ -39,11 +39,29 @@ const {} = Astro.props
                 </div>
                 <a href={links.tickets} class="button">GET TICKETS NOW</a>
             </div> -->
-            <div class="scroller">
-                <div class="scroller-inner">
-                    <img src="/images/poster.png" alt="">
-                    <img src="/images/poster.png" alt="">
-                    <img src="/images/poster.png" alt="">
+            <div class="scroller-wrapper">
+                <div class="scroller">
+                    <div class="scroller-inner">
+                        <img src="/images/poster.png" alt="">
+                        <img src="/images/poster.png" alt="">
+                        <img src="/images/poster.png" alt="">
+                        <img src="/images/poster.png" alt="">
+                    </div>
+                </div>
+                <div class="still">
+                    <div class="still-inner">
+                        <img src="/images/poster.png" alt="">
+                        <img src="/images/poster.png" alt="">
+                        <img src="/images/poster.png" alt="">
+                    </div>
+                </div>
+                <div class="scroller">
+                    <div class="scroller-inner">
+                        <img src="/images/poster.png" alt="">
+                        <img src="/images/poster.png" alt="">
+                        <img src="/images/poster.png" alt="">
+                        <img src="/images/poster.png" alt="">
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,24 +76,40 @@ const {} = Astro.props
         height: 100%;
     }
 
-    .scroller{
-        overflow: hidden;
-        max-width: 300px;
-        max-height: 100%;
-    }
-
-    .scroller-inner{
+    .scroller-wrapper{
         display: flex;
-        flex-direction: column;
-        height: max-content;
-        animation: scroll 10s linear infinite;
-    }
+        overflow: visible;
+        transform: rotate(10deg);
 
-    .small-scroller{
-        img{
-            width: 250px;
+        .scroller{
+            overflow: visible;
+            max-width: 200px;
+            max-height: 100%;
+        }
+
+        .scroller-inner{
+            display: flex;
+            flex-direction: column;
+            height: max-content;
+            animation: scroll 10s linear infinite;
+        }
+
+        .still{
+            overflow: visible;
+            max-width: 400px;
+            max-height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .still-inner{
+            display: flex;
+            flex-direction: column;
+            height: max-content;
         }
     }
+
+    
 
     .text-wrapper{
         overflow: visible;
