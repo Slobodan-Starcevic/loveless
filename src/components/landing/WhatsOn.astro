@@ -27,8 +27,9 @@ const {} = Astro.props
 </script>
 <section class="section-wrapper bg-blue color-blue">
     <div class="cic">
+        <img src="/images/radial-lines.png" class="background-image-2" alt="">
         <div class="content-wrapper">
-            <!-- <div class="text-wrapper">
+            <div class="text-wrapper">
                 <div class="header-wrapper">
                     <h1 class="back-1 stroke-blue">WHAT'S ON</h1>
                     <h1 class="back-2 stroke-blue">WHAT'S ON</h1>
@@ -38,7 +39,7 @@ const {} = Astro.props
                     <p>MARK YOUR CALENDERS FOR <span id="date">OCTOBER 26TH</span> – IT’S GONNA BE A HELLOWEEN NIGHT YOU WON’T FORGET</p>
                 </div>
                 <a href={links.tickets} class="button">GET TICKETS NOW</a>
-            </div> -->
+            </div>
             <div class="scroller-wrapper">
                 <div class="scroller">
                     <div class="scroller-inner">
@@ -55,7 +56,7 @@ const {} = Astro.props
                         <img src="/images/poster.png" alt="">
                     </div>
                 </div>
-                <div class="scroller">
+                <div class="scroller" data-direction="down">
                     <div class="scroller-inner">
                         <img src="/images/poster.png" alt="">
                         <img src="/images/poster.png" alt="">
@@ -69,43 +70,117 @@ const {} = Astro.props
 </section>
 <style lang="scss">
 
+    .background-image-2{
+        position: absolute;
+        width: 100%;
+        margin-left: 55%;
+        margin-top: 10%;
+    }
+
     .content-wrapper{
         display: flex;
+        justify-content: space-between;
         width: 100%;
-        overflow: visible;
         height: 100%;
+        overflow: visible;
+        padding: 10% 0 10% 10%;
     }
 
     .scroller-wrapper{
         display: flex;
+        justify-content: center;
         overflow: visible;
         transform: rotate(10deg);
 
         .scroller{
             overflow: visible;
-            max-width: 200px;
-            max-height: 100%;
-        }
-
-        .scroller-inner{
-            display: flex;
-            flex-direction: column;
-            height: max-content;
-            animation: scroll 10s linear infinite;
-        }
-
-        .still{
-            overflow: visible;
-            max-width: 400px;
+            width: 250px;
+            min-width: 250px;
             max-height: 100%;
             display: flex;
             align-items: center;
         }
 
-        .still-inner{
+        .scroller-inner{
             display: flex;
+            gap: var(--spacing-xs);
             flex-direction: column;
             height: max-content;
+            transition: animation 0.3s var(--custom-ease-2);
+            animation: scroll var(--animation-duration, 30s)
+            var(--animation-direction, forwards) linear infinite;
+            animation-play-state: running;
+            
+
+            &:hover{
+                animation-play-state: paused;
+            }
+            img{
+                border: 2px solid var(--loveless-blue);
+                border-radius: var(--radius-xs);
+                filter: brightness(60%);
+                transition: transform 0.3s var(--custom-ease-1), filter 0.3s var(--custom-ease-1);
+                &:hover{
+                    filter: brightness(80%);
+                    // transform: scale(1.01);
+                    // transform-origin: center center;
+                }
+            }
+        }
+
+        .scroller[data-direction="down"] {
+            --animation-direction: reverse;
+        }
+
+        .scroller[data-direction="up"] {
+            --animation-direction: forwards;
+        }
+        .scroller[data-speed="slow"] {
+            --animation-duration: 80s;
+        }
+
+        .still{
+            overflow: visible;
+            width: 500px;
+            min-width: 500px;
+            max-height: 100%;
+            display: flex;
+            align-items: center;
+            margin: 0 var(--spacing-s);
+        }
+
+        .still-inner{
+            display: flex;
+            gap: var(--spacing-s);
+            flex-direction: column;
+            height: max-content;
+            img{
+                border: 3px solid var(--loveless-blue);
+                border-radius: var(--radius-xs);
+                transition: transform 0.3s var(--custom-ease-1), filter 0.3s var(--custom-ease-1);
+                &:hover{
+                    // transform: scale(1.01);
+                    // transform-origin: center center;
+                }
+                &:nth-child(1){
+                    filter: brightness(60%);
+                    &:hover{
+                        filter: brightness(80%);
+                    }
+                }
+                &:nth-child(2){
+                    filter: brightness(90%);
+                    &:hover{
+                        filter: brightness(100%);
+                    }
+                }
+                &:nth-child(3){
+                    filter: brightness(60%);
+                    &:hover{
+                        filter: brightness(80%);
+                    }
+                }
+            }
         }
     }
 
@@ -113,7 +188,7 @@ const {} = Astro.props
 
     .text-wrapper{
         overflow: visible;
-        margin-left: 15rem;
+        max-width: 500px;
         .header-wrapper{
             z-index: 0;
             position: relative;
@@ -172,8 +247,7 @@ const {} = Astro.props
     }
     @keyframes scroll {
     to {
-        transform: translateY(calc(-50%));
-    }
-}
+        transform: translateY(calc(-25% - 0.25rem));
+    }}
     
 </style>
