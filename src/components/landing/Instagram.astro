@@ -1,4 +1,6 @@
 ---
+import { links } from '../../utils/links'
+
 type Props = {
 
 }
@@ -6,41 +8,54 @@ type Props = {
 const {} = Astro.props
 
 ---
+<script lang="ts">
+    function addAnimation() {
+    const scrollers2 = document.querySelectorAll(".scroller2");
+    scrollers2.forEach((scroller) => {
+      const scrollerInner = scroller.querySelector(".scroller2-inner");
+      const scrollerContent = Array.from(scrollerInner.children);
+
+      scrollerContent.forEach((item) => {
+        const duplicatedItem = item.cloneNode(true);
+        duplicatedItem.setAttribute("aria-hidden", true);
+        scrollerInner.appendChild(duplicatedItem);
+      });
+    });
+  }
+  
+  document.addEventListener('DOMContentLoaded', addAnimation);
+</script>
 <section class="section-wrapper bg-insta color-pink">
     <div class="cic">
         <div class="background-wrapper">
-            <img src="/images/worm.png" id="worm-1" alt="">
-            <img src="/images/worm.png" id="worm-2" alt="">
+            <img src="/images/thingy.svg" alt="">
         </div>
         <div class="content-wrapper">
             <div class="header-wrapper">
                 <div class="line-1">
-                    <h1 class="stroke-special">FOLLOW US</h1>
+                    <h1 class="stroke-special line-hover">FOLLOW</h1>
+                    <h1 class="stroke-special line-hover">US</h1>
                 </div>
                 <div class="line-2">
-                    <h1 class="stroke-special">ON THE</h1>
-                    <img src="/images/gram.svg" alt="">
+                    <h1 class="stroke-special line-hover">ON</h1>
+                    <h1 class="stroke-special line-hover">THE</h1>
+                    <a href={links.instagram}><img src="/images/gram.svg" alt=""></a>
                 </div>
             </div>
-            <div class="posts-wrapper">
-                <div class="post-wrapper">
-                    <img src="/images/insta1.jpg" alt="">
-                </div>
-                <div class="post-wrapper">
-                    <img src="/images/insta2.jpg" alt="">
-                </div>
-                <div class="post-wrapper">
-                    <img src="/images/insta3.jpg" alt="">
-                </div>
-                <div class="post-wrapper">
-                    <img src="/images/insta4.jpg" alt="">
-                </div>
-                <div class="post-wrapper">
-                    <img src="/images/insta5.jpg" alt="">
-                </div>
-                <div class="post-wrapper">
-                    <img src="/images/insta6.jpg" alt="">
-                </div>
+            <div class="scroller2">
+                <a href={links.instagram} target="_blank">
+                    <div class="scroller2-inner">
+                        <img src="/images/insta1.jpg" alt="">
+                        <img src="/images/insta2.jpg" alt="">
+                        <img src="/images/insta3.jpg" alt="">
+                        <img src="/images/insta4.jpg" alt="">
+                        <img src="/images/insta5.jpg" alt="">
+                        <img src="/images/insta6.jpg" alt="">
+                    </div>
+                </a>
+            </div>
+            <div class="empty">
+                <a href={links.instagram} target="_blank" class="button">FOLLOW NOW</a>
             </div>
         </div>
     </div>
@@ -54,22 +69,33 @@ const {} = Astro.props
     width: 100%;
     align-items: center;
     justify-content: space-between;
-    #worm-1{
-        transform: rotate(180deg);
-    }
-    img{
-        height: 80vh;
-    }
+    fill: #DA01D3;
+}
+
+.content-wrapper{
+    position: inherit;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .header-wrapper{
     color: var(--loveless-black);
     overflow: hidden;
     width: 40vw;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    cursor: default;
     
     .line-1{
         display: flex;
         justify-content: flex-start;
+        gap: var(--spacing-l);
     }
 
     .line-2{
@@ -80,19 +106,83 @@ const {} = Astro.props
             height: var(--font-size-4xl);
         }
     }
+    .line-hover:hover{
+        color: #DA01D3;
+        text-shadow: none;
+    }
 }
+.scroller2{
+    max-width: 100%;
+    margin: var(--spacing-2xl) 0;
+    overflow: hidden;
+    position: relative;
 
-.posts-wrapper{
-    display: flex;
+    .scroller2-inner{
+        display: flex;
+        gap: var(--spacing-l);
+        width: max-content;
+        animation: scroll2 var(--_animation-duration, 20s) var(--_animation-direction, forwards) linear infinite;
 
-    .post-wrapper{
-        height: 300px;
-        overflow: hidden;
         img{
-            width: 100%;
-            height: 100%;
+            width: 350px;
+            min-width: 350px;
+            height: 350px;
+            min-height: 350px;
             object-fit: cover;
         }
     }
 }
+.scroller2::before,
+.scroller2::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 5%; /* The 5% of left and right side to be skewed */
+  height: 100%;
+  background: inherit; /* Match the background */
+  z-index: 0; /* Behind the content */
+}
+/* Left side skew */
+.scroller2::before {
+  left: 0;
+  transform: skewX(-10deg);
+  transform-origin: left;
+}
+
+/* Right side skew */
+.scroller2::after {
+  right: 0;
+  transform: skewX(10deg);
+  transform-origin: right;
+}
+
+@keyframes scroll2 {
+  to {
+    transform: translate(calc(-50% - 0.75rem));
+  }
+}
+
+.empty{
+    flex: 1;
+    overflow: visible;
+    .button {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #DA01D3;
+        color: var(--loveless-black);
+        font-size: var(--font-size-m);
+        font-weight: 700;
+        border-radius: var(--radius-m);
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 0.3s, transform 0.2s ease-in-out;
+
+        &:hover {
+            background-color: var(--loveless-pink-dark);
+            transform: translateY(calc( -1 * var(--spacing-2xs)));
+        }
+    }
+}
+
+
 </style>
