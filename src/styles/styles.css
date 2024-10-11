@@ -27,26 +27,13 @@
     --loveless-blue-dark: hsl(180,60%,46%,100%);
     --loveless-black: hsl(0,0%,0%);
     --loveless-white: hsl(0,0%,100%);
-    --instagram-gradient-1: radial-gradient(
-        circle,
-        rgba(255, 27, 144, 1) 24%,
-        rgba(248, 2, 97, 1) 44%,
-        rgba(237, 0, 192, 1) 69%,
-        rgba(197, 0, 233, 1) 78%,
-        rgba(112, 23, 255, 1) 89%
-    );
-    --instagram-gradient-2: radial-gradient(
-        circle,
-        rgba(255, 208, 0, 1) 9%,
-        rgba(255, 105, 48, 1) 44%,
-        rgba(254, 59, 54, 1) 69%,
-        rgba(255, 105, 48, 0) 100%
-    );
+    --instagram-gradient:
+        radial-gradient(51.01% 50.82% at 17.48% 100%, #FFD000 9%, #FF6930 44%, #FE3B36 69%, rgba(255, 105, 48, 0) 100%),
+        radial-gradient(201.84% 137.18% at 97.24% 123.75%, #FF1B90 24.39%, #F80261 43.67%, #ED00C0 68.85%, #C500E9 77.68%, #7017FF 89.32%);
     --custom-ease-1: cubic-bezier(0.475,0.425,0,0.995);
     --custom-ease-2: cubic-bezier(0.835,-0.005,0.06,1);
     --custom-ease-3: cubic-bezier(0.19,1,0.22,1);
     --custom-ease-4: cubic-bezier(0.63,0.03,0.21,1);
-    --primary-ease: var(--custom-ease-1);
 
     --spacing-2xs: .25rem;
     --spacing-xs: .50rem;
@@ -98,11 +85,17 @@ h1{
 .bg-blue{
     background-color: var(--loveless-blue);
 }
+.bg-insta{
+    background: var(--instagram-gradient);
+}
 .color-pink{
     color: var(--loveless-pink);
 }
 .color-blue{
     color: var(--loveless-blue);
+}
+.color-insta{
+    color: var(--instagram-gradient);
 }
 
 .stroke-pink{
@@ -121,10 +114,10 @@ h1{
 }
 .stroke-special{
     text-shadow: 
-        1rem 1rem 0px var(--loveless-black),
-        -1rem 1rem 0px var(--loveless-black),
-        1rem -1rem 0px var(--loveless-black),
-        -1rem -1rem 0px var(--loveless-black);
+        1px 1px 0px #DA01D3,
+        -1px 1px 0px #DA01D3,
+        1px -1px 0px #DA01D3,
+        -1px -1px 0px #DA01D3;
 }
 
 /* SECTION BASE STYLING */

@@ -8,62 +8,120 @@ type Props = {
 const {} = Astro.props
 
 ---
+<script lang="ts">
+    document.addEventListener('mousemove', (e) => {
+        const header = document.getElementById('floating-header');
+        const rect = header.getBoundingClientRect();
+        const titleCenterX = rect.left + rect.width / 2;
+        const titleCenterY = rect.top + rect.height / 2;
+        const deltaX = e.clientX - titleCenterX;
+        const deltaY = e.clientY - titleCenterY;
+        const moveX = Math.min(Math.max(deltaX * 0.05, -8), 8);
+        const moveY = Math.min(Math.max(deltaY * 0.05, -6), 6);
+        header.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+        const scrollers = document.querySelectorAll(".scroller");
+        scrollers.forEach((scroller) => {
+        const scrollerInner = scroller.querySelector(".scroller-inner");
+        const scrollerContent = Array.from(scrollerInner.children);
+        scrollerContent.forEach((item) => {
+        const duplicatedItem = item.cloneNode(true);
+        duplicatedItem.setAttribute("aria-hidden", true);
+        scrollerInner.appendChild(duplicatedItem);
+      });
+    });
+    })
+</script>
+
 <div class="section-wrapper bg-pink color-pink">
     <div class="cic">
         <img src="/images/test.png" class="background-image" alt="">
         <div class="content-container">
             <div class="header-wrapper">
+                <h1 id="floating-header" class="stroke-pink">GET READY</h1>
                 <h1>GET READY</h1>
             </div>
-            <div class="image-carousel">
-                <div class="image-wrapper">
-                    <img src="/images/MrLoveless90s-109.jpg" alt="">
-                </div>
-                <div class="image-wrapper">
-                    <img src="/images/MrLoveless90s-130.jpg" alt="">
-                </div>
-                <div class="image-wrapper">
-                    <img src="/images/MrLoveless90s-153.jpg" alt="">
-                </div>
-                <div class="image-wrapper">
-                    <img src="/images/MrLoveless90s-158.jpg" alt="">
-                </div>
-
-                <div class="image-wrapper">
-                    <img src="/images/MrLoveless90s-163.jpg" alt="">
+            <div class="scroller">
+                <div class="inner-scroller">
+                    <div class="image-wrapper">
+                        <img src="/images/MrLoveless90s-109.jpg" alt="">
+                    </div>
+                    <div class="image-wrapper">
+                        <img src="/images/MrLoveless90s-130.jpg" alt="">
+                    </div>
+                    <div class="image-wrapper">
+                        <img src="/images/MrLoveless90s-153.jpg" alt="">
+                    </div>
+                    <div class="image-wrapper">
+                        <img src="/images/MrLoveless90s-158.jpg" alt="">
+                    </div>
+                    <div class="image-wrapper">
+                        <img src="/images/MrLoveless90s-163.jpg" alt="">
+                    </div>
                 </div>
             </div>
             <div class="cta-wrapper">
-                <div class="pretty-thing">
-                    <div class="row-1">
-                        <p>WORDS DON'T EVEN</p>
-                        <?xml version="1.0" encoding="utf-8"?>
-                        <svg version="1.1" id="squiggly-line-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                            viewBox="0 0 92.8 12" style="enable-background:new 0 0 92.8 12;" xml:space="preserve">
-                        <style type="text/css">
-                        .squiggly-line {
-                            fill: none;
-                            stroke: var(--loveless-pink);
-                            stroke-width: 4;
-                            stroke-miterlimit: 10;
-                            stroke-dasharray: 100;
-                        }
-                        </style>
-                        <path class="squiggly-line"  d="M1.4,6c0,0,9-9,18,0s18,0,18,0s9-9,18,0s18,0,18,0s9-9,18,0"/>
-                        </svg>
+                <div class="cta-helper-wrapper">
+                    <div class="pretty-thing">
+                        <div class="row-1">
+                            <p>WORDS DON'T EVEN</p>
+                            <svg version="1.1" id="squiggly-line-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 92.8 12" style="enable-background:new 0 0 92.8 12;" xml:space="preserve"><path class="squiggly-line"  d="M1.4,6c0,0,9-9,18,0s18,0,18,0s9-9,18,0s18,0,18,0s9-9,18,0"/></svg>
+                        </div>
+                        <div class="row-2">
+                            <img src="/images/barcode.png" alt="">
+                            <p>COME CLOSE</p>
+                        </div>
                     </div>
-                    <div class="row-2">
-                        <img src="/images/barcode.png" alt="">
-                        <p>COME CLOSE</p>
-                    </div>
+                    <a href={links.gallery} class="button">OUR GALLERY</a>
                 </div>
-                <a href={links.tickets} class="button">OUR GALLERY</a>
             </div>
         </div>
     </div>
 </div>
 
 <style lang="scss">
+    .background-image {
+        z-index: 0;
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .scroller{
+        display: flex;
+        height: auto;
+        margin: var(--spacing-xl) 0 var(--spacing-l) 0;
+        overflow: hidden;
+
+        .inner-scroller{
+            width: 100%;
+            display: flex;
+            gap: var(--spacing-s);
+
+            .image-wrapper{
+                height: 500px;
+                width: 200px;
+                overflow: hidden;
+                border-radius: var(--radius-xl);
+                transition: width 0.5s var(--custom-ease-4), filter 0.5s var(--custom-ease-4);
+                filter: brightness(50%);
+
+                &:hover{
+                    width: 700px;
+                    filter: brightness(90%);
+                }
+
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+
     .background-image{
         position: absolute;
         z-index: 0;
@@ -84,75 +142,71 @@ const {} = Astro.props
         display: flex;
         flex-direction: column;
         justify-content: end;
-    }
+        position: relative;
+        overflow: visible;
 
-    .image-carousel{
-        display: flex;
-        height: auto;
-        gap: var(--spacing-l);
-        margin: var(--spacing-xl) 0 var(--spacing-l) 0;
-        .image-wrapper{
-            height: 500px;
-            width: 700px;
-            overflow: hidden;
-            border-radius: var(--radius-xl);
-            img{
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
+        #floating-header{
+            position: absolute;
+            color: var(--loveless-black);
+            transition: transform 0.2s ease-out;
         }
     }
 
     .cta-wrapper{
         flex: 1;
-        display: flex;
-        gap: var(--spacing-l);
-        .pretty-thing{
-            height: max-content;
-            width: 500px;
+
+        .cta-helper-wrapper{
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            .row-1{
+            gap: var(--spacing-l);
+            align-items: center;
+
+            .pretty-thing{
+                height: max-content;
+                width: 500px;
                 display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-                height: var(--font-size-2xl);
-                overflow: hidden;
-                p{
-                    font-size: var(--font-size-2xl);
-                    min-width: max-content;
-                    margin: 0;
-                }
-                img{
-                    height: var(--font-size-2xl);
-                    margin: 0 var(--spacing-s);
-                }
-            }
-            .row-2{
-                display: flex;
-                gap: var(--spacing-xs);
-                justify-content: flex-end;
-                align-items: center;
-                width: 100%;
-                height: var(--font-size-2xl);
-                overflow: hidden;
-                p{
-                    font-size: var(--font-size-2xl);
-                    min-width: max-content;
-                    margin: 0;
-                }
-                img{
+                flex-direction: column;
+                align-items: flex-start;
+                .row-1{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                     width: 100%;
                     height: var(--font-size-2xl);
+                    overflow: hidden;
+                    p{
+                        font-size: var(--font-size-2xl);
+                        min-width: max-content;
+                        margin: 0;
+                    }
+                    img{
+                        height: var(--font-size-2xl);
+                        margin: 0 var(--spacing-s);
+                    }
+                }
+                .row-2{
+                    display: flex;
+                    gap: var(--spacing-xs);
+                    justify-content: flex-end;
+                    align-items: center;
+                    width: 100%;
+                    height: var(--font-size-2xl);
+                    overflow: hidden;
+                    p{
+                        font-size: var(--font-size-2xl);
+                        min-width: max-content;
+                        margin: 0;
+                    }
+                    img{
+                        width: 100%;
+                        height: var(--font-size-2xl);
+                    }
                 }
             }
         }
+        
         .button {
             display: inline-block;
-            height: calc(var(--font-size-2xl) * 2);
+            height: max-content;
             padding: 12px 24px;
             background-color: var(--loveless-pink);
             color: var(--loveless-black);
@@ -168,4 +222,12 @@ const {} = Astro.props
             }
         }
     }
+
+    .squiggly-line {
+                                fill: none;
+                                stroke: var(--loveless-pink);
+                                stroke-width: 4;
+                                stroke-miterlimit: 10;
+                                stroke-dasharray: 100;
+                            }
 </style>
