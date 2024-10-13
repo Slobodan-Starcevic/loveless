@@ -36,7 +36,9 @@ const {} = Astro.props
                 <div class="line-2">
                     <h1 class="stroke-special line-hover">ON</h1>
                     <h1 class="stroke-special line-hover">THE</h1>
-                    <a href={links.instagram}><img src="/images/gram.svg" alt=""></a>
+                    <a href={links.instagram} target="_blank">
+                        <img src="/images/gram.svg" alt="">
+                        <img src="/images/heart-cloud.svg" alt="">
                 </div>
             </div>
             <div class="scroller2">
@@ -51,9 +53,7 @@ const {} = Astro.props
                     </div>
                 </a>
             </div>
-            <div class="empty">
-                <a href={links.instagram} target="_blank" class="button">FOLLOW NOW</a>
-            </div>
+            <div class="empty"></div>
         </div>
     </div>
 </section>
@@ -73,7 +73,7 @@ const {} = Astro.props
 .header-wrapper{
     color: var(--loveless-black);
     overflow: hidden;
-    width: 40vw;
+    width: 43vw;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -90,8 +90,16 @@ const {} = Astro.props
         display: flex;
         justify-content: flex-end;
         gap: var(--spacing-l);
+        a{
+            text-decoration: none;
+            display: flex;
+            gap: var(--spacing-l);
+        }
         img{
             height: var(--font-size-4xl);
+        }
+        #link-arrow{
+            fill: var(--instagram-gradient);
         }
     }
     .line-hover:hover{
@@ -120,29 +128,6 @@ const {} = Astro.props
         }
     }
 }
-.scroller2::before,
-.scroller2::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  width: 5%; /* The 5% of left and right side to be skewed */
-  height: 100%;
-  background: inherit; /* Match the background */
-  z-index: 0; /* Behind the content */
-}
-/* Left side skew */
-.scroller2::before {
-  left: 0;
-  transform: skewX(-10deg);
-  transform-origin: left;
-}
-
-/* Right side skew */
-.scroller2::after {
-  right: 0;
-  transform: skewX(10deg);
-  transform-origin: right;
-}
 
 @keyframes scroll2 {
   to {
@@ -150,27 +135,12 @@ const {} = Astro.props
   }
 }
 
-.empty{
+.empty {
     flex: 1;
     overflow: visible;
-    .button {
-        display: inline-block;
-        padding: 12px 24px;
-        background-color: #DA01D3;
-        color: var(--loveless-black);
-        font-size: var(--font-size-m);
-        font-weight: 700;
-        border-radius: var(--radius-m);
-        text-align: center;
-        text-decoration: none;
-        transition: background-color 0.3s, transform 0.2s ease-in-out;
-
-        &:hover {
-            background-color: var(--loveless-pink-dark);
-            transform: translateY(calc( -1 * var(--spacing-2xs)));
-        }
-    }
 }
+
+
 
 
 </style>
