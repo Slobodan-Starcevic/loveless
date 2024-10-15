@@ -1,0 +1,254 @@
+---
+import { links } from '../../utils/links'
+type Props = {
+
+}
+
+const {} = Astro.props
+
+---
+<section class="wrapper">
+    <div class="mail-wrapper">
+        <div class="left bg-black">
+            <div class="cic-left">
+                <div class="header-wrapper">
+                    <p class="big-words">MISSED</p>
+                </div>
+                <div class="content-wrapper">
+                    <p>LET'S<br>FIX THAT</p>
+                    <input type="email" name="email" placeholder="YOUR@MAIL.COM" required />
+                </div>
+                <div class="bottom"></div>
+            </div>
+        </div>
+        <div class="right bg-blue-dark">
+            <div class="cic-right">
+                <div class="header-wrapper">
+                    <p class="stroke-blue big-words">ME?</p>
+                </div>
+                <div class="content-wrapper">
+                    <button type="submit">SUBSCRIBE</button>
+                </div>
+                <div class="bottom">
+                    <p>SIGN UP TO MY MAILING LIST AND NEVER MISS OUT AGAIN</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-wrapper">
+        <div class="logo-block">
+            <img src="/images/loveless-pink.png" alt="">
+            <div class="logo-texts">
+                <div class="loveless-header stroke-pink">
+                    <h1>MR. LOVELESS</h1>
+                    <h1>BRISBANE</h1>
+                </div>
+                <p class="logo-slogan">WHERE PARTIES COME TRUE</p>
+            </div>
+        </div>
+        <div class="pages-block">
+            <ul>
+                <li id="header235623" class="stroke-pink">PAGES</li>
+
+                <li><a href={links.events}>EVENTS</a></li>
+                <li><a href={links.gallery}>GALLERY</a></li>
+                <li><a href={links.tickets}>TICKETS</a></li>
+                <li><a href={links.merch}>MERCH</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<style lang="scss">
+    .wrapper{
+        width: 100vw;
+        height: 100vh;
+    }
+    .mail-wrapper{
+        display: flex;
+        width: 100%;
+        height: 70vh;
+
+        .header-wrapper{
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            
+            .big-words{
+                font-family: 'Mortend', 'sans-serif';
+                font-size: 10rem;
+            }
+        }
+
+        .bottom{
+            flex: 0 0 30%;
+            display: flex;
+            width: 100%;
+            justify-content: end;
+            align-items: center;
+            flex-direction: column;
+            color: var(--loveless-blue);
+            p{
+                font-family: 'Mortend', 'sans-serif';
+            }
+        }
+    }
+
+    .left{
+        flex: 0 0 60%;
+        padding: var(--spacing-s) 0 var(--spacing-s) var(--spacing-s);
+        .cic-left {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: center;
+            align-items: flex-end;
+            border-radius: var(--radius-2xl) 0 0 var(--radius-2xl);
+            background-color: var(--loveless-blue-dark);
+            overflow: hidden;
+            .header-wrapper{
+                margin-right: var(--spacing-m);
+            }
+
+            .content-wrapper{
+            display: flex;
+            gap: var(--spacing-l);
+            align-items: flex-end;
+            justify-content: end;
+            height: 100px;
+            width: 100%;
+
+            p{
+                font-size: var(--font-size-3xl);
+                font-family: 'Mortend', 'sans-serif';
+            }
+
+            input{
+                height: var(--font-size-3xl);
+                width: 400px;
+                margin-bottom: 10px;
+                padding: 0 12px;
+                border: none;
+                border-radius: var(--radius-xs) 0 0 var(--radius-xs);
+                background: var(--loveless-black);
+                color: var(--loveless-blue);
+                outline: none;
+                appearance: none;
+            }
+        }
+        }
+    }
+
+
+    .right{
+        flex: 0 0 40%;
+        padding: var(--spacing-s) var(--spacing-s) var(--spacing-s) 0;
+
+        .cic-right {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: center;
+            align-items: flex-start;
+            border-radius: 0 var(--radius-2xl) var(--radius-2xl) 0;
+            background-color: var(--loveless-black);
+            overflow: hidden;
+
+            .content-wrapper{
+                display: flex;
+                flex-direction: row;
+                gap: var(--spacing-l);
+                align-items: flex-end;
+                height: 100px;
+                width: 100%;
+                padding-bottom: 10px;
+
+                button{
+                    height: var(--font-size-3xl);
+                    padding: 0 12px;
+                    background-color: var(--loveless-blue);
+                    border: none;
+                    border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+                    color: var(--loveless-black);
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .footer-wrapper{
+        width: 100%;
+        max-height: 30vh;
+        padding: var(--spacing-l);
+        background-color: var(--loveless-black);
+        display: flex;
+        justify-content: center;
+        gap: var(--spacing-l);
+        color: var(--loveless-pink);
+        
+        .logo-block{
+            display: flex;
+            align-items: center;
+            flex: 0 0 50%;
+
+            .logo-texts{
+                
+                .loveless-header {
+                    z-index: 10;
+                    text-align: left;
+                    color: var(--loveless-black);
+                    flex: 1 1;
+                    overflow: visible;
+                    cursor: default;
+                    
+                    h1{
+                        transition: color 0.3s var(--custom-ease-1), text-shadow 0.3s var(--custom-ease-1);
+
+                        &:hover{
+                            text-shadow: none;
+                            color: var(--loveless-pink);
+                        }
+                    }
+                }
+                .logo-slogan{
+                    letter-spacing: 6px;
+                }
+            }
+
+            img{
+                max-height: 90%;
+            }
+        }
+        .pages-block{
+            display: flex;
+            align-items: center;
+            flex: 0 0 20%;
+
+            ul a{
+                font-size: var(--font-size-xl);
+                color: var(--loveless-pink);
+                text-decoration: none;
+                transition: margin 0.3s var(--custom-ease-1);
+                &:hover{
+                    margin-left: var(--spacing-s);
+                }
+            }
+            #header235623{
+                font-size: var(--font-size-2xl);
+                color: var(--loveless-black);
+                font-family: 'Mortend';
+            }
+        }
+        .socials-block{
+
+        }
+    }
+</style>

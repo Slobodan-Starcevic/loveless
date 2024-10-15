@@ -38,7 +38,7 @@ const {} = Astro.props
                     <h1 class="stroke-special line-hover">THE</h1>
                     <a href={links.instagram} target="_blank">
                         <img src="/images/gram.svg" alt="">
-                        <img src="/images/heart-cloud.svg" alt="">
+                        <img src="/images/arrow.svg" id="link-arrow" alt="">
                 </div>
             </div>
             <div class="scroller2">
@@ -90,16 +90,23 @@ const {} = Astro.props
         display: flex;
         justify-content: flex-end;
         gap: var(--spacing-l);
+        overflow: visible;
         a{
             text-decoration: none;
             display: flex;
             gap: var(--spacing-l);
+            overflow: visible;
         }
         img{
             height: var(--font-size-4xl);
         }
         #link-arrow{
-            fill: var(--instagram-gradient);
+            margin-right: var(--spacing-xs);
+            transition: transform 0.3s var(--custom-ease-1), animation 0.3s var();
+            animation: arrow 3s ease-in-out infinite;
+            &:hover{
+                transform: scale(1.2);
+            }
         }
     }
     .line-hover:hover{
@@ -133,6 +140,18 @@ const {} = Astro.props
   to {
     transform: translate(calc(-50% - 0.75rem));
   }
+}
+
+@keyframes arrow {
+    0% {
+        transform: translateX(-0.25rem);
+    }
+    50% {
+        transform: translateX(0.375rem);
+    }
+    100% {
+        transform: translateX(-0.25rem);
+    }
 }
 
 .empty {
