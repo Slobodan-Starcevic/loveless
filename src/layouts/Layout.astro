@@ -1,5 +1,6 @@
 ---
 import "../../src/styles/styles.css"
+import Footer from "../components/landing/Footer.astro";
 
 interface Props {
 	title: string;
@@ -25,5 +26,6 @@ const { title } = Astro.props;
 	</head>
 	<body>
 		<slot />
+		<Footer/>
 	</body>
 </html>
