@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
 
 type Props = {
 
@@ -10,10 +11,105 @@ const {} = Astro.props
 ---
 <Layout title="Mr. Loveless Brisbane">
 	<main>
-		
+		<section class="events-wrapper bg-blue color-blue">
+            <div class="events-cic">
+                <div class="header-wrapper">
+                    <h1 class="back-1 stroke-blue">WHAT'S ON</h1>
+                    <h1 class="back-2 stroke-blue">WHAT'S ON</h1>
+                    <h1 class="front">WHAT'S ON</h1>
+                </div>
+                <div class="content-wrapper">
+                    <div class="content-header">
+                        <h1 class="stroke-blue">UPCOMING</h1>
+                    </div>
+                    <div class="cards">
+                        <Card upcoming={true} align='left'/>
+                    </div>
+                    <div class="content-header align-row-right">
+                        <h1 class="stroke-blue two">(placeholders) FROM THE PAST</h1>
+                    </div>
+                    <div class="cards">
+                        <Card upcoming={false} align='right'/>
+                        <Card upcoming={false} align='left'/>
+                        <Card upcoming={false} align='right'/>
+                        <Card upcoming={false} align='left'/>
+                        <Card upcoming={false} align='right'/>
+                    </div>
+                </div>
+            </div>
+        </section>
 	</main>
 </Layout>
 
-<style>
+<style lang="scss">
+    .events-wrapper {
+        width: 100vw;
+        min-height: 100vh;
+        padding: var(--spacing-s);
+        display: flex;
+        flex-direction: column;
+        
+        .events-cic {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: flex-start;
+            align-items: center;
+            border-radius: var(--radius-2xl);
+            background-color: var(--loveless-black);
+            overflow: hidden;
+            padding: var(--spacing-2xl);
+        }
+    }
 
+    .header-wrapper{
+        z-index: 0;
+        position: relative;
+        overflow: visible;
+        margin: var(--spacing-6xl);
+        cursor: default;
+        .back-1{
+            z-index: 10;
+            color: var(--loveless-black);
+            position: absolute;
+            transform: translateY(var(--spacing-2xl));
+        }
+        .back-2{
+            z-index: 10;
+            color: var(--loveless-black);
+            position: absolute;
+            transform: translateY(calc(-1 * var(--spacing-l)));
+        }
+        .front{
+            position: relative;
+            z-index: 20;
+            font-family: 'Mortend', 'sans-serif';
+            font-size: var(--font-size-6xl);
+            display: inline-block;
+            padding-top: 10px;
+            background-color: var(--loveless-black);
+        }
+    }
+
+    .content-wrapper{
+        width: 80vw;
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-2xl);
+        .content-header{
+            border-bottom: 1px solid var(--loveless-blue);
+            display: flex;
+            h1{
+                color: var(--loveless-black);
+            }
+        }
+        .cards{
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-4xl);
+        }
+    }
 </style>

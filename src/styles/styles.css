@@ -144,6 +144,14 @@ a{
         -1px -1px 0px #DA01D3;
 }
 
+.align-row-left{
+    display: flex;
+    justify-content: flex-start;
+}
+.align-row-right{
+    display: flex;
+    justify-content: flex-end;
+}
 /* SECTION BASE STYLING */
 .section-wrapper {
     width: 100vw;
