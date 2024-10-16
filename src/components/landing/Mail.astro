@@ -160,6 +160,9 @@ const {} = Astro.props
             border-radius: 0 var(--radius-2xl) var(--radius-2xl) 0;
             background-color: var(--loveless-black);
             overflow: hidden;
+            .header-wrapper{
+                margin-right: var(--spacing-m);
+            }
 
             .content-wrapper{
                 display: flex;
@@ -220,6 +223,7 @@ const {} = Astro.props
                 }
                 .logo-slogan{
                     letter-spacing: 6px;
+                    cursor: default;
                 }
             }
 
@@ -245,6 +249,7 @@ const {} = Astro.props
                 font-size: var(--font-size-2xl);
                 color: var(--loveless-black);
                 font-family: 'Mortend';
+                cursor: default;
             }
         }
         .socials-block{

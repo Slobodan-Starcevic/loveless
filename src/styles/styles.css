@@ -160,3 +160,25 @@ h1{
     background-color: var(--loveless-black);
     overflow: hidden;
 }
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 480px) {
+    /* Styles for extra small devices */
+  }
+  
+  @media (min-width: 481px) and (max-width: 767px) {
+    /* Styles for small devices */
+  }
+  
+  @media (min-width: 768px) and (max-width: 1024px) {
+    /* Styles for medium devices */
+  }
+  
+  @media (min-width: 1025px) and (max-width: 1440px) {
+    /* Styles for large devices */
+  }
+  
+  @media (min-width: 1441px) {
+    /* Styles for extra large devices */
+  }
+  
