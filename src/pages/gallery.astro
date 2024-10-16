@@ -29,18 +29,37 @@ type Props = {};
 const {} = Astro.props;
 
 ---
+<script lang="ts">
+    document.addEventListener('mousemove', (e) => {
+        const header = document.getElementById('floating-header');
+        const rect = header.getBoundingClientRect();
+        const titleCenterX = rect.left + rect.width / 2;
+        const titleCenterY = rect.top + rect.height / 2;
+        const deltaX = e.clientX - titleCenterX;
+        const deltaY = e.clientY - titleCenterY;
+        const moveX = Math.min(Math.max(deltaX * 0.05, -8), 8);
+        const moveY = Math.min(Math.max(deltaY * 0.05, -6), 6);
+        header.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    });
+</script>
 <Layout title="Mr. Loveless Brisbane">
 	<main>
 		<section class="gallery-wrapper bg-pink color-pink">
             <div class="gallery-cic-14124">
-                <div class="selector-wrapper-32r32">
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="left" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
-                    </a>
-                    <p>90S THROWBACK</p>
-                    <a href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="right" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
-                    </a>
+                <div class="headerder-wrapper">
+                    <div class="header-wrapper">
+                        <h1 id="floating-header" class="stroke-pink">GET READY</h1>
+                        <h1>GET READY</h1>
+                    </div>
+                    <div class="selector-wrapper-32r32">
+                        <a href="">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="left" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
+                        </a>
+                        <p>90S THROWBACK</p>
+                        <a href="">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="right" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
+                        </a>
+                    </div>
                 </div>
                 <div class="gallery-2352">
                     {galleryImages.map((imagePath) => (
@@ -55,6 +74,51 @@ const {} = Astro.props;
 </Layout>
 
 <style lang="scss">
+    .headerder-wrapper{
+        padding: var(--spacing-3xl);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .header-wrapper{
+            flex: 1;
+            justify-content: end;
+            position: relative;
+            overflow: visible;
+
+            #floating-header{
+                position: absolute;
+                color: var(--loveless-black);
+                transition: transform 0.2s ease-out;
+            }
+        }
+        .selector-wrapper-32r32 {
+                z-index: 100;
+                width: max-content;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: var(--spacing-m);
+                background-color: var(--loveless-black);
+                padding: var(--spacing-2xs) var(--spacing-m);
+                border-radius: var(--radius-m);
+                margin-top: var(--spacing-s);
+                p {
+                    font-size: var(--font-size-xl);
+                    font-family: 'Mortend', 'TT';
+                }
+                .left{
+                    fill: var(--loveless-pink-dark);
+                    transform: rotate(90deg);
+                    width: 30px;
+                }
+                .right{
+                    fill: var(--loveless-pink-dark);
+                    transform: rotate(270deg);
+                    width: 30px;
+                }
+            }
+    }
+    
     .gallery-wrapper {
         width: 100vw;
         min-height: 100vh;
@@ -65,6 +129,7 @@ const {} = Astro.props;
             width: 100%;
             height: 100%;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             border-radius: var(--radius-2xl);
             background-color: var(--loveless-black);
@@ -93,36 +158,7 @@ const {} = Astro.props;
                 position: absolute;
                 top: 0;
                 left: 0;
-                filter: brightness(60%);
             }
-        }
-    }
-
-    .selector-wrapper-32r32 {
-        z-index: 100;
-        position: absolute;
-        width: max-content;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: var(--spacing-m);
-        background-color: var(--loveless-black);
-        padding: var(--spacing-2xs) var(--spacing-m);
-        border-radius: var(--radius-m);
-        margin-top: var(--spacing-s);
-        p {
-            font-size: var(--font-size-xl);
-            font-family: 'Mortend', 'TT';
-        }
-        .left{
-            fill: var(--loveless-pink-dark);
-            transform: rotate(90deg);
-            width: 30px;
-        }
-        .right{
-            fill: var(--loveless-pink-dark);
-            transform: rotate(270deg);
-            width: 30px;
         }
     }
 </style>
