@@ -40,7 +40,7 @@ const {} = Astro.props
                 </div>
                 <a href={links.tickets} class="button" target="_blank">GET TICKETS NOW</a>
             </div>
-            <div class="scroller-wrapper">
+            <div class="scroller-wrapper desktop-content">
                 <div class="scroller">
                     <div class="scroller-inner">
                         <img src="/images/poster.png" alt="" loading="lazy">
@@ -65,6 +65,7 @@ const {} = Astro.props
                     </div>
                 </div>
             </div>
+            <img src="/images/poster.png" class="mobile-image mobile-content" alt="" loading="lazy">
         </div>
     </div>
 </section>
@@ -184,8 +185,6 @@ const {} = Astro.props
         }
     }
 
-    
-
     .text-wrapper{
         overflow: visible;
         max-width: 500px;
@@ -221,14 +220,14 @@ const {} = Astro.props
             color: var(--loveless-white);
             font-size: var(--font-size-xl);
             margin-bottom: var(--spacing-l);
-            margin-right: var(--spacing-7xl);
             #date{
                 color: var(--loveless-blue);
             }
         }
 
         .button {
-            display: inline-block;
+            display: block;
+            width: max-content;
             padding: 12px 24px;
             background-color: var(--loveless-blue);
             color: var(--loveless-black);
@@ -250,4 +249,49 @@ const {} = Astro.props
         transform: translateY(calc(-25% - 0.25rem));
     }}
     
+    @media screen and (max-width : 767px) {
+        .content-wrapper{
+            flex-direction: column;
+            padding: 10%;
+            align-items: center;
+        }
+        .text-wrapper{
+            overflow: visible;
+            max-width: none;
+            .header-wrapper{
+                margin-top: var(--spacing-l);
+                margin-bottom: var(--spacing-xl);
+                .back-1{
+                    transform: translateY(28px);
+                }
+                .back-2{
+                    transform: translateY(-10px);
+                }
+            }
+            .p-wrapper{
+                font-size: var(--font-size-m);
+                margin-bottom: var(--spacing-l);
+            }
+            .button{
+                margin: 0 auto var(--spacing-l) auto !important;
+            }
+        }
+        .background-image-2{
+            margin-left: 55%;
+            margin-top: 100%;
+        }
+        .mobile-image{
+            z-index: 1000;
+            border: 2px solid var(--loveless-blue);
+            border-radius: var(--radius-xs);
+            max-width: 300px;
+            height: auto;
+        }
+    }
+    @media screen and (min-width: 768px) and (max-width: 1079px) {
+        
+    }
+    @media screen and (min-width : 1080px) {
+        
+    }
 </style>

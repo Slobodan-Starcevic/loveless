@@ -30,15 +30,16 @@ const {} = Astro.props
         <div class="content-wrapper">
             <div class="header-wrapper">
                 <div class="line-1">
-                    <h1 class="stroke-special line-hover">FOLLOW</h1>
-                    <h1 class="stroke-special line-hover">US</h1>
+                    <h1 class="stroke-special line-hover">JOIN</h1>
+                    <h1 class="stroke-special line-hover">THE</h1>
                 </div>
                 <div class="line-2">
-                    <h1 class="stroke-special line-hover">ON</h1>
-                    <h1 class="stroke-special line-hover">THE</h1>
-                    <a href={links.instagram} target="_blank">
+                    <!-- <a href={links.instagram} target="_blank">
                         <img src="/images/gram.svg" alt="" loading="lazy">
                         <img src="/images/arrow.svg" id="link-arrow" alt="" loading="lazy">
+                    </a> -->
+                    <h1 class="stroke-special line-hover">INSTAGRAM</h1>
+                    <h1 class="stroke-special line-hover">COMMUNITY</h1>
                 </div>
             </div>
             <div class="scroller2">
@@ -73,22 +74,21 @@ const {} = Astro.props
 .header-wrapper{
     color: var(--loveless-black);
     overflow: hidden;
-    width: 43vw;
+    width: auto;
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
     cursor: default;
     
     .line-1{
         display: flex;
-        justify-content: flex-start;
         gap: var(--spacing-l);
     }
 
     .line-2{
         display: flex;
-        justify-content: flex-end;
         gap: var(--spacing-l);
         overflow: visible;
         a{
