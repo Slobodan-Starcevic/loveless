@@ -33,8 +33,7 @@ const {} = Astro.props
     });
     })
 </script>
-
-<div class="section-wrapper bg-pink color-pink">
+<section class="section-wrapper bg-pink color-pink">
     <div class="cic">
         <img src="/images/test.png" class="background-image" alt="">
         <div class="content-container">
@@ -63,22 +62,16 @@ const {} = Astro.props
             </div>
             <div class="cta-wrapper">
                 <div class="cta-helper-wrapper">
-                    <div class="pretty-thing">
-                        <div class="row-1">
-                            <p>WORDS DON'T EVEN</p>
-                            <svg version="1.1" id="squiggly-line-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 92.8 12" style="enable-background:new 0 0 92.8 12;" xml:space="preserve"><path class="squiggly-line"  d="M1.4,6c0,0,9-9,18,0s18,0,18,0s9-9,18,0s18,0,18,0s9-9,18,0"/></svg>
-                        </div>
-                        <div class="row-2">
-                            <img src="/images/barcode.png" alt="" loading="lazy">
-                            <p>COME CLOSE</p>
-                        </div>
+                    <div class="cta-text">
+                        <p class="row-1">WORDS DON'T EVEN</p>
+                        <p class="row-2">COME CLOSE</p>
                     </div>
                     <a href={links.gallery} class="button">OUR GALLERY</a>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 <style lang="scss">
     .background-image {
@@ -154,80 +147,119 @@ const {} = Astro.props
 
     .cta-wrapper{
         flex: 1;
-
         .cta-helper-wrapper{
             display: flex;
             gap: var(--spacing-l);
             align-items: center;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            margin-bottom: var(--spacing-3xl);
 
-            .pretty-thing{
-                height: max-content;
-                width: 500px;
+            .cta-text{
+                width: 300px;
                 display: flex;
                 flex-direction: column;
-                align-items: flex-start;
-                .row-1{
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 100%;
-                    height: var(--font-size-2xl);
-                    overflow: hidden;
-                    p{
-                        font-size: var(--font-size-2xl);
-                        min-width: max-content;
-                        margin: 0;
-                    }
-                    img{
-                        height: var(--font-size-2xl);
-                        margin: 0 var(--spacing-s);
-                    }
-                }
-                .row-2{
-                    display: flex;
-                    gap: var(--spacing-xs);
-                    justify-content: flex-end;
-                    align-items: center;
-                    width: 100%;
-                    height: var(--font-size-2xl);
-                    overflow: hidden;
-                    p{
-                        font-size: var(--font-size-2xl);
-                        min-width: max-content;
-                        margin: 0;
-                    }
-                    img{
-                        width: 100%;
-                        height: var(--font-size-2xl);
-                    }
+                align-items: center;
+                overflow: hidden;
+            }
+
+            .button {
+                display: inline-block;
+                height: max-content;
+                padding: 12px 24px;
+                background-color: var(--loveless-pink);
+                color: var(--loveless-black);
+                font-size: var(--font-size-l);
+                font-weight: 700;
+                border-radius: var(--radius-m);
+                text-align: center;
+                text-decoration: none;
+                transition: background-color 0.3s;
+
+                &:hover {
+                    background-color: var(--loveless-pink-dark);
                 }
             }
         }
         
-        .button {
-            display: inline-block;
-            height: max-content;
-            padding: 12px 24px;
-            background-color: var(--loveless-pink);
-            color: var(--loveless-black);
-            font-size: var(--font-size-l);
-            font-weight: 700;
-            border-radius: var(--radius-m);
-            text-align: center;
-            text-decoration: none;
-            transition: background-color 0.3s;
-
-            &:hover {
-                background-color: var(--loveless-pink-dark);
-            }
-        }
+        
     }
 
     .squiggly-line {
-                                fill: none;
-                                stroke: var(--loveless-pink);
-                                stroke-width: 4;
-                                stroke-miterlimit: 10;
-                                stroke-dasharray: 100;
-                            }
+        fill: none;
+        stroke: var(--loveless-pink);
+        stroke-width: 4;
+        stroke-miterlimit: 10;
+        stroke-dasharray: 100;
+    }
+
+    @media screen and (max-width : 767px) {
+        .section-wrapper{
+            height: max-content !important;
+        }
+        .header-wrapper{
+            flex: none;
+            margin-top: var(--spacing-3xl);
+        }
+        .image-wrapper{
+            height: 400px !important;
+        }
+        .cta-helper-wrapper{
+            flex-direction: column;
+        }
+
+        .scroller {
+            animation: rock 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes rock {
+            0% {
+                transform: translateX(0%);
+            }
+            50% {
+                transform: translateX(25%);
+            }
+            100% {
+                transform: translateX(-25%);
+            }
+        }
+    }
+    @media screen and (min-width: 768px) and (max-width: 1079px) {
+        .section-wrapper{
+            height: max-content !important;
+        }
+        .header-wrapper{
+            flex: none;
+            margin-top: var(--spacing-3xl);
+        }
+        .cta-wrapper{
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            overflow: visible;
+        }
+        .cta-helper-wrapper{
+            display: flex;
+            overflow: visible;
+            justify-content: center;
+            .cta-text{
+                overflow: visible;
+                width: max-content;
+                align-items: end !important;
+                .row-1{
+                    width: max-content;
+                }
+                p{
+                    font-size: var(--font-size-xl);
+                }
+            }
+        }
+        .image-wrapper{
+            height: 500px !important;
+        }
+    }
+    @media screen and (min-width : 1080px) {
+        
+    }
 </style>
