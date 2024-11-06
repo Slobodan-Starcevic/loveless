@@ -8,7 +8,7 @@ const {} = Astro.props
 
 ---
 <section class="wrapper">
-    <div class="mail-wrapper">
+    <!-- <div class="mail-wrapper">
         <div class="left bg-black">
             <div class="cic-left">
                 <div class="header-wrapper">
@@ -30,20 +30,20 @@ const {} = Astro.props
                     <button type="submit">SUBSCRIBE</button>
                 </div>
                 <div class="bottom">
-                    <p>SIGN UP TO MY MAILING LIST AND NEVER MISS OUT AGAIN</p>
+                    <p class="desktop-content">SIGN UP TO MY MAILING LIST AND NEVER MISS OUT AGAIN</p>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="footer-wrapper">
         <div class="logo-block">
             <img src="/images/loveless-pink.png" alt="">
             <div class="logo-texts">
                 <div class="loveless-header stroke-pink">
-                    <h1>MR. LOVELESS</h1>
-                    <h1>BRISBANE</h1>
+                    <h1 class="desktop-content">MR LOVELESS</h1>
+                    <h1 class="desktop-content">BRISBANE</h1>
                 </div>
-                <p class="logo-slogan">MAKE BRISBANE NIGHTLIFE GREAT AGAIN</p>
+                <p class="logo-slogan desktop-content">MAKE BRISBANE NIGHTLIFE GREAT AGAIN</p>
             </div>
         </div>
         <div class="pages-block">
@@ -65,6 +65,7 @@ const {} = Astro.props
         width: 100vw;
         height: 100vh;
     }
+
     .mail-wrapper{
         display: flex;
         width: 100%;
@@ -144,7 +145,6 @@ const {} = Astro.props
         }
     }
 
-
     .right{
         flex: 0 0 40%;
         padding: var(--spacing-s) var(--spacing-s) var(--spacing-s) 0;
@@ -201,7 +201,7 @@ const {} = Astro.props
         .logo-block{
             display: flex;
             align-items: center;
-            flex: 0 0 50%;
+            flex: 0 0 60%;
             cursor: default;
 
             .logo-texts{
@@ -256,4 +256,193 @@ const {} = Astro.props
 
         }
     }
+
+@media screen and (max-width : 767px) {
+    .left{
+        padding: var(--spacing-2xs) 0 var(--spacing-2xs) var(--spacing-2xs);
+        .header-wrapper{
+            flex: none;
+            margin-right: var(--spacing-xs) !important;
+        }
+    }
+    .right{
+        padding: var(--spacing-2xs) var(--spacing-2xs) var(--spacing-2xs) 0;
+        .header-wrapper{
+            flex: none;
+            margin-left: var(--spacing-xs) !important;
+        }
+    }
+    .wrapper{
+        height: max-content !important;
+        .mail-wrapper{
+            height: max-content !important;
+            min-height: 300px;
+            .big-words{
+                font-size: var(--font-size-2xl);
+            }
+        }
+    }
+
+    .footer-wrapper{
+        flex-direction: column;
+        max-height: max-content !important;
+        gap: var(--spacing-2xs) !important;
+        .logo-block{
+            flex-direction: column-reverse;
+            h1{
+                font-size: var(--font-size-2xl) !important;
+                padding: 5px;
+                text-align: center;
+            }
+
+            img{
+                max-width: 250px;
+            }
+        }
+        .pages-block{
+            justify-content: center;
+
+            ul li{
+                text-align: center;
+            }
+        }
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1079px) {
+    .left{
+        padding: var(--spacing-xs) 0 var(--spacing-xs) var(--spacing-xs);
+    }
+    .right{
+        padding: var(--spacing-2xs) var(--spacing-2xs) var(--spacing-2xs) 0;
+    }
+
+    .wrapper{
+        height: max-content !important;
+        .mail-wrapper{
+            height: max-content !important;
+            min-height: 300px;
+            .big-words{
+                font-size: var(--font-size-2xl);
+            }
+        }
+    }
+
+    .footer-wrapper{
+        max-height: max-content !important;
+        gap: var(--spacing-2xl) !important;
+        .logo-block{
+
+            .logo-texts{
+                .loveless-header {
+                    
+                    h1{
+                        font-size: var(--font-size-2xl) !important;
+                        &:hover{
+                            text-shadow: none;
+                            color: var(--loveless-pink);
+                        }
+                    }
+                }
+                .logo-slogan{
+                    letter-spacing: 6px;
+                    font-size: var(--font-size-s);
+                    cursor: default;
+                }
+            }
+
+            img{
+                max-height: 90%;
+            }
+        }
+        .pages-block{
+            display: flex;
+            align-items: center;
+            flex: 0 0 20%;
+
+            ul a{
+                font-size: var(--font-size-l);
+                color: var(--loveless-pink);
+                text-decoration: none;
+                transition: margin 0.3s var(--custom-ease-1);
+                &:hover{
+                    margin-left: var(--spacing-s);
+                }
+            }
+            #header235623{
+                font-size: var(--font-size-xl);
+                color: var(--loveless-black);
+                font-family: 'Mortend';
+                cursor: default;
+            }
+        }
+        .socials-block{
+
+        }
+    }
+}
+@media screen and (min-width : 1080px) {
+    .wrapper{
+        height: max-content !important;
+        .mail-wrapper{
+            height: max-content !important;
+            min-height: 300px;
+            .big-words{
+                font-size: var(--font-size-2xl);
+            }
+        }
+    }
+    .footer-wrapper{
+        max-height: max-content !important;
+        gap: var(--spacing-2xl) !important;
+        .logo-block{
+
+            .logo-texts{
+                .loveless-header {
+                    
+                    h1{
+                        font-size: var(--font-size-2xl) !important;
+                        &:hover{
+                            text-shadow: none;
+                            color: var(--loveless-pink);
+                        }
+                    }
+                }
+                .logo-slogan{
+                    letter-spacing: 6px;
+                    font-size: var(--font-size-s);
+                    cursor: default;
+                }
+            }
+
+            img{
+                max-height: 90%;
+                max-width: 300px;
+            }
+        }
+        .pages-block{
+            display: flex;
+            align-items: center;
+            flex: 0 0 20%;
+
+            ul a{
+                font-size: var(--font-size-l);
+                color: var(--loveless-pink);
+                text-decoration: none;
+                transition: margin 0.3s var(--custom-ease-1);
+                &:hover{
+                    margin-left: var(--spacing-s);
+                }
+            }
+            #header235623{
+                font-size: var(--font-size-xl);
+                color: var(--loveless-black);
+                font-family: 'Mortend';
+                cursor: default;
+            }
+        }
+        .socials-block{
+
+        }
+    }
+}
 </style>

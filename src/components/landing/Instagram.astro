@@ -164,7 +164,17 @@ const {} = Astro.props
     
 }
 @media screen and (min-width : 1080px) {
-    
+    .section-wrapper{
+        min-height: 100vh !important;
+
+        .header-wrapper{
+            margin-top: 0px;
+            margin-bottom: var(--spacing-2xl);
+        }
+        .button{
+            margin-top: var(--spacing-2xl);
+        }
+    }
 }
 
 </style>
