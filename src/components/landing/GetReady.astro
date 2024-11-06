@@ -61,11 +61,11 @@ const {} = Astro.props
                 </div>
             </div>
             <div class="cta-wrapper">
-                <div class="cta-helper-wrapper">
-                    <div class="cta-text">
-                        <p class="row-1">WORDS DON'T EVEN</p>
-                        <p class="row-2">COME CLOSE</p>
-                    </div>
+                <div class="cta-text">
+                    <p class="row-1">WORDS DON'T EVEN</p>
+                    <p class="row-2">COME CLOSE</p>
+                </div>
+                <div class="cta-button">
                     <a href={links.gallery} class="button">OUR GALLERY</a>
                 </div>
             </div>
@@ -74,6 +74,9 @@ const {} = Astro.props
 </section>
 
 <style lang="scss">
+    .section-wrapper{
+            height: max-content !important;
+    }
     .background-image {
         z-index: 0;
         position: absolute;
@@ -137,6 +140,8 @@ const {} = Astro.props
         justify-content: end;
         position: relative;
         overflow: visible;
+        flex: none;
+        margin-top: var(--spacing-3xl);
 
         #floating-header{
             position: absolute;
@@ -147,43 +152,39 @@ const {} = Astro.props
 
     .cta-wrapper{
         flex: 1;
-        .cta-helper-wrapper{
+        display: flex;
+        gap: var(--spacing-l);
+        align-items: center;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        margin-bottom: var(--spacing-3xl);
+
+        .cta-text{
+            width: 300px;
             display: flex;
-            gap: var(--spacing-l);
+            flex-direction: column;
             align-items: center;
             overflow: hidden;
-            width: 100%;
-            height: 100%;
-            margin-bottom: var(--spacing-3xl);
+        }
 
-            .cta-text{
-                width: 300px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                overflow: hidden;
-            }
+        .button {
+            display: inline-block;
+            height: max-content;
+            padding: 12px 24px;
+            background-color: var(--loveless-pink);
+            color: var(--loveless-black);
+            font-size: var(--font-size-l);
+            font-weight: 700;
+            border-radius: var(--radius-m);
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
 
-            .button {
-                display: inline-block;
-                height: max-content;
-                padding: 12px 24px;
-                background-color: var(--loveless-pink);
-                color: var(--loveless-black);
-                font-size: var(--font-size-l);
-                font-weight: 700;
-                border-radius: var(--radius-m);
-                text-align: center;
-                text-decoration: none;
-                transition: background-color 0.3s;
-
-                &:hover {
-                    background-color: var(--loveless-pink-dark);
-                }
+            &:hover {
+                background-color: var(--loveless-pink-dark);
             }
         }
-        
-        
     }
 
     .squiggly-line {
@@ -195,9 +196,7 @@ const {} = Astro.props
     }
 
     @media screen and (max-width : 767px) {
-        .section-wrapper{
-            height: max-content !important;
-        }
+        
         .header-wrapper{
             flex: none;
             margin-top: var(--spacing-3xl);
@@ -205,7 +204,7 @@ const {} = Astro.props
         .image-wrapper{
             height: 400px !important;
         }
-        .cta-helper-wrapper{
+        .cta-wrapper{
             flex-direction: column;
         }
 
@@ -226,9 +225,7 @@ const {} = Astro.props
         }
     }
     @media screen and (min-width: 768px) and (max-width: 1079px) {
-        .section-wrapper{
-            height: max-content !important;
-        }
+        
         .header-wrapper{
             flex: none;
             margin-top: var(--spacing-3xl);
@@ -238,15 +235,11 @@ const {} = Astro.props
             display: flex;
             justify-content: center;
             overflow: visible;
-        }
-        .cta-helper-wrapper{
-            display: flex;
-            overflow: visible;
-            justify-content: center;
             .cta-text{
                 overflow: visible;
                 width: max-content;
                 align-items: end !important;
+                flex: 1;
                 .row-1{
                     width: max-content;
                 }
@@ -254,12 +247,42 @@ const {} = Astro.props
                     font-size: var(--font-size-xl);
                 }
             }
+            .cta-button{
+                flex: 1;
+                display: flex;
+                align-items: center;
+            }
         }
         .image-wrapper{
             height: 500px !important;
         }
     }
     @media screen and (min-width : 1080px) {
-        
+        .cta-wrapper{
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            overflow: visible;
+            .cta-text{
+                overflow: visible;
+                width: max-content;
+                align-items: end !important;
+                flex: 1;
+                .row-1{
+                    width: max-content;
+                }
+                p{
+                    font-size: var(--font-size-xl);
+                }
+                a{
+                    flex: 1;
+                }
+            }
+            .cta-button{
+                flex: 1;
+                display: flex;
+                align-items: center;
+            }
+        }
     }
 </style>
