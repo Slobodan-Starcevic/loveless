@@ -104,11 +104,6 @@ const {} = Astro.props
                 transition: width 0.5s var(--custom-ease-4), filter 0.5s var(--custom-ease-4);
                 filter: brightness(50%);
 
-                &:hover{
-                    width: 700px;
-                    filter: brightness(90%);
-                }
-
                 img{
                     width: 100%;
                     height: 100%;
@@ -286,6 +281,12 @@ const {} = Astro.props
                 display: flex;
                 align-items: center;
             }
+        }
+    }
+    @media (min-width: 768px) {
+        .image-wrapper:hover {
+            width: 700px;
+            filter: brightness(90%);
         }
     }
 </style>

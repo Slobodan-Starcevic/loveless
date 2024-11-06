@@ -75,6 +75,7 @@ const {} = Astro.props
             
             h1{
                 transition: margin 0.3s var(--custom-ease-1);
+                padding: 2px;
 
                 &:hover{
                     margin-right: 20px;
@@ -119,8 +120,7 @@ const {} = Astro.props
                 transition: opacity 0.3s var(--custom-ease-1);
             }
 
-            &:hover,
-            &:active{
+            &:hover{
                 .li-text{
                     margin-left: 50px;
                     color: var(--loveless-pink);
@@ -189,6 +189,9 @@ const {} = Astro.props
                 .li-text{
                     font-size: var(--font-size-2xl);
                 }
+                &:hover{
+                    all: unset;
+                }
             }
         }
     }
@@ -214,8 +217,12 @@ const {} = Astro.props
         .nav-list{
             li a{
                 justify-content: center;
+                
                 .li-text{
                     font-size: var(--font-size-3xl);
+                }
+                &:hover{
+                    all: unset;
                 }
             }
         }
