@@ -43,7 +43,7 @@ const { upcoming, align } = Astro.props;
 		height: 454px;
 		overflow: hidden;
 		border-radius: var(--radius-l);
-		&:hover, &:active img{
+		&:hover img{
 			transform: scale(1.1);
 		}
 	}
@@ -74,6 +74,7 @@ const { upcoming, align } = Astro.props;
 		.month{
 			text-align: center;
 			padding: var(--spacing-2xs) 0;
+			font-size: var(--font-size-l);
 		}
 	}
 
@@ -160,6 +161,15 @@ const { upcoming, align } = Astro.props;
 		}
 	}
  }
+ .date-card{
+	width: 60px;
+	.day{
+		font-size: var(--font-size-l) !important;
+	}
+	.month{
+		font-size: var(--font-size-m);
+	}
+}
 }
 @media screen and (min-width: 768px) and (max-width: 1079px) {
 	

@@ -72,7 +72,7 @@ const {} = Astro.props
         z-index: 0;
         position: relative;
         overflow: visible;
-        margin: var(--spacing-6xl);
+        margin: var(--spacing-5xl);
         cursor: default;
         min-width: max-content;
 
@@ -108,6 +108,7 @@ const {} = Astro.props
         .content-header{
             border-bottom: 1px solid var(--loveless-blue);
             display: flex;
+            
             h1{
                 color: var(--loveless-black);
             }
@@ -124,8 +125,8 @@ const {} = Astro.props
             padding: var(--spacing-2xs);
         } 
         .header-wrapper {
-            margin-top: var(--spacing-l);
-            margin-bottom: var(--spacing-xl);
+            margin-top: var(--spacing-2xl);
+            margin-bottom: var(--spacing-3xl);
 
             .back-1 {
                 transform: translateY(28px);
@@ -147,11 +148,15 @@ const {} = Astro.props
         } 
         .content-header{
             h1{
-                font-size: var(--font-size-3xl) !important;
+                font-size: var(--font-size-2xl) !important;
             }
         }
     }
     @media screen and (min-width : 1080px) {
-        
+        .content-header{
+            h1{
+                font-size: var(--font-size-4xl) !important;
+            }
+        }
     }
 </style>
