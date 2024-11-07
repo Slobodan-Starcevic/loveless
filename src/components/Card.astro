@@ -74,6 +74,10 @@ const { upcoming, align } = Astro.props;
 		.month{
 			text-align: center;
 			padding: var(--spacing-2xs) 0;
+<<<<<<< HEAD
+=======
+			font-size: var(--font-size-l);
+>>>>>>> dev
 		}
 	}
 
@@ -160,11 +164,41 @@ const { upcoming, align } = Astro.props;
 		}
 	}
  }
+<<<<<<< HEAD
 }
 @media screen and (min-width: 768px) and (max-width: 1079px) {
 	
 }
 @media screen and (min-width : 1080px) {
 	
+=======
+ .date-card{
+	width: 60px;
+	.day{
+		font-size: var(--font-size-l) !important;
+	}
+	.month{
+		font-size: var(--font-size-m);
+	}
+}
+}
+@media screen and (min-width: 768px) and (max-width: 1079px) {
+	.buttons{
+		padding-left: var(--spacing-s);
+		.button{
+			width: 100%;
+			text-align: center;
+		}
+	}
+}
+@media screen and (min-width : 1080px) {
+	.buttons{
+		padding-left: var(--spacing-s);
+		.button{
+			width: 100%;
+			text-align: center;
+		}
+	}
+>>>>>>> dev
 }
 </style>

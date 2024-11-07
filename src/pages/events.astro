@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import Return from '../components/Return.astro';
 
 type Props = {
 
@@ -13,6 +14,7 @@ const {} = Astro.props
 	<main>
 		<section class="events-wrapper bg-blue color-blue">
             <div class="events-cic">
+                <Return/>
                 <div class="header-wrapper">
                     <h1 class="back-1 stroke-blue">WHAT'S ON</h1>
                     <h1 class="back-2 stroke-blue">WHAT'S ON</h1>
@@ -42,6 +44,7 @@ const {} = Astro.props
 </Layout>
 
 <style lang="scss">
+    
     .events-wrapper {
         width: 100vw;
         min-height: 100vh;
@@ -72,7 +75,7 @@ const {} = Astro.props
         z-index: 0;
         position: relative;
         overflow: visible;
-        margin: var(--spacing-6xl);
+        margin: var(--spacing-5xl);
         cursor: default;
         min-width: max-content;
 
@@ -102,12 +105,14 @@ const {} = Astro.props
 
     .content-wrapper{
         width: 80vw;
+        max-width: 1300px;
         display: flex;
         flex-direction: column;
         gap: var(--spacing-2xl);
         .content-header{
             border-bottom: 1px solid var(--loveless-blue);
             display: flex;
+            
             h1{
                 color: var(--loveless-black);
             }
@@ -124,8 +129,8 @@ const {} = Astro.props
             padding: var(--spacing-2xs);
         } 
         .header-wrapper {
-            margin-top: var(--spacing-l);
-            margin-bottom: var(--spacing-xl);
+            margin-top: var(--spacing-2xl);
+            margin-bottom: var(--spacing-3xl);
 
             .back-1 {
                 transform: translateY(28px);
@@ -147,11 +152,17 @@ const {} = Astro.props
         } 
         .content-header{
             h1{
-                font-size: var(--font-size-3xl) !important;
+                font-size: var(--font-size-2xl) !important;
             }
         }
+        
     }
     @media screen and (min-width : 1080px) {
+        .content-header{
+            h1{
+                font-size: var(--font-size-4xl) !important;
+            }
+        }
         
     }
 </style>

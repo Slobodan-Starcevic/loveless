@@ -1,0 +1,99 @@
+---
+
+---
+<script>
+    const returnWrapper = document.querySelector('.return-wrapper') as HTMLElement;
+
+    window.addEventListener('scroll', handler, false);
+
+    window.addEventListener('load', handler, false);
+
+    function handler(event: Event) {
+        if (window.scrollY === 0) {
+            returnWrapper?.classList.add('at-top');
+            returnWrapper?.classList.remove('not-top');
+        } else {
+            returnWrapper?.classList.remove('at-top');
+            returnWrapper?.classList.add('not-top');
+        }
+    };
+</script>
+<a class="return-wrapper" href="#" onclick="window.history.back()">
+    <span></span>
+    <img src="/images/back-arrow.svg" alt="">
+</a>
+
+<style lang="scss">
+    .return-wrapper{
+        position: fixed;
+        z-index: 1000;
+        left: var(--spacing-s);
+        top: var(--spacing-s);
+        background-color: var(--loveless-blue);
+        border-radius: 0 0 var(--radius-xl) 0;
+        width: max-content;
+        height: max-content;
+        padding: var(--spacing-m) var(--spacing-s) var(--spacing-m) var(--spacing-l);
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: var(--spacing-xs);
+        color: var(--loveless-black);
+        cursor: pointer;
+        span{
+            font-family: 'Mortend', sans-serif;
+            font-size: var(--font-size-l);
+            padding-top: 3px;
+            &::after{
+                content: "BACK";
+            }
+        }
+        img{
+            height: var(--font-size-2xl);
+            width: auto;
+        }
+    }
+    .at-top{
+        border-radius: 0 0 var(--radius-xl) 0 !important;
+        box-shadow: -10px 0 1px var(--loveless-blue), 0 -10px 1px var(--loveless-blue), 3px 3px 10px var(--loveless-black);
+    }
+    .not-top{
+        border-radius: 0 var(--radius-xl) var(--radius-xl) 0 !important;
+        box-shadow: -10px 0 1px var(--loveless-blue), 3px 3px 10px var(--loveless-black);
+        span{
+            &::after{
+                content: '';
+            }
+        }
+    }
+
+    @media screen and (max-width : 767px) {
+        .return-wrapper{
+            top: var(--spacing-2xs);
+            left: var(--spacing-2xs);
+            padding: var(--spacing-s) var(--spacing-s) var(--spacing-s) var(--spacing-m);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--spacing-2xs);
+            span{
+                font-size: var(--font-size-m);
+            }
+            img{
+                height: var(--font-size-xl);
+                width: auto;
+            }
+        }
+    }
+    @media screen and (min-width: 768px) and (max-width: 1079px) {
+        .return-wrapper{
+            top: var(--spacing-xs);
+            left: var(--spacing-xs);
+        }
+    }
+    @media screen and (min-width : 1080px) {
+        
+    }
+</style>
