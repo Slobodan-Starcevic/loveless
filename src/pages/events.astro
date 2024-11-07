@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import Return from '../components/Return.astro';
 
 type Props = {
 
@@ -13,6 +14,7 @@ const {} = Astro.props
 	<main>
 		<section class="events-wrapper bg-blue color-blue">
             <div class="events-cic">
+                <Return/>
                 <div class="header-wrapper">
                     <h1 class="back-1 stroke-blue">WHAT'S ON</h1>
                     <h1 class="back-2 stroke-blue">WHAT'S ON</h1>
@@ -42,6 +44,7 @@ const {} = Astro.props
 </Layout>
 
 <style lang="scss">
+    
     .events-wrapper {
         width: 100vw;
         min-height: 100vh;
@@ -102,6 +105,7 @@ const {} = Astro.props
 
     .content-wrapper{
         width: 80vw;
+        max-width: 1300px;
         display: flex;
         flex-direction: column;
         gap: var(--spacing-2xl);
@@ -151,6 +155,7 @@ const {} = Astro.props
                 font-size: var(--font-size-2xl) !important;
             }
         }
+        
     }
     @media screen and (min-width : 1080px) {
         .content-header{
@@ -158,5 +163,6 @@ const {} = Astro.props
                 font-size: var(--font-size-4xl) !important;
             }
         }
+        
     }
 </style>
