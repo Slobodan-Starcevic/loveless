@@ -20,13 +20,13 @@ const {} = Astro.props
                 </div>
                 <div class="content-wrapper">
                     <div class="content-header">
-                        <h1 class="stroke-blue">UPCOMING</h1>
+                        <h1 class="stroke-blue">UPCOMING EVENTS</h1>
                     </div>
                     <div class="cards">
                         <Card upcoming={true} align='left'/>
                     </div>
                     <div class="content-header align-row-right">
-                        <h1 class="stroke-blue two">(placeholders) FROM THE PAST</h1>
+                        <h1 class="stroke-blue two">PAST EVENTS</h1>
                     </div>
                     <div class="cards">
                         <Card upcoming={false} align='right'/>
@@ -63,6 +63,9 @@ const {} = Astro.props
             overflow: hidden;
             padding: var(--spacing-2xl);
         }
+        h1{
+            padding: 2px;
+        }
     }
 
     .header-wrapper{
@@ -71,6 +74,8 @@ const {} = Astro.props
         overflow: visible;
         margin: var(--spacing-6xl);
         cursor: default;
+        min-width: max-content;
+
         .back-1{
             z-index: 10;
             color: var(--loveless-black);
@@ -85,6 +90,7 @@ const {} = Astro.props
         }
         .front{
             position: relative;
+            width: 105%;
             z-index: 20;
             font-family: 'Mortend', 'sans-serif';
             font-size: var(--font-size-6xl);
@@ -111,5 +117,41 @@ const {} = Astro.props
             flex-direction: column;
             gap: var(--spacing-4xl);
         }
+    }
+
+    @media screen and (max-width : 767px) {
+        .events-wrapper{
+            padding: var(--spacing-2xs);
+        } 
+        .header-wrapper {
+            margin-top: var(--spacing-l);
+            margin-bottom: var(--spacing-xl);
+
+            .back-1 {
+                transform: translateY(28px);
+            }
+
+            .back-2 {
+                transform: translateY(-10px);
+            }
+        }
+        .content-header{
+            h1{
+                font-size: var(--font-size-xl) !important;
+            }
+        }
+    }
+    @media screen and (min-width: 768px) and (max-width: 1079px) {
+        .events-wrapper{
+            padding: var(--spacing-xs);
+        } 
+        .content-header{
+            h1{
+                font-size: var(--font-size-3xl) !important;
+            }
+        }
+    }
+    @media screen and (min-width : 1080px) {
+        
     }
 </style>
