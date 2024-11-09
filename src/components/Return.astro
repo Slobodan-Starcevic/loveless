@@ -1,17 +1,15 @@
 ---
-const handleReturnClick = () => {
-    const referrer = document.referrer;  // Get the referrer URL
+// const handleReturnClick = () => {
+//     const referrer = document.referrer;
 
-    // Define allowed pages where you don't want to redirect
-    const allowedPages = ['/', '/gallery', '/events'];
+//     const allowedPages = ['/', '/gallery', '/events'];
 
-    // Check if the referrer is from one of the allowed pages
-    if (allowedPages.some(page => referrer.includes(page))) {
-      window.history.back();  // Go back to the last page if it's an allowed referrer
-    } else {
-      window.location.href = '/';  // Redirect to home page if the referrer is unexpected
-    }
-  };
+//     if (allowedPages.some(page => referrer.includes(page))) {
+//       window.history.back();
+//     } else {
+//       window.location.href = '/';
+//     }
+//   };
 ---
 <script>
     const returnWrapper = document.querySelector('.return-wrapper') as HTMLElement;

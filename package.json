@@ -12,7 +12,9 @@
   "dependencies": {
     "": "file:",
     "@astrojs/check": "^0.9.4",
+    "@astrojs/react": "^3.6.2",
     "astro": "^4.16.8",
+    "decap-cms-app": "^3.3.3",
     "sass": "^1.79.4",
     "typescript": "^5.6.2"
   }

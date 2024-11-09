@@ -1,0 +1,9 @@
+backend:
+    name: git-gateway
+    branch: main
+
+local_backend: true
+# logo_url: HAS TO BE URL
+
+public_folder: "/images"
+media_folder: "public/images"
