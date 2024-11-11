@@ -20,15 +20,16 @@
     height: auto;
     max-height: 600px;
     border-radius: var(--radius-l);
-    box-shadow: 17px 12px 36px var(--loveless-black);
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center; 
+    cursor: pointer;
     img{
         width: 100%;
         height: 100%;
         object-fit: cover;
+        transition: all 0.3s var(--custom-ease-1);
     }
 
     .card-content{
@@ -46,6 +47,10 @@
             font-family: 'Mortend';
             font-size: var(--font-size-xl);
         }
+    }
+
+    &:hover img{
+        transform: scale(1.1);
     }
 }
 
