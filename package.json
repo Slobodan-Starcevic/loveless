@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "mrlovelessbrisbane",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -17,6 +17,7 @@
     "astro": "^4.16.8",
     "decap-cms-app": "^3.3.3",
     "sass": "^1.79.4",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.2",
+    "vue": "^3.5.12"
   }
 }
