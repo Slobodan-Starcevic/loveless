@@ -9,4 +9,15 @@ public_folder: "/images"
 media_folder: "public/images"
 
 collections:
-    
+  - name: "rentals"
+    label: "Rentals"
+    folder: "content/rentals"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Price", name: "price", widget: "number" }
+      - { label: "Location", name: "location", widget: "string" }
+      - { label: "Date Posted", name: "date_posted", widget: "datetime" }
+      - { label: "Images", name: "images", widget: "list", fields: [{ label: "Image", name: "image", widget: "image" }] }
