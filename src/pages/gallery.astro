@@ -1,28 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const galleryImages = [
-  '/images/gallery/MrLoveless90s-081.jpg',
-  '/images/gallery/MrLoveless90s-090.jpg',
-  '/images/gallery/MrLoveless90s-102.jpg',
-  '/images/gallery/MrLoveless90s-107.jpg',
-  '/images/gallery/MrLoveless90s-111.jpg',
-  '/images/gallery/MrLoveless90s-115.jpg',
-  '/images/gallery/MrLoveless90s-118.jpg',
-  '/images/gallery/MrLoveless90s-120.jpg',
-  '/images/gallery/MrLoveless90s-125.jpg',
-  '/images/gallery/MrLoveless90s-128.jpg',
-  '/images/gallery/MrLoveless90s-133.jpg',
-  '/images/gallery/MrLoveless90s-147.jpg',
-  '/images/gallery/MrLoveless90s-157.jpg',
-  '/images/gallery/MrLoveless90s-159.jpg',
-  '/images/gallery/MrLoveless90s-162.jpg',
-  '/images/gallery/MrLoveless90s-164.jpg',
-  '/images/gallery/MrLoveless90s-166.jpg',
-  '/images/gallery/MrLoveless90s-168.jpg',
-  '/images/gallery/MrLoveless90s-180.jpg',
-  '/images/gallery/MrLoveless90s-184.jpg',
-];
+import ImageGallery from '../components/gallery/ImageGallery.vue';
 
 type Props = {};
 
@@ -42,92 +20,48 @@ const {} = Astro.props;
         header.style.transform = `translate(${moveX}px, ${moveY}px)`;
     });
 </script>
-<Layout title="Mr. Loveless Brisbane">
+<Layout title="Gallery - Mr Loveless Brisbane">
 	<main>
 		<section class="gallery-wrapper bg-pink color-pink">
-            <div class="gallery-cic-14124">
-                <div class="headerder-wrapper">
-                    <div class="header-wrapper">
-                        <h1 id="floating-header" class="stroke-pink">GALLERY</h1>
-                        <h1>GALLERY</h1>
-                    </div>
-                    <div class="selector-wrapper-32r32">
-                        <a href="">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="left" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
-                        </a>
-                        <p>90S THROWBACK</p>
-                        <a href="">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="right" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
-                        </a>
-                    </div>
+            <div class="gallery-cic-123">
+                <div class="header-wrapper">
+                    <h1 id="floating-header" class="stroke-pink">GALLERY</h1>
+                    <h1>GALLERY</h1>
                 </div>
-                <div class="gallery-2352">
-                    {galleryImages.map((imagePath) => (
-                        <div class="gallery-item-2352">
-                            <img src={imagePath} class="gallery-image-2352" alt="Gallery Image" />
-                        </div>
-                    ))}
-                </div>
+                <ImageGallery/>
             </div>
         </section>
 	</main>
 </Layout>
 
 <style lang="scss">
-    .headerder-wrapper{
-        padding: var(--spacing-3xl);
+    .header-wrapper{
+        position: relative;
+        overflow: visible;
+        padding: var(--spacing-6xl) 0 var(--spacing-3xl) 0;
         display: flex;
         flex-direction: column;
         align-items: center;
-        .header-wrapper{
-            flex: 1;
-            justify-content: end;
-            position: relative;
-            overflow: visible;
 
-            #floating-header{
-                position: absolute;
-                color: var(--loveless-black);
-                transition: transform 0.2s ease-out;
-            }
+        #floating-header{
+            position: absolute;
+            color: var(--loveless-black);
+            transition: transform 0.2s ease-out;
         }
-        .selector-wrapper-32r32 {
-                z-index: 100;
-                width: max-content;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: var(--spacing-m);
-                background-color: var(--loveless-black);
-                padding: var(--spacing-2xs) var(--spacing-m);
-                border-radius: var(--radius-m);
-                margin-top: var(--spacing-s);
-                p {
-                    font-size: var(--font-size-xl);
-                    font-family: 'Mortend', 'TT';
-                }
-                .left{
-                    fill: var(--loveless-pink-dark);
-                    transform: rotate(90deg);
-                    width: 30px;
-                }
-                .right{
-                    fill: var(--loveless-pink-dark);
-                    transform: rotate(270deg);
-                    width: 30px;
-                }
-            }
     }
     
     .gallery-wrapper {
         width: 100vw;
         min-height: 100vh;
         padding: var(--spacing-s);
+        display: flex;
         
-        .gallery-cic-14124 {
+        .gallery-cic-123 {
             position: relative;
             width: 100%;
             height: 100%;
+            padding: 0;
+            flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -160,5 +94,28 @@ const {} = Astro.props;
                 left: 0;
             }
         }
+    }
+
+    @media screen and (max-width : 767px) {
+        .gallery-wrapper {
+            padding: var(--spacing-2xs);
+        }
+        .header-wrapper{
+            padding: var(--spacing-3xl) 0 var(--spacing-xl) 0;
+
+            #floating-header{
+                position: absolute;
+                color: var(--loveless-black);
+                transition: transform 0.2s ease-out;
+            }
+        }
+    }
+    @media screen and (min-width: 768px) and (max-width: 1079px) {
+        .gallery-wrapper {
+            padding: var(--spacing-xs);
+        }
+    }
+    @media screen and (min-width : 1080px) {
+        
     }
 </style>

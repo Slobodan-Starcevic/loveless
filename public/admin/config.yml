@@ -9,15 +9,16 @@ public_folder: "/images/uploads"
 media_folder: "public/images/uploads"
 
 collections:
-  - name: "rentals"
-    label: "Rentals"
-    folder: "content/rentals"
+  - name: "events"
+    label: "Events"
+    folder: "src/content/events"
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Price", name: "price", widget: "number" }
-      - { label: "Location", name: "location", widget: "string" }
-      - { label: "Date Posted", name: "date_posted", widget: "datetime" }
-      - { label: "Images", name: "images", widget: "list", fields: [{ label: "Image", name: "image", widget: "image" }] }
+      - { label: "Event title", name: "title", widget: "string" }
+      - { label: "Catchy description (Example: MARK YOUR CALENDERS FOR OCTOBER 26TH – IT’S GONNA BE A HALLOWEEN NIGHT YOU WON’T FORGET)", name: "description", widget: "text" }
+      - { label: "Location/Venue", name: "location", widget: "string" }
+      - { label: "Event date", name: "date", widget: "datetime" }
+      - { label: "Link to ticket sale page (EventBrite etc)", name: "ticket-link", widget: "string" }
+      - { label: "Banner image", name: "banner", widget: "image" }
+      - { label: "Images (Gallery images taken during the event)", name: "images", widget: "list", fields: [{ label: "Image", name: "image", widget: "image" }] }
