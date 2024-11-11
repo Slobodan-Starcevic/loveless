@@ -5,8 +5,8 @@ backend:
 local_backend: true
 # logo_url: HAS TO BE URL
 
-public_folder: "/images"
-media_folder: "public/images"
+public_folder: "/images/uploads"
+media_folder: "public/images/uploads"
 
 collections:
   - name: "rentals"
