@@ -1,34 +1,33 @@
 ---
-// const handleReturnClick = () => {
-//     const referrer = document.referrer;
+type Props = {
+    color: String;
+};
+  
+const {color} = Astro.props;
 
-//     const allowedPages = ['/', '/gallery', '/events'];
-
-//     if (allowedPages.some(page => referrer.includes(page))) {
-//       window.history.back();
-//     } else {
-//       window.location.href = '/';
-//     }
-//   };
 ---
 <script>
     const returnWrapper = document.querySelector('.return-wrapper') as HTMLElement;
-
-    window.addEventListener('scroll', handler, false);
-
-    window.addEventListener('load', handler, false);
+    const color = returnWrapper?.dataset.color;
 
     function handler(event: Event) {
         if (window.scrollY === 0) {
-            returnWrapper?.classList.add('at-top');
-            returnWrapper?.classList.remove('not-top');
+            returnWrapper?.classList.add(`at-top-${color}`);
+            returnWrapper?.classList.remove(`not-top-${color}`);
         } else {
-            returnWrapper?.classList.remove('at-top');
-            returnWrapper?.classList.add('not-top');
+            returnWrapper?.classList.remove(`at-top-${color}`);
+            returnWrapper?.classList.add(`not-top-${color}`);
         }
     };
+    window.addEventListener('scroll', handler, false);
+
+    window.addEventListener('load', handler, false);
 </script>
-<a class="return-wrapper" href="#" onclick="window.history.back()">
+<a 
+class={`return-wrapper bg-${color}`} 
+href="#" 
+onclick="window.history.back()"
+data-color={color}>
     <span></span>
     <img src="/images/back-arrow.svg" alt="">
 </a>
@@ -39,7 +38,6 @@
         z-index: 1000;
         left: var(--spacing-s);
         top: var(--spacing-s);
-        background-color: var(--loveless-blue);
         border-radius: 0 0 var(--radius-xl) 0;
         width: max-content;
         height: max-content;
@@ -64,13 +62,26 @@
             width: auto;
         }
     }
-    .at-top{
+    .at-top-blue{
         border-radius: 0 0 var(--radius-xl) 0 !important;
         box-shadow: -10px 0 1px var(--loveless-blue), 0 -10px 1px var(--loveless-blue), 3px 3px 10px var(--loveless-black);
     }
-    .not-top{
+    .not-top-blue{
         border-radius: 0 var(--radius-xl) var(--radius-xl) 0 !important;
         box-shadow: -10px 0 1px var(--loveless-blue), 3px 3px 10px var(--loveless-black);
+        span{
+            &::after{
+                content: '';
+            }
+        }
+    }
+    .at-top-pink{
+        border-radius: 0 0 var(--radius-xl) 0 !important;
+        box-shadow: -10px 0 1px var(--loveless-pink), 0 -10px 1px var(--loveless-pink), 3px 3px 10px var(--loveless-black);
+    }
+    .not-top-pink{
+        border-radius: 0 var(--radius-xl) var(--radius-xl) 0 !important;
+        box-shadow: -10px 0 1px var(--loveless-pink), 3px 3px 10px var(--loveless-black);
         span{
             &::after{
                 content: '';
