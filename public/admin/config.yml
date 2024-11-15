@@ -13,6 +13,7 @@ collections:
     label: "Events"
     folder: "src/content/events"
     create: true
+    format: "json"
     slug: "{{slug}}"
     fields:
       - { label: "Event title", name: "title", widget: "string" }
