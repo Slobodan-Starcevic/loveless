@@ -1,20 +1,20 @@
 <script setup lang="ts">
   import GalleryCard from './GalleryCard.vue';
   import { ref } from 'vue';
-  import Modal from './GalleryModal.vue';
-  import type { Event } from '../../types/event';
+  import type { EventProps } from '../../types/event';
+  import ImageModal from '../ImageModal.vue';
  
   const isModalVisible = ref(false);
-  const selectedImage = ref('');
+  const selectedEvent = ref<EventProps | null>(null);
   const props = defineProps({
     eventsCollection: {
-      type: Array<Event>,
+      type: Array<EventProps>,
       required: true
     }
   });
 
-  const openModal = (image: string) => {
-    selectedImage.value = image;
+  const openModal = (id: string) => {
+    selectedEvent.value = props.eventsCollection.find(event => event.id === id) || null;
     isModalVisible.value = true;
   };
 
@@ -24,18 +24,21 @@
 </script>
 
 <template>
-  <Modal v-if="isModalVisible" @close="closeModal">
-    <h2>Event Details</h2>
-    <img :src="selectedImage" alt="Event Image" />
-    <p>More details about the event...</p>
-  </Modal>
+  <teleport to="body">
+    <ImageModal 
+    v-if="isModalVisible"
+    :eventImages="selectedEvent?.data.images" 
+    @close="closeModal"
+    client:load
+    />
+  </teleport>
 
   <div class="gallery-cards-wrapper">
     <GalleryCard
       v-for="(event, index) in props.eventsCollection"
       :key="index"
       :event="event"
-      @select="openModal"
+      @event-choice="openModal"
     />
   </div>
 </template>
@@ -50,17 +53,20 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: var(--spacing-2xl);
   }
 
   @media screen and (max-width : 767px) {
     .gallery-cards-wrapper{
       padding: 0;
+      justify-content: center !important;
     }
   }
   @media screen and (min-width: 768px) and (max-width: 1079px) {
-      
+    .gallery-cards-wrapper{
+      justify-content: center !important;
+    }
   }
   @media screen and (min-width : 1080px) {
       

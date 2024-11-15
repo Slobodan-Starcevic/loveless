@@ -1,16 +1,13 @@
 <script setup lang="ts">
-import { number } from 'astro:schema';
 import type { EventProps } from '../../types/event';
 
 const props = defineProps<{
-    key: number;
     event: EventProps;
   }>();
-console.log(props.event)
 </script>
 
 <template>
-<div class="card-wrapper">
+<div class="card-wrapper" @click="$emit('eventChoice', props.event.id)">
     <img :src="event.data.banner" alt="">
     <div class="card-content">
         <p class="card-title">{{ event.data.title }}</p>

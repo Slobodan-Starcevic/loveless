@@ -28,6 +28,7 @@ const formattedDateEvents = allEvents.map(event => ({
         header.style.transform = `translate(${moveX}px, ${moveY}px)`;
     });
 </script>
+
 <Layout title="Gallery - Mr Loveless Brisbane">
 	<main>
 		<section class="gallery-wrapper bg-pink color-pink">
@@ -37,7 +38,7 @@ const formattedDateEvents = allEvents.map(event => ({
                     <h1 id="floating-header" class="stroke-pink">GALLERY</h1>
                     <h1>GALLERY</h1>
                 </div>
-                <ImageGallery eventsCollection={formattedDateEvents}/>
+                <ImageGallery eventsCollection={formattedDateEvents} client:load/>
             </div>
         </section>
 	</main>
@@ -68,7 +69,6 @@ const formattedDateEvents = allEvents.map(event => ({
         .gallery-cic-123 {
             position: relative;
             width: 100%;
-            height: 100%;
             padding: 0;
             flex: 1;
             display: flex;
