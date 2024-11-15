@@ -1,13 +1,20 @@
 <script setup lang="ts">
+import { number } from 'astro:schema';
+import type { EventProps } from '../../types/event';
 
+const props = defineProps<{
+    key: number;
+    event: EventProps;
+  }>();
+console.log(props.event)
 </script>
 
 <template>
 <div class="card-wrapper">
-    <img src="images/MrLoveless90s-153.jpg" alt="">
+    <img :src="event.data.banner" alt="">
     <div class="card-content">
-        <p class="card-title">Halloween Party</p>
-        <p>Saturday 26th October 2024</p>
+        <p class="card-title">{{ event.data.title }}</p>
+        <p>{{ event.data.date }}</p>
     </div>
 </div>
 </template>

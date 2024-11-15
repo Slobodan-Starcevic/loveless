@@ -1,6 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 
 const eventsCollection = defineCollection({
+  type: 'data',
   schema: z.object({
     title: z.string(),
     description: z.string(),

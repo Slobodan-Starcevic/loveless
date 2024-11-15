@@ -2,11 +2,18 @@
 import Layout from '../layouts/Layout.astro';
 import ImageGallery from '../components/gallery/ImageGallery.vue';
 import Return from '../components/Return.astro';
+import {getCollection} from 'astro:content'
+import {dateFormatterDDMY} from '../utils/dateFormater' 
 
-type Props = {};
+const allEvents = await getCollection('events');
 
-const {} = Astro.props;
-
+const formattedDateEvents = allEvents.map(event => ({
+    ...event,
+    data: {
+        ...event.data,
+        date: dateFormatterDDMY(event.data.date)
+    }
+}))
 ---
 <script lang="ts">
     document.addEventListener('mousemove', (e) => {
@@ -30,7 +37,7 @@ const {} = Astro.props;
                     <h1 id="floating-header" class="stroke-pink">GALLERY</h1>
                     <h1>GALLERY</h1>
                 </div>
-                <ImageGallery/>
+                <ImageGallery eventsCollection={formattedDateEvents}/>
             </div>
         </section>
 	</main>

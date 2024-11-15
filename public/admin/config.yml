@@ -20,6 +20,6 @@ collections:
       - { label: "Catchy description (Example: MARK YOUR CALENDERS FOR OCTOBER 26TH – IT’S GONNA BE A HALLOWEEN NIGHT YOU WON’T FORGET)", name: "description", widget: "text" }
       - { label: "Location/Venue", name: "location", widget: "string" }
       - { label: "Event date", name: "date", widget: "datetime" }
-      - { label: "Link to ticket sale page (EventBrite etc)", name: "ticket-link", widget: "string" }
+      - { label: "Link to ticket sale page (EventBrite etc)", name: "ticketLink", widget: "string" }
       - { label: "Banner image", name: "banner", widget: "image" }
       - { label: "Images (Gallery images taken during the event)", name: "images", widget: "list", fields: [{ label: "Image", name: "image", widget: "image" }] }

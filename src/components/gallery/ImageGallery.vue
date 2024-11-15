@@ -1,46 +1,44 @@
+<script setup lang="ts">
+  import GalleryCard from './GalleryCard.vue';
+  import { ref } from 'vue';
+  import Modal from './GalleryModal.vue';
+  import type { Event } from '../../types/event';
+ 
+  const isModalVisible = ref(false);
+  const selectedImage = ref('');
+  const props = defineProps({
+    eventsCollection: {
+      type: Array<Event>,
+      required: true
+    }
+  });
+
+  const openModal = (image: string) => {
+    selectedImage.value = image;
+    isModalVisible.value = true;
+  };
+
+  const closeModal = () => {
+    isModalVisible.value = false;
+  };
+</script>
+
 <template>
-   <Modal v-if="isModalVisible" @close="closeModal">
+  <Modal v-if="isModalVisible" @close="closeModal">
     <h2>Event Details</h2>
     <img :src="selectedImage" alt="Event Image" />
     <p>More details about the event...</p>
   </Modal>
+
   <div class="gallery-cards-wrapper">
-    <GalleryCard/>
-    <GalleryCard/>
-    <GalleryCard/>
-    <GalleryCard/>
-    <GalleryCard/>
-    <GalleryCard/>
+    <GalleryCard
+      v-for="(event, index) in props.eventsCollection"
+      :key="index"
+      :event="event"
+      @select="openModal"
+    />
   </div>
 </template>
-
-<script setup lang="ts">
-import GalleryCard from './GalleryCard.vue';
-import { ref } from 'vue';
-import Modal from './GalleryModal.vue';
-
-const isModalVisible = ref(false);
-const selectedImage = ref('');
-const galleryCards = ref([
-  { image: 'image1.jpg', title: 'Event 1' },
-  { image: 'image2.jpg', title: 'Event 2' },
-  { image: 'image3.jpg', title: 'Event 3' },
-  { image: 'image4.jpg', title: 'Event 4' },
-  { image: 'image5.jpg', title: 'Event 5' },
-  { image: 'image6.jpg', title: 'Event 6' }
-]);
-
-// Function to open modal with selected image
-const openModal = (image: string) => {
-  selectedImage.value = image;
-  isModalVisible.value = true;
-};
-
-// Function to close modal
-const closeModal = () => {
-  isModalVisible.value = false;
-};
-</script>
 
 <style lang="scss" scoped>
   .gallery-cards-wrapper{
