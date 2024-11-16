@@ -4,15 +4,15 @@ import Card from '../components/Card.astro';
 import Return from '../components/Return.astro';
 import { getCollection } from 'astro:content';
 import { EventProps } from '../types/event';
+import { links } from '../utils/links';
 
-type Props = {
+const allEvents = await getCollection('events') as Array<EventProps>;
 
-}
+const now = new Date()
 
-const {} = Astro.props
+const upcomingEvents = allEvents.filter(event => new Date(event.data.date) > now);
 
-const allEvents = await getCollection('events');
-
+const pastEvents = allEvents.filter(event => new Date(event.data.date) < now);
 ---
 <script>
 
@@ -32,17 +32,27 @@ const allEvents = await getCollection('events');
                     <div class="content-header">
                         <h1 class="stroke-blue">UPCOMING EVENTS</h1>
                     </div>
-                    <div class="cards">
-                        <Card upcoming={true} align='left'/>
-                    </div>
+                    {upcomingEvents.length > 0 ?
+                        upcomingEvents.map((event: EventProps) => (
+                            <div class="cards">
+                                <Card event={event} upcoming={true} align='right'/>
+                            </div>
+                        ))
+                        :
+                        <a href={links.instagram} target="_blank" class="no-event">STAY TUNED FOR MORE</a>
+                    }
                     <div class="content-header align-row-right">
                         <h1 class="stroke-blue two">PAST EVENTS</h1>
                     </div>
-                    <div class="cards">
-                        {allEvents.map((event: EventProps) => (
-                            <Card event={event} upcoming={false} align='right'/>
-                        ))}
-                    </div>
+                    {pastEvents.length > 0 ?
+                        pastEvents.map((event: EventProps) => (
+                            <div class="cards">
+                                <Card event={event} upcoming={true} align='right'/>
+                            </div>
+                        ))
+                        :
+                        <a href={links.instagram} target="_blank" class="no-event">STAY TUNED FOR MORE</a>
+                    }
                 </div>
             </div>
         </section>
@@ -50,6 +60,23 @@ const allEvents = await getCollection('events');
 </Layout>
 
 <style lang="scss">
+    .no-event{
+        margin: 0 auto;
+        font-family: 'Mortend', sans-serif;
+        text-align: center;
+        justify-self: center;
+        border: 2px solid var(--loveless-blue);
+        border-radius: var(--radius-l);
+        padding: var(--spacing-l);
+        box-shadow: 0 0 10px var(--loveless-blue);
+        transition: all 0.3s var(--custom-ease-1);
+        span{
+            font-size: var(--font-size-xl);
+        }
+        &:hover{
+            transform: scale(1.1);
+        }
+    }
     
     .events-wrapper {
         width: 100vw;
