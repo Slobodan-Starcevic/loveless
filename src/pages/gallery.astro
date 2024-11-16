@@ -14,6 +14,8 @@ const formattedDateEvents = allEvents.map(event => ({
         date: dateFormatterDDMY(event.data.date)
     }
 }))
+
+const query = Astro.url.searchParams.get('id');
 ---
 <script lang="ts">
     document.addEventListener('mousemove', (e) => {
@@ -38,7 +40,7 @@ const formattedDateEvents = allEvents.map(event => ({
                     <h1 id="floating-header" class="stroke-pink">GALLERY</h1>
                     <h1>GALLERY</h1>
                 </div>
-                <ImageGallery eventsCollection={formattedDateEvents} client:load/>
+                <ImageGallery eventsCollection={formattedDateEvents} urlParam={query} client:load/>
             </div>
         </section>
 	</main>

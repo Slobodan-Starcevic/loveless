@@ -1,17 +1,15 @@
 <script setup lang="ts">
   import GalleryCard from './GalleryCard.vue';
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
   import type { EventProps } from '../../types/event';
   import ImageModal from '../ImageModal.vue';
  
   const isModalVisible = ref(false);
   const selectedEvent = ref<EventProps | null>(null);
-  const props = defineProps({
-    eventsCollection: {
-      type: Array<EventProps>,
-      required: true
-    }
-  });
+  const props = defineProps<{
+    eventsCollection: Array<EventProps>;
+    urlParam?: string;
+  }>();
 
   const openModal = (id: string) => {
     selectedEvent.value = props.eventsCollection.find(event => event.id === id) || null;
@@ -21,6 +19,13 @@
   const closeModal = () => {
     isModalVisible.value = false;
   };
+
+  onMounted(() => {
+  if (props.urlParam) {
+    selectedEvent.value = props.eventsCollection.find((event) => event.id === props.urlParam) || null;
+    console.log('something');
+  }
+});
 </script>
 
 <template>
