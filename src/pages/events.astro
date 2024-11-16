@@ -33,9 +33,9 @@ const pastEvents = allEvents.filter(event => new Date(event.data.date) < now);
                         <h1 class="stroke-blue">UPCOMING EVENTS</h1>
                     </div>
                     {upcomingEvents.length > 0 ?
-                        upcomingEvents.map((event: EventProps) => (
-                            <div class="cards">
-                                <Card event={event} upcoming={true} align='right'/>
+                        upcomingEvents.map((event: EventProps, index) => (
+                            <div class="cards" data-index={index}>
+                                <Card event={event} upcoming={true} align={index % 2 === 0 ? 'right' : 'left'}/>
                             </div>
                         ))
                         :
@@ -45,9 +45,9 @@ const pastEvents = allEvents.filter(event => new Date(event.data.date) < now);
                         <h1 class="stroke-blue two">PAST EVENTS</h1>
                     </div>
                     {pastEvents.length > 0 ?
-                        pastEvents.map((event: EventProps) => (
-                            <div class="cards">
-                                <Card event={event} upcoming={true} align='right'/>
+                        pastEvents.map((event: EventProps, index) => (
+                            <div class="cards" data-index={index}>
+                                <Card event={event} upcoming={false} align={index % 2 === 0 ? 'right' : 'left'}/>
                             </div>
                         ))
                         :
