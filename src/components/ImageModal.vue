@@ -1,33 +1,48 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 
 const props = defineProps<{
     eventImages: { image: string }[];
 }>();
+const closeEmit = defineEmits<{
+  (event: 'close'): void;
+}>();
 
-console.log(props.eventImages)
-const focusedImage = ref(props.eventImages[0].image)
+const focusedImage = ref(props.eventImages.length > 0 ?  props.eventImages[0].image: '')
 
-const imageHandler = (number: number) => {
+const imageHandler = (delta: -1 | 1) => {
     const imagesAmount = props.eventImages.length;
     const currentFocusedImage = props.eventImages.findIndex(
         image => image.image === focusedImage.value
     );
 
-    const newIndex = (currentFocusedImage + number + imagesAmount) % imagesAmount;
+    const newIndex = (currentFocusedImage + delta) % imagesAmount;
 
     focusedImage.value = props.eventImages[newIndex].image;
 };
+
+onMounted(() => {
+    const handleEsc = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+            closeEmit('close');
+        }
+    };
+
+    window.addEventListener('keydown', handleEsc);
+
+    onBeforeUnmount(() => {
+        window.removeEventListener('keydown', handleEsc);
+    });
+});
 
 </script>
 
 <template>
     <div class="modal-wrapper">
-        <div class="background" @click="$emit('close')"></div>
+        <div class="background" @click="closeEmit('close')"></div>
         <div class="modal-content">
             <div class="">
-                <img src="/images/cross.svg" class="cross" @click="$emit('close')" alt="Button to close images">
+                <img src="/images/cross.svg" class="cross" @click="closeEmit('close')" alt="Button to close images">
             </div>
             <div class="">
                 <img src="/images/chevron.svg" @click="imageHandler(-1)" class="chevron chevron-left" alt="Button to previous image">

@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import Return from '../components/Return.astro';
+import { getCollection } from 'astro:content';
+import { EventProps } from '../types/event';
 
 type Props = {
 
@@ -9,7 +11,13 @@ type Props = {
 
 const {} = Astro.props
 
+const allEvents = await getCollection('events');
+
 ---
+<script>
+
+</script>
+
 <Layout title="Events - Mr Loveless Brisbane">
 	<main>
 		<section class="events-wrapper bg-blue color-blue">
@@ -31,11 +39,9 @@ const {} = Astro.props
                         <h1 class="stroke-blue two">PAST EVENTS</h1>
                     </div>
                     <div class="cards">
-                        <Card upcoming={false} align='right'/>
-                        <Card upcoming={false} align='left'/>
-                        <Card upcoming={false} align='right'/>
-                        <Card upcoming={false} align='left'/>
-                        <Card upcoming={false} align='right'/>
+                        {allEvents.map((event: EventProps) => (
+                            <Card event={event} upcoming={false} align='right'/>
+                        ))}
                     </div>
                 </div>
             </div>

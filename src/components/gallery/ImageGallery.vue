@@ -29,7 +29,6 @@
     v-if="isModalVisible"
     :eventImages="selectedEvent?.data.images" 
     @close="closeModal"
-    client:load
     />
   </teleport>
 

@@ -1,31 +1,36 @@
 ---
 import { links } from '../utils/links';
+import type { EventProps } from '../types/event'
 interface Props {
 	upcoming: boolean;
 	align: string;
+	event?: EventProps;
 }
 
-const { upcoming, align } = Astro.props;
+const { upcoming, align, event } = Astro.props;
+const eventDate = new Date(event?.data.date);
+const eventDay = eventDate.getDate()
+const eventMonth = eventDate.toLocaleString('default', {month: 'long'}).slice(0, 3).toUpperCase();
 ---
 
 <div style="width: 100%;" class={`align-row-${align}`}>
 	<div class="card-wrapper">
-		<a href={links.tickets} target="_blank">
+		<a href={upcoming ? event?.data.ticketLink : links.gallery} target="_blank">
 			<div class="date-card">
-				<p class="day">26</p>
-				<p class="month">OCT</p>
+				<p class="day">{eventDay}</p>
+				<p class="month">{eventMonth}</p>
 			</div>
 			<div class="card-image">
-				<img src="/images/poster.png" alt="Event Image">
+				<img src={event?.data.banner} alt="Event Image">
 			</div>
 			<div class="card-content">
 				<div class="text">
-					<h3 class="card-title">HALLOWEEN PARTY</h3>
-					<p class="card-description">The end is nigh, party with us on the last day on earth!</p>
+					<h3 class="card-title">{event?.data.title}</h3>
+					<p class="card-description">{event?.data.description}</p>
 				</div>
 				<div class="buttons">
 					{upcoming ?
-						<a href={links.tickets} class="button primary" target="_blank">TICKETS</a>
+						<a href={event?.data.ticketLink} class="button primary" target="_blank">TICKETS</a>
 						:
 						<a href={links.gallery} class="button secondary">GALLERY</a>
 					}
