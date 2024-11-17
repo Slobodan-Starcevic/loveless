@@ -8,10 +8,19 @@ type Props = {
 
 const {events} = Astro.props
 
+const imageList = events.flatMap(event => event.data.images.map(image => image.image));
+const randomisedImages = getRandomItems(imageList, 5);
+console.log(randomisedImages.length)
+
+function getRandomItems(array: string[], count: number): string[]{
+    const shuffled = [...array].sort(() => Math.random() - 0.5)
+    return shuffled.slice(0, count);
+};
+
 ---
-<script lang="ts">
+<script>
     document.addEventListener('mousemove', (e) => {
-        const header = document.getElementById('floating-header');
+        const header = document.getElementById('floating-header') as HTMLElement;
         const rect = header.getBoundingClientRect();
         const titleCenterX = rect.left + rect.width / 2;
         const titleCenterY = rect.top + rect.height / 2;
@@ -21,18 +30,6 @@ const {events} = Astro.props
         const moveY = Math.min(Math.max(deltaY * 0.05, -6), 6);
         header.style.transform = `translate(${moveX}px, ${moveY}px)`;
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        const scrollers = document.querySelectorAll(".scroller");
-        scrollers.forEach((scroller) => {
-        const scrollerInner = scroller.querySelector(".scroller-inner");
-        const scrollerContent = Array.from(scrollerInner.children);
-        scrollerContent.forEach((item) => {
-        const duplicatedItem = item.cloneNode(true);
-        duplicatedItem.setAttribute("aria-hidden", true);
-        scrollerInner.appendChild(duplicatedItem);
-      });
-    });
-    })
 </script>
 <section class="section-wrapper bg-pink color-pink">
     <div class="cic">
@@ -44,21 +41,11 @@ const {events} = Astro.props
             </div>
             <div class="scroller">
                 <div class="inner-scroller">
-                    <div class="image-wrapper">
-                        <img src="/images/MrLoveless90s-109.jpg" alt="" loading="lazy">
-                    </div>
-                    <div class="image-wrapper">
-                        <img src="/images/MrLoveless90s-130.jpg" alt="" loading="lazy">
-                    </div>
-                    <div class="image-wrapper">
-                        <img src="/images/MrLoveless90s-153.jpg" alt="" loading="lazy">
-                    </div>
-                    <div class="image-wrapper">
-                        <img src="/images/MrLoveless90s-158.jpg" alt="" loading="lazy">
-                    </div>
-                    <div class="image-wrapper">
-                        <img src="/images/MrLoveless90s-163.jpg" alt="" loading="lazy">
-                    </div>
+                    {randomisedImages.map((image, index)=> (
+                        <div class={`image-wrapper ${index === 0 ? 'desktop-content' : ''}`}>
+                            <img src={image} class={`${index === 0 ? 'desktop-content' : ''}`} alt="Gallery image" loading="lazy"/>
+                        </div>
+                    ))}
                 </div>
             </div>
             <div class="cta-wrapper">
@@ -255,6 +242,11 @@ const {events} = Astro.props
         }
         .image-wrapper{
             height: 500px !important;
+
+            &:hover{
+                width: 500px !important;
+                filter: brightness(90%) !important;
+            }
         }
     }
     @media screen and (min-width : 1080px) {
@@ -287,11 +279,9 @@ const {events} = Astro.props
                 align-items: center;
             }
         }
-    }
-    @media (min-width: 768px) {
         .image-wrapper:hover {
-            width: 700px;
-            filter: brightness(90%);
+            width: 700px !important;
+            filter: brightness(90%) !important;
         }
     }
 </style>

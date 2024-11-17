@@ -38,7 +38,7 @@ const imageArray = computed(() => {
 </script>
 
 <template>
-<div class="scroller-wrapper desktop-content">
+<div class="scroller-wrapper desktop-tablet-content">
                 <div class="scroller">
                     <div class="scroller-inner">
                         <img v-for="(image, index) in imageArray" 

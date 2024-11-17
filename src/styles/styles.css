@@ -188,6 +188,9 @@ a{
     .desktop-content{
         display: none !important;
     }
+    .desktop-tablet-content{
+        display: none !important;
+    }
 }
 @media screen and (min-width: 768px) and (max-width: 1079px) {
     h1{
@@ -200,6 +203,9 @@ a{
         padding: var(--spacing-xs);
     }  
     .mobile-content{
+        display: none !important;
+    }
+    .desktop-content{
         display: none !important;
     }
 }
