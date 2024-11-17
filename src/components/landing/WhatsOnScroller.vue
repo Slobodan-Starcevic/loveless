@@ -51,7 +51,7 @@ const imageArray = computed(() => {
                 <div class="still">
                     <div class="still-inner">
                         <img :src="imageArray[0]" alt="" loading="lazy">
-                        <img src="/images/poster.png" alt="" loading="lazy">
+                        <img src="images/uploads/mrloveless90s-166.jpg" alt="" loading="lazy">
                         <img :src="imageArray[1]" alt="" loading="lazy">
                     </div>
                 </div>

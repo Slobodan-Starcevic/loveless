@@ -6,4 +6,14 @@ import vue from '@astrojs/vue';
 export default defineConfig({
     devToolbar: { enabled: false },
     integrations: [vue()],
+    vite: {
+        css: {
+          preprocessorOptions: {
+            scss: {
+              api: "modern-compiler",
+              importers: [],
+            },
+          },
+        },
+      }
 });
