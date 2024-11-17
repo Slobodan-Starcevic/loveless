@@ -1,5 +1,5 @@
 ---
-import { EventProps } from '../../types/event'
+import type { EventProps } from '../../types/event'
 import { links } from '../../utils/links'
 import WhatsOnScroller from './WhatsOnScroller.vue'
 
@@ -9,8 +9,25 @@ type Props = {
 
 const {events} = Astro.props
 
+var upcomingEvents: EventProps[] = events;
+
+if (events && events.length > 0){
+    const now = new Date();
+    const result = events.reduce((maxEvent, currentEvent) => {
+        const maxEventDate = new Date(maxEvent.data.date);
+        const currentEventDate = new Date(currentEvent.data.date);
+        return currentEventDate > maxEventDate ? currentEvent : maxEvent;
+    });
+    if (new Date(result.data.date) > now) {
+        upcomingEvents = [result];
+    }
+}
+
+const description = (upcomingEvents.length === 1
+    ? upcomingEvents[0].data.description.toUpperCase()
+    : "WE GOT SOME SURPRISES IN STORE FOR YOU. STAY IN TOUCH FOR THE NEXT EVENT");
 ---
-<script lang="ts">
+<script>
     
 </script>
 <section class="section-wrapper bg-blue color-blue section-helper">
@@ -24,11 +41,14 @@ const {events} = Astro.props
                     <h1 class="front">WHAT'S ON</h1>
                 </div>
                 <div class="p-wrapper">
-                    <p>MARK YOUR CALENDERS FOR <span id="date">OCTOBER 26TH</span> – IT’S GONNA BE A HELLOWEEN NIGHT YOU WON’T FORGET</p>
+                    <p>{description}</p>
                 </div>
-                <a href={links.tickets} class="button" target="_blank">GET TICKETS NOW</a>
+                {upcomingEvents.length == 1
+                    ? <a href={links.tickets} class="button" target="_blank">GET TICKETS NOW</a>
+                    : <a href={links.instagram} class="button" target="_blank">STAY IN TOUCH</a>
+                }
             </div>
-            <WhatsOnScroller client:visible/>
+            <WhatsOnScroller events={upcomingEvents} client:visible/>
             <img src="/images/poster.png" class="mobile-image mobile-content" alt="" loading="lazy">
         </div>
     </div>
