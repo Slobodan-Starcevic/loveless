@@ -1,11 +1,12 @@
 ---
+import { EventProps } from '../../types/event'
 import { links } from '../../utils/links'
 
 type Props = {
-
+    events: Array<EventProps>
 }
 
-const {} = Astro.props
+const {events} = Astro.props
 
 ---
 <script lang="ts">
