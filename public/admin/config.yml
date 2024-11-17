@@ -8,11 +8,6 @@ local_backend: true
 public_folder: "/images/uploads"
 media_folder: "public/images/uploads"
 
-media_library:
-  name: simple
-  config:
-    max_file_size: 512000
-
 collections:
   - name: "events"
     label: "Events"
@@ -22,9 +17,9 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Event title", name: "title", widget: "string" }
-      - { label: "Catchy description (Example: MARK YOUR CALENDERS FOR OCTOBER 26TH – IT’S GONNA BE A HALLOWEEN NIGHT YOU WON’T FORGET)", name: "description", widget: "text" }
+      - { label: "Catchy description (Example: The end is nigh - are you coming with us on the last day on earth?)", name: "description", widget: "text" }
       - { label: "Location/Venue", name: "location", widget: "string" }
       - { label: "Event date", name: "date", widget: "datetime" }
-      - { label: "Link to ticket sale page (EventBrite etc)", name: "ticketLink", widget: "string" }
+      - { label: "Ticket page link", name: "ticketLink", widget: "string" }
       - { label: "Banner image", name: "banner", widget: "image" }
-      - { label: "Images (Gallery images taken during the event)", name: "images", widget: "list", fields: [{ label: "Image", name: "image", widget: "image" }] }
+      - { label: "Gallery Images", name: "images", widget: "list", fields: [{ label: "Image", name: "image", widget: "image" }] }
