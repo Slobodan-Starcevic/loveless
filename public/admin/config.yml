@@ -9,7 +9,9 @@ public_folder: "/images/uploads"
 media_folder: "public/images/uploads"
 
 media_library:
-  max_file_size: 512000
+  name: simple
+  config:
+    max_file_size: 512000
 
 collections:
   - name: "events"
