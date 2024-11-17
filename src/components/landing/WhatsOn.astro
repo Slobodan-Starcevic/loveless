@@ -44,12 +44,12 @@ const description = (upcomingEvents.length === 1
                     <p>{description}</p>
                 </div>
                 {upcomingEvents.length == 1
-                    ? <a href={links.tickets} class="button" target="_blank">GET TICKETS NOW</a>
-                    : <a href={links.instagram} class="button" target="_blank">STAY IN TOUCH</a>
+                    ? (<a href={links.tickets} class="button" target="_blank">GET TICKETS NOW</a> <a href={links.events} class="button-secondary">OUR EVENTS</a>)
+                    : (<a href={links.instagram} class="button" target="_blank">STAY IN TOUCH</a> <a href={links.events} class="button-secondary">CHECK PAST EVENTS</a>)
                 }
             </div>
             <WhatsOnScroller events={upcomingEvents} client:visible/>
-            <img src="/images/poster.png" class="mobile-image mobile-content" alt="" loading="lazy">
+            <img src="/images/surprise.svg" class="mobile-image mobile-content" alt="" loading="lazy">
         </div>
     </div>
 </section>
@@ -131,6 +131,26 @@ const description = (upcomingEvents.length === 1
         &:hover {
             background-color: var(--loveless-blue-dark);
             transform: translateY(calc(-1 * var(--spacing-2xs)));
+        }
+
+        &-secondary{
+            display: block;
+            width: max-content;
+            margin-top: var(--spacing-l);
+            padding: 12px 24px;
+            background-color: var(--loveless-black);
+            color: var(--loveless-blue);
+            border: 2px solid var(--loveless-blue);
+            font-size: var(--font-size-m);
+            font-weight: 700;
+            border-radius: var(--radius-m);
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s ease-in-out;
+
+            &:hover {
+                transform: translateY(calc(-1 * var(--spacing-2xs)));
+            }
         }
     }
 }

@@ -125,7 +125,11 @@ const {} = Astro.props
     border-radius: var(--radius-m);
     text-align: center;
     text-decoration: none;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+
+    &:hover {
+        transform: translateY(calc(-1 * var(--spacing-2xs)));
+    }
 }
 
 @keyframes scroll2 {
