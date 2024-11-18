@@ -135,17 +135,6 @@ var upcomingEvent: EventProps | null = (() => {
                 fill: var(--loveless-black);
                 transition: opacity 0.3s var(--custom-ease-1);
             }
-
-            &:hover{
-                .li-text{
-                    margin-left: 50px;
-                    color: var(--loveless-pink);
-                    text-shadow: none;
-                }
-                svg{
-                    opacity: 1;
-                }
-            }
         }
     }
     
@@ -269,6 +258,16 @@ var upcomingEvent: EventProps | null = (() => {
                 svg{
                     padding: 0 0 var(--spacing-s) var(--spacing-xs);
                 }
+                &:hover{
+                .li-text{
+                    margin-left: 50px;
+                    color: var(--loveless-pink);
+                    text-shadow: none;
+                }
+                svg{
+                    opacity: 1;
+                }
+            }
             }
         }
     }
