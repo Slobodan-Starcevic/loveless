@@ -10,7 +10,6 @@ const {events} = Astro.props
 
 const imageList = events.flatMap(event => event.data.images.map(image => image.image));
 const randomisedImages = getRandomItems(imageList, 5);
-console.log(randomisedImages.length)
 
 function getRandomItems(array: string[], count: number): string[]{
     const shuffled = [...array].sort(() => Math.random() - 0.5)
@@ -33,7 +32,7 @@ function getRandomItems(array: string[], count: number): string[]{
 </script>
 <section class="section-wrapper bg-pink color-pink">
     <div class="cic">
-        <img src="/images/test.png" class="background-image" alt="">
+        <img src="/images/waves.png" class="background-image" alt=""  loading="lazy" decoding="async">
         <div class="content-container">
             <div class="header-wrapper">
                 <h1 id="floating-header" class="stroke-pink">GET READY</h1>
@@ -43,7 +42,7 @@ function getRandomItems(array: string[], count: number): string[]{
                 <div class="inner-scroller">
                     {randomisedImages.map((image, index)=> (
                         <div class={`image-wrapper ${index === 0 ? 'desktop-content' : ''}`}>
-                            <img src={image} class={`${index === 0 ? 'desktop-content' : ''}`} alt="Gallery image" loading="lazy"/>
+                            <img src={image} class={`${index === 0 ? 'desktop-content' : ''}`} alt="Gallery image"  loading="lazy" decoding="async"/>
                         </div>
                     ))}
                 </div>

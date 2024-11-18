@@ -23,7 +23,6 @@
   onMounted(() => {
   if (props.urlParam) {
     selectedEvent.value = props.eventsCollection.find((event) => event.id === props.urlParam) || null;
-    console.log('something');
   }
 });
 </script>

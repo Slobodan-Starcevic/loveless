@@ -8,7 +8,7 @@ const props = defineProps<{
 
 <template>
 <div class="card-wrapper" @click="$emit('eventChoice', props.event.id)">
-    <img :src="event.data.banner" alt="">
+    <img :src="event.data.banner" alt=""  loading="lazy" decoding="async">
     <div class="card-content">
         <p class="card-title">{{ event.data.title }}</p>
         <p>{{ event.data.date }}</p>

@@ -21,7 +21,7 @@ const eventMonth = eventDate.toLocaleString('default', {month: 'long'}).slice(0,
 				<p class="month">{eventMonth}</p>
 			</div>
 			<div class="card-image">
-				<img src={event?.data.banner} alt="Event Image">
+				<img src={event?.data.banner} alt="Event Image"  loading="lazy" decoding="async">
 			</div>
 			<div class="card-content">
 				<div class="text">

@@ -42,15 +42,15 @@ onMounted(() => {
         <div class="background" @click="closeEmit('close')"></div>
         <div class="modal-content">
             <div class="">
-                <img src="/images/cross.svg" class="cross" @click="closeEmit('close')" alt="Button to close images">
+                <img src="/images/cross.svg" class="cross" @click="closeEmit('close')" alt="Button to close images"  loading="lazy" decoding="async">
             </div>
             <div class="">
-                <img src="/images/chevron.svg" @click="imageHandler(-1)" class="chevron chevron-left" alt="Button to previous image">
+                <img src="/images/chevron.svg" @click="imageHandler(-1)" class="chevron chevron-left" alt="Button to previous image"  loading="lazy" decoding="async">
             </div>
             <div class="">
-                <img src="/images/chevron.svg" @click="imageHandler(1)" class="chevron chevron-right" alt="Button to next image">
+                <img src="/images/chevron.svg" @click="imageHandler(1)" class="chevron chevron-right" alt="Button to next image"  loading="lazy" decoding="async">
             </div>
-            <img :src="focusedImage" class="focused-image" alt="Event images">
+            <img :src="focusedImage" class="focused-image" alt="Event images"  loading="lazy" decoding="async">
         </div>
     </div>
 </template>
