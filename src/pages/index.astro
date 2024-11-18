@@ -12,7 +12,7 @@ const allEvents = await getCollection('events');
 
 <Layout title="Mr. Loveless Brisbane">
 	<main>
-		<Hero/>
+		<Hero events={allEvents}/>
 		<WhatsOn events={allEvents}/>
 		<GetReady events={allEvents}/>
 		<Instagram/>
