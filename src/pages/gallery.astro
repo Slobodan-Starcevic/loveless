@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import ImageGallery from '../components/gallery/ImageGallery.vue';
 import Return from '../components/Return.astro';
 import {getCollection} from 'astro:content'
-import {dateFormatterDDMY} from '../utils/dateFormater' 
+import {dateFormatterDDMY} from '../utils/dateFormatter' 
 
 const allEvents = await getCollection('events');
 
@@ -17,9 +17,9 @@ const formattedDateEvents = allEvents.map(event => ({
 
 const query = Astro.url.searchParams.get('id');
 ---
-<script lang="ts">
+<script>
     document.addEventListener('mousemove', (e) => {
-        const header = document.getElementById('floating-header');
+        const header = document.getElementById('floating-header') as HTMLElement;
         const rect = header.getBoundingClientRect();
         const titleCenterX = rect.left + rect.width / 2;
         const titleCenterY = rect.top + rect.height / 2;
@@ -40,7 +40,7 @@ const query = Astro.url.searchParams.get('id');
                     <h1 id="floating-header" class="stroke-pink">GALLERY</h1>
                     <h1>GALLERY</h1>
                 </div>
-                <ImageGallery eventsCollection={formattedDateEvents} urlParam={query} client:load/>
+                <ImageGallery eventsCollection={formattedDateEvents} client:load/>
             </div>
         </section>
 	</main>

@@ -5,26 +5,19 @@
   import ImageModal from '../ImageModal.vue';
  
   const isModalVisible = ref(false);
-  const selectedEvent = ref<EventProps | null>(null);
+  const selectedEvent = ref<EventProps | undefined>(undefined);
   const props = defineProps<{
     eventsCollection: Array<EventProps>;
-    urlParam?: string;
   }>();
 
   const openModal = (id: string) => {
-    selectedEvent.value = props.eventsCollection.find(event => event.id === id) || null;
+    selectedEvent.value = props.eventsCollection.find(event => event.id === id) || undefined;
     isModalVisible.value = true;
   };
 
   const closeModal = () => {
     isModalVisible.value = false;
   };
-
-  onMounted(() => {
-  if (props.urlParam) {
-    selectedEvent.value = props.eventsCollection.find((event) => event.id === props.urlParam) || null;
-  }
-});
 </script>
 
 <template>

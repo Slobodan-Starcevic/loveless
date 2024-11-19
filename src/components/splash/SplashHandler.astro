@@ -1,0 +1,33 @@
+---
+import SplashScreen from './SplashScreen.astro';
+import Hero from '../landing/Hero.astro';
+import WhatsOn from '../landing/WhatsOn.astro';
+import GetReady from '../landing/GetReady.astro';
+import Instagram from '../landing/Instagram.astro';
+
+const { events } = Astro.props;
+let splashSeen: Boolean = false;
+if (typeof window !== 'undefined') {
+    splashSeen = localStorage.getItem('splashSeen') === 'true';
+  }
+---
+
+<script>
+function markSplashSeen() {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('splashSeen', 'true');
+      splashSeen = true;
+    }
+  }
+</script>
+
+{!splashSeen ? (
+  <SplashScreen on:finish={markSplashSeen} />
+) : (
+  <>
+    <Hero events={events} />
+    <WhatsOn events={events} />
+    <GetReady events={events} />
+    <Instagram />
+  </>
+)}

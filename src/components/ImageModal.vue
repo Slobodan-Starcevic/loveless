@@ -2,21 +2,29 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 
 const props = defineProps<{
-    eventImages: { image: string }[];
+    eventImages: { image: string }[] | undefined;
 }>();
 const closeEmit = defineEmits<{
   (event: 'close'): void;
 }>();
 
-const focusedImage = ref(props.eventImages.length > 0 ?  props.eventImages[0].image: '')
+const focusedImage = ref(
+    props.eventImages && props.eventImages.length > 0
+        ? props.eventImages[0].image
+        : ''
+);
 
 const imageHandler = (delta: -1 | 1) => {
+    if (!props.eventImages || props.eventImages.length === 0) {
+        return;
+    }
+
     const imagesAmount = props.eventImages.length;
     const currentFocusedImage = props.eventImages.findIndex(
         image => image.image === focusedImage.value
     );
 
-    const newIndex = (currentFocusedImage + delta) % imagesAmount;
+    const newIndex = (currentFocusedImage + delta + imagesAmount) % imagesAmount;
 
     focusedImage.value = props.eventImages[newIndex].image;
 };
@@ -30,11 +38,10 @@ onMounted(() => {
 
     window.addEventListener('keydown', handleEsc);
 
-    onBeforeUnmount(() => {
+    return () => {
         window.removeEventListener('keydown', handleEsc);
-    });
+    };
 });
-
 </script>
 
 <template>

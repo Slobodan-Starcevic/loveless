@@ -1,10 +1,6 @@
 ---
-import Hero from '../components/landing/Hero.astro';
-import WhatsOn from '../components/landing/WhatsOn.astro';
-import GetReady from '../components/landing/GetReady.astro';
-import Instagram from '../components/landing/Instagram.astro';
-
 import Layout from '../layouts/Layout.astro';
+import SplashHandler from '../components/splash/SplashHandler.astro'
 import { getCollection } from 'astro:content';
 
 const allEvents = await getCollection('events');
@@ -12,10 +8,7 @@ const allEvents = await getCollection('events');
 
 <Layout title="Mr Loveless Brisbane">
 	<main>
-		<Hero events={allEvents}/>
-		<WhatsOn events={allEvents}/>
-		<GetReady events={allEvents}/>
-		<Instagram/>
+		<SplashHandler :events={allEvents} />
 	</main>
 </Layout>
 

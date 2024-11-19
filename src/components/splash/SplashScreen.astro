@@ -1,0 +1,69 @@
+---
+const { onFinish } = Astro.props;
+---
+
+<script type="module">
+  let clickCount = 0;
+
+  // Attach event listener after the DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    const heartContainer = document.querySelector('.heart-container');
+    const messageElement = document.getElementById('message');
+
+    if (heartContainer && messageElement) {
+      heartContainer.addEventListener('click', () => {
+        clickCount++;
+
+        switch (clickCount) {
+          case 1:
+            messageElement.textContent = "That’s not going to fix it.";
+            break;
+          case 2:
+            messageElement.textContent = "Seriously, it’s very broken.";
+            break;
+          case 3:
+            messageElement.textContent = "Click it one more time.";
+            break;
+          case 4:
+            messageElement.textContent = "Alright, you’ve been ghosted…";
+            setTimeout(() => {
+              heartContainer.style.display = 'none'; // Make heart disappear
+              if (onFinish) onFinish(); // Call Astro prop
+            }, 1000);
+            break;
+        }
+      });
+    }
+  });
+</script>
+
+<div class="splash-screen">
+  <div class="heart-container">
+    <div class="heart"></div>
+  </div>
+  <p id="message">That’s not going to fix it.</p>
+</div>
+
+<style>
+  .splash-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+  }
+
+  .heart-container {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+  }
+
+  .heart {
+    width: 100px;
+    height: 90px;
+    background: red;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+</style>
