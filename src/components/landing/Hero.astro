@@ -21,6 +21,33 @@ var upcomingEvent: EventProps | null = (() => {
     return null;
 })();
 ---
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    let clickCount: number = 0;
+    const heartElement = document.getElementById('hero-logo') as HTMLElement;
+    heartElement.classList.add('heartbeat-zero');
+
+
+    heartElement.addEventListener('click', () => {
+        clickCount++;
+
+        heartElement.classList.remove('heartbeat-zero', 'heartbeat-one', 'heartbeat-two', 'heartbeat-three');
+
+        switch (clickCount) {
+            case 1:
+                heartElement.classList.add('heartbeat-one');
+                break;
+            case 2:
+                heartElement.classList.add('heartbeat-two');
+                break;
+            case 3:
+                heartElement.classList.add('heartbeat-three');
+                clickCount = 2;
+                break;
+        }
+    });
+});
+</script>
 <section class="section-wrapper bg-pink color-pink">
     <div class="cic">
         <img src="/images/synthscape.png" class="background-image" alt="">
@@ -30,7 +57,7 @@ var upcomingEvent: EventProps | null = (() => {
                 <h1>LOVELESS</h1>
                 <h1>BRISBANE</h1>
             </div>
-            <img src="/images/loveless-pink.png" class="loveless-logo" alt="">
+            <img src="/images/loveless-pink.png" id="hero-logo" class="loveless-logo" alt="">
             <ul class="nav-list">
                 <li class="stroke-pink">
                     <a href="/events">
@@ -80,6 +107,7 @@ var upcomingEvent: EventProps | null = (() => {
         justify-content: center;
         align-items: center;
         width: 100%;
+        overflow: visible;
     
         .loveless-header {
             z-index: 10;
@@ -101,7 +129,23 @@ var upcomingEvent: EventProps | null = (() => {
 
         .loveless-logo {
             z-index: 10;
+            cursor: pointer;
+        }
+
+        .heartbeat-zero {
             animation: beat 5s infinite;
+        }
+
+        .heartbeat-one {
+            animation: flicker 5s infinite, beat 5s infinite;
+        }
+
+        .heartbeat-two {
+            animation: flicker2 5s infinite, beat 10s infinite;
+        }
+
+        .heartbeat-three {
+            opacity: 0.2;
         }
     }
 
@@ -167,6 +211,30 @@ var upcomingEvent: EventProps | null = (() => {
         }
         100%{
             transform: translateY(0);
+        }
+    }
+    @keyframes beat {
+		0%, 100% {
+			transform: scale(1);
+		}
+		50% {
+			transform: scale(1.04);
+		}
+	}
+    @keyframes flicker {
+        0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+        opacity: 0.99;
+        }
+        20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+        opacity: 0.4;
+        }
+    }
+    @keyframes flicker2 {
+        0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+        opacity: 0.4;
+        }
+        20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+        opacity: 0.99;
         }
     }
 
@@ -272,12 +340,5 @@ var upcomingEvent: EventProps | null = (() => {
             }
         }
     }
-    @keyframes beat {
-		0%, 100% {
-			transform: scale(1);
-		}
-		50% {
-			transform: scale(1.05);
-		}
-	}
+    
 </style>
