@@ -67,7 +67,7 @@ onMounted(() => {
     position: fixed;
     z-index: 9999;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     overflow: hidden;
     display: flex;
     justify-content: center;

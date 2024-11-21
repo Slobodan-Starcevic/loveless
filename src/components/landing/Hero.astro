@@ -101,6 +101,7 @@ var upcomingEvent: EventProps | null = (() => {
 
         .loveless-logo {
             z-index: 10;
+            animation: beat 5s infinite;
         }
     }
 
@@ -271,4 +272,12 @@ var upcomingEvent: EventProps | null = (() => {
             }
         }
     }
+    @keyframes beat {
+		0%, 100% {
+			transform: scale(1);
+		}
+		50% {
+			transform: scale(1.05);
+		}
+	}
 </style>
