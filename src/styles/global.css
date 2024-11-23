@@ -28,7 +28,7 @@
     --loveless-blue-light: hsl(180,80%,86%,100%);
     --loveless-blue: hsl(211, 100%, 59%);
     --loveless-blue-dark: hsl(211, 72%, 45%);
-    --loveless-black: hsl(0, 0%, 0%);
+    --loveless-black: hsl(0, 0%, 2%);
     --loveless-white: hsl(0,0%,100%);
     --instagram-gradient:
         radial-gradient(51.01% 50.82% at 17.48% 100%, #FFD000 9%, #FF6930 44%, #FE3B36 69%, rgba(255, 105, 48, 0) 100%),
@@ -161,7 +161,6 @@ a{
     display: flex;
     flex-direction: column;
 }
-
 .cic {
     position: relative;
     width: 100%;

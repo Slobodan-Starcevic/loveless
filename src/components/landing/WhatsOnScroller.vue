@@ -39,33 +39,33 @@ const imageArray = computed(() => {
 
 <template>
 <div class="scroller-wrapper desktop-tablet-content">
-                <div class="scroller">
-                    <div class="scroller-inner">
-                        <img v-for="(image, index) in imageArray" 
-                        :key="'scroll1-' + index"
-                        :src="image" 
-                        alt="" 
-                        loading="lazy"
-                        decoding="async">
-                    </div>
-                </div>
-                <div class="still">
-                    <div class="still-inner">
-                        <img :src="imageArray[0]" alt="" loading="lazy" decoding="async">
-                        <img src="images/surprise.svg" alt="" loading="lazy" decoding="async">
-                        <img :src="imageArray[1]" alt="" loading="lazy" decoding="async">
-                    </div>
-                </div>
-                <div class="scroller" data-direction="down">
-                    <div class="scroller-inner">
-                        <img v-for="(image, index) in imageArray" 
-                        :key="'scroll2-' + index"
-                        :src="image" 
-                        alt="" 
-                        loading="lazy" decoding="async">
-                    </div>
-                </div>
-            </div>
+    <div class="scroller">
+        <div class="scroller-inner s-one">
+            <img v-for="(image, index) in imageArray" 
+            :key="'scroll1-' + index"
+            :src="image" 
+            alt="" 
+            loading="lazy"
+            decoding="async">
+        </div>
+    </div>
+    <div class="still">
+        <div class="still-inner">
+            <img :src="imageArray[0]" alt="" loading="lazy" decoding="async">
+            <img src="images/surprise.svg" alt="" loading="lazy" decoding="async">
+            <img :src="imageArray[1]" alt="" loading="lazy" decoding="async">
+        </div>
+    </div>
+    <div class="scroller" data-direction="down">
+        <div class="scroller-inner s-two">
+            <img v-for="(image, index) in imageArray" 
+            :key="'scroll2-' + index"
+            :src="image" 
+            alt="" 
+            loading="lazy" decoding="async">
+        </div>
+    </div>
+</div>
 </template>
 
 <style lang="scss" scoped>
