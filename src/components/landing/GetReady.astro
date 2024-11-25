@@ -9,7 +9,7 @@ type Props = {
 const {events} = Astro.props
 
 const imageList = events.flatMap(event => event.data.images.map(image => image.image));
-const randomisedImages = getRandomItems(imageList, 5);
+const randomizedImage = getRandomItems(imageList, 5);
 
 function getRandomItems(array: string[], count: number): string[]{
     const shuffled = [...array].sort(() => Math.random() - 0.5)
@@ -29,9 +29,77 @@ function getRandomItems(array: string[], count: number): string[]{
         const moveY = Math.min(Math.max(deltaY * 0.05, -6), 6);
         header.style.transform = `translate(${moveX}px, ${moveY}px)`;
     });
+
+    import {gsap} from 'gsap';
+    import ScrollTrigger from 'gsap/ScrollTrigger';
+
+    gsap.registerPlugin(ScrollTrigger);
+    const wrapper = document.getElementById('getReady-wrapper');
+    const cic = document.getElementById('getReady-cic');
+    const timeline = gsap.timeline({
+        scrollTrigger: {
+            trigger: wrapper,
+            start: 'top 60%',
+            once: true
+        }
+    });
+
+    timeline
+        .from(wrapper, {
+            padding: '0px'
+        })
+        .from(cic, {
+            borderRadius: '0px'
+        }, 0)
+        .from('#getReady-wrapper .background-image', {
+            opacity: 0,
+            scale: 1.1,
+            duration: 3,
+            ease: 'back.out'
+        })
+        .from('#getReady-wrapper .header-wrapper', {
+            opacity: 0,
+            duration: 1,
+            ease: 'power1.out',
+            stagger: 0.3
+        }, 1)
+        .to('#getReady-wrapper .header-wrapper', {
+            scale: 1.3,
+            duration: 1,
+            ease: 'power4.out',
+            yoyo: true,
+            repeat: 1
+        }, '<')
+        .to('#getReady-wrapper #floating-header', {
+            x: -10,
+            y: 8,
+            duration: 1,
+            ease: 'power4.out',
+            yoyo: true,
+            repeat: 1
+        }, '<')
+        .from('#getReady-wrapper .cta-text p', {
+            opacity: 0,
+            duration: 2,
+            ease: 'power1.out',
+            stagger: 0.3
+        }, '<')
+        .from('#getReady-wrapper .cta-button .button', {
+            opacity: 0,
+            duration: 2,
+            ease: 'power1.out'
+        }, '<')
+        .from('#getReady-wrapper .image-wrapper', {
+            opacity: 0,
+            scale: 0.7,
+            duration: 1,
+            stagger: .2,
+            ease: 'power1.out'
+        }, '-=1')
 </script>
-<section class="section-wrapper bg-pink color-pink">
-    <div class="cic">
+
+<section class="section-wrapper bg-pink color-pink" id="getReady-wrapper">
+    <div class="cic" id="getReady-cic">
         <img src="/images/waves.png" class="background-image" alt=""  loading="lazy" decoding="async">
         <div class="content-container">
             <div class="header-wrapper">
@@ -40,7 +108,7 @@ function getRandomItems(array: string[], count: number): string[]{
             </div>
             <div class="scroller">
                 <div class="inner-scroller">
-                    {randomisedImages.map((image, index)=> (
+                    {randomizedImage.map((image, index)=> (
                         <div class={`image-wrapper ${index === 0 ? 'desktop-content' : ''}`}>
                             <img src={image} class={`${index === 0 ? 'desktop-content' : ''}`} alt="Gallery image"  loading="lazy" decoding="async"/>
                         </div>
@@ -138,7 +206,7 @@ function getRandomItems(array: string[], count: number): string[]{
         display: flex;
         gap: var(--spacing-l);
         align-items: center;
-        overflow: visible;
+        overflow: hidden;
         width: 100%;
         height: 100%;
         margin-bottom: var(--spacing-3xl);
@@ -152,9 +220,9 @@ function getRandomItems(array: string[], count: number): string[]{
         }
 
         .cta-button{
-            overflow: visible;
+            overflow: hidden;
             .button {
-                display: inline-block;
+                display: block;
                 height: max-content;
                 padding: 12px 24px;
                 background-color: var(--loveless-pink);
@@ -164,11 +232,10 @@ function getRandomItems(array: string[], count: number): string[]{
                 border-radius: var(--radius-m);
                 text-align: center;
                 text-decoration: none;
-                transition: background-color 0.3s, transform 0.2s ease-in-out;
+                transition: background-color 0.3s;
 
                 &:hover {
                     background-color: var(--loveless-pink-dark);
-                    transform: translateY(calc(-1 * var(--spacing-2xs)));
                 }
             }
         }
