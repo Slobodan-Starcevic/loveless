@@ -15,7 +15,7 @@ const eventMonth = eventDate.toLocaleString('default', {month: 'long'}).slice(0,
 
 <div style="width: 100%;" class={`align-row-${align}`}>
 	<div class="card-wrapper">
-		<a href={upcoming ? event?.data.ticketLink : `${links.gallery}?id=${event?.id}`} target={upcoming ? "_blank" : "_self"}>
+		<a href={upcoming ? event?.data.ticketLink : `#`} target={upcoming ? "_blank" : "_self"} class="animated-link" data-target="/gallery">
 			<div class="date-card">
 				<p class="day">{eventDay}</p>
 				<p class="month">{eventMonth}</p>

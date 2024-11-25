@@ -22,28 +22,10 @@ const {color} = Astro.props;
     window.addEventListener('scroll', handler, false);
 
     window.addEventListener('load', handler, false);
-
-    returnWrapper?.addEventListener('click', (e) => {
-        e.preventDefault();
-        handleReturn();
-    });
-
-    function handleReturn() {
-        const referrer = document.referrer;
-
-        const allowedPaths = ['/', 'events', '/gallery'];
-        const isInternal = allowedPaths.some(path => referrer.includes(window.location.origin + path));
-
-        if (isInternal){
-            history.back();
-        } else {
-            window.location.href = '/';
-        }
-    };
 </script>
 <a 
 class={`return-wrapper bg-${color} animated-link`} 
-href="/"
+href="#"
 data-color={color}>
     <span></span>
     <img src="/images/back-arrow.svg" alt="" loading="lazy" decoding="async">

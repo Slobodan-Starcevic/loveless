@@ -74,7 +74,7 @@ const query = Astro.url.searchParams.get('id');
                     const cics = document.querySelectorAll('.gallery-cic-123');
 
                     const timeline = gsap.timeline({
-                        defaults: { duration: 0.5, ease: "power1.inOut" },
+                        defaults: { duration: 0.2, ease: "power1.inOut" },
                         onComplete: () => {
                             window.location.href = target;
                         },
@@ -82,21 +82,72 @@ const query = Astro.url.searchParams.get('id');
 
                     timeline
                         .to('.gallery-cic-123 > *', {
-                            opacity: 0,
-                            stagger: 0.1,
+                            opacity: 0
                         })
                         .to('.gallery-cards-wrapper', {
-                            opacity: 0,
-                            stagger: 0.1,
+                            opacity: 0
                         }, '<')
                         .to(wrappers, {
                             padding: 0,
+                            duration: 1
                         }, '<')
                         .to(cics, {
                             borderRadius: '0px',
+                            duration: 1
                         }, '<');
-                } else {
-                    console.error("No 'data-target' attribute found on the link.");
+                }  else {
+                    // Handle the case where no data-target exists
+                    const referrer = document.referrer;
+                    const allowedPaths = ['/events', '/gallery']; // Ensure correct paths
+                    const isInternal = allowedPaths.some(path => referrer.includes(window.location.origin + path));
+
+                    if (isInternal) {
+                        const timeline = gsap.timeline({
+                            defaults: { duration: 0.2, ease: "power1.inOut" },
+                            onComplete: () => {
+                                history.back();
+                            },
+                        });
+
+                        timeline
+                            .to('.gallery-cic-123 > *', {
+                                opacity: 0
+                            })
+                            .to('.gallery-cards-wrapper', {
+                                opacity: 0
+                            }, '<')
+                            .to(wrapper, {
+                                padding: 0,
+                                duration: 1
+                            }, '<')
+                            .to(cic, {
+                                borderRadius: '0px',
+                                duration: 1
+                            }, '<');
+                    } else {
+                        const timeline = gsap.timeline({
+                            defaults: { duration: 0.2, ease: "power1.inOut" },
+                            onComplete: () => {
+                                window.location.href = '/';
+                            },
+                        });
+
+                        timeline
+                            .to('.gallery-cic-123 > *', {
+                                opacity: 0
+                            })
+                            .to('.gallery-cards-wrapper', {
+                                opacity: 0
+                            }, '<')
+                            .to(wrapper, {
+                                padding: 0,
+                                duration: 1
+                            }, '<')
+                            .to(cic, {
+                                borderRadius: '0px',
+                                duration: 1
+                            }, '<');
+                    }
                 }
             });
         });
