@@ -91,9 +91,11 @@ const description = (upcomingEvents.length === 1
             stagger: .1,
             ease: 'power1.in'
         }, '<')
+        .from('#whatsOn-wrapper .mobile-image', {
+            opacity: 0,
+        }, '<')
         .from('#whatsOn-wrapper .background-image-2', {
             opacity: 0,
-            
         })
 
         document.addEventListener('DOMContentLoaded', () => {
