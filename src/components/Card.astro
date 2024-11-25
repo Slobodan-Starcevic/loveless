@@ -32,7 +32,7 @@ const eventMonth = eventDate.toLocaleString('default', {month: 'long'}).slice(0,
 					{upcoming ?
 						<a href={event?.data.ticketLink} class="button primary" target="_blank">TICKETS</a>
 						:
-						<a href={links.gallery} class="button secondary">GALLERY</a>
+						<a href={links.gallery} class="button secondary animated-link" data-target="/gallery">GALLERY</a>
 					}
 				</div>
 			</div>

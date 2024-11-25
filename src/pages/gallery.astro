@@ -29,6 +29,78 @@ const query = Astro.url.searchParams.get('id');
         const moveY = Math.min(Math.max(deltaY * 0.05, -6), 6);
         header.style.transform = `translate(${moveX}px, ${moveY}px)`;
     });
+
+    import {gsap} from 'gsap';
+
+    const wrapper = document.getElementsByClassName('gallery-wrapper');
+    const cic = document.getElementsByClassName('gallery-cic-123');
+    const timeline = gsap.timeline();
+
+    timeline
+        .to(wrapper, {
+                autoAlpha: 1,
+                duration: .5
+            })
+        .from(wrapper, {
+            padding: '0px',
+            duration: 2
+        })
+        .from(cic, {
+            borderRadius: '0px',
+            duration: 2
+        }, '<')
+        .from('.gallery-wrapper .header-wrapper', {
+            opacity: 0,
+            duration: 1,
+        }, 1.5)
+        .from('.card-wrapper', {
+            opacity: 0,
+            stagger: 0.3
+        }, '<')
+        .from('.gallery-wrapper .return-wrapper', {
+            x: '-150%',
+            duration: 1
+        })
+
+        document.addEventListener('DOMContentLoaded', () => {
+        const links = document.querySelectorAll('.animated-link');
+
+        links.forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const target = link.getAttribute('data-target');
+                if (target) {
+                    const wrappers = document.querySelectorAll('.gallery-wrapper');
+                    const cics = document.querySelectorAll('.gallery-cic-123');
+
+                    const timeline = gsap.timeline({
+                        defaults: { duration: 0.5, ease: "power1.inOut" },
+                        onComplete: () => {
+                            window.location.href = target;
+                        },
+                    });
+
+                    timeline
+                        .to('.gallery-cic-123 > *', {
+                            opacity: 0,
+                            stagger: 0.1,
+                        })
+                        .to('.gallery-cards-wrapper', {
+                            opacity: 0,
+                            stagger: 0.1,
+                        }, '<')
+                        .to(wrappers, {
+                            padding: 0,
+                        }, '<')
+                        .to(cics, {
+                            borderRadius: '0px',
+                        }, '<');
+                } else {
+                    console.error("No 'data-target' attribute found on the link.");
+                }
+            });
+        });
+    });
 </script>
 
 <Layout title="Gallery - Mr Loveless Brisbane">
@@ -67,6 +139,7 @@ const query = Astro.url.searchParams.get('id');
         min-height: 100vh;
         padding: var(--spacing-s);
         display: flex;
+        visibility: hidden;
         
         .gallery-cic-123 {
             position: relative;

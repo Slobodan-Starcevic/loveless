@@ -22,7 +22,8 @@ function getRandomItems(array: string[], count: number): string[]{
     import ScrollTrigger from 'gsap/ScrollTrigger';
     gsap.registerPlugin(ScrollTrigger);
 
-    document.addEventListener('mousemove', (e) => {
+    setTimeout(() => {
+        document.addEventListener('mousemove', (e) => {
         const header = document.getElementById('floating-header') as HTMLElement;
         const rect = header.getBoundingClientRect();
         const titleCenterX = rect.left + rect.width / 2;
@@ -33,6 +34,7 @@ function getRandomItems(array: string[], count: number): string[]{
         const moveY = Math.min(Math.max(deltaY * 0.05, -6), 6);
         header.style.transform = `translate(${moveX}px, ${moveY}px)`;
     });
+    }, 1200)
 
     
     const wrapper = document.getElementById('getReady-wrapper');
@@ -78,8 +80,8 @@ function getRandomItems(array: string[], count: number): string[]{
             repeat: 1
         }, '<')
         .to('#getReady-wrapper #floating-header', {
-            x: -10,
-            y: 8,
+            x: -5,
+            y: 5,
             delay: 0.2,
             duration: .8,
             ease: 'power4.out',

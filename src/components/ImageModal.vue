@@ -95,9 +95,9 @@ onMounted(() => {
         }
 
         .cross {
-            position: absolute;
-            top: 15px;
-            right: 15px;
+            position: fixed;
+            top: 30px;
+            right: 30px;
             filter: invert(1);
             width: 30px;
             height: 30px;
@@ -105,25 +105,36 @@ onMounted(() => {
         }
 
         .chevron {
-            position: absolute;
+            position: fixed;
             width: 60px;
             height: 60px;
             filter: invert(1);
             cursor: pointer;
 
             &.chevron-left {
-                left: 10px;
+                left: 3%;
                 top: 50%;
                 transform: translateY(-50%) rotate(-90deg);
             }
 
             &.chevron-right {
-                right: 10px;
+                right: 3%;
                 top: 50%;
                 transform: translateY(-50%) rotate(90deg);
             }
         }
     }
+}
+@media screen and (max-width : 767px) {
+    .chevron{
+        width: 50px !important;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1079px) {
+    
+}
+@media screen and (min-width : 1080px) {
+    
 }
 </style>
   
