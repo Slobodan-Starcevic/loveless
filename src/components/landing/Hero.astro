@@ -22,13 +22,13 @@ var upcomingEvent: EventProps | null = (() => {
 })();
 ---
 <script>
-    import {gsap} from 'gsap';
-
+    import {gsap} from 'gsap'; 
+    
     document.addEventListener('DOMContentLoaded', () => {
         let clickCount: number = 0;
+        const sectionWrapper = document.getElementById('hero-wrapper') as HTMLElement;
+        const cicWrapper = document.getElementById('hero-cic') as HTMLElement;
         const heartElement = document.getElementById('hero-logo') as HTMLElement;
-        const sectionWrapper = document.getElementById('hero-wrapper');
-        const cicWrapper = document.getElementById('hero-cic');
         heartElement.classList.add('heartbeat-zero');
 
         heartElement.addEventListener('click', () => {
@@ -55,17 +55,21 @@ var upcomingEvent: EventProps | null = (() => {
         const wrapperTimeline = gsap.timeline({defaults: {duration: 2, ease: "power1.inOut"}});
 
         wrapperTimeline
+            .to(sectionWrapper, {
+                autoAlpha: 1,
+                duration: .1
+            })
             .from(sectionWrapper, {
                 padding: '0px'
             })
             .from(cicWrapper, {
                 borderRadius: '0px'
-            }, 0)
+            }, '<')
             .from('#hero-cic > *', {
                 opacity: 0,
                 duration: 0.5,
                 ease: "power2.in"
-            }, 0.5)
+            }, '<+.5')
         
         heroTimeline
             .from('#hero-header > h1', {
@@ -83,6 +87,41 @@ var upcomingEvent: EventProps | null = (() => {
                 ease: 'power1.out'
             }, 0.5)
     });
+    document.addEventListener('DOMContentLoaded', () => {
+        const links = document.querySelectorAll('.animated-link');
+
+        links.forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const target = link.getAttribute('data-target');
+                if (target) {
+                    const wrappers = document.querySelectorAll('.section-wrapper');
+                    const cics = document.querySelectorAll('.cic');
+
+                    const timeline = gsap.timeline({
+                        defaults: { duration: 0.5, ease: "power1.inOut" },
+                        onComplete: () => {
+                            window.location.href = target;
+                        },
+                    });
+
+                    timeline
+                        .to('.cic > *', {
+                            opacity: 0,
+                            stagger: 0.1,
+                        })
+                        .to(wrappers, {
+                            padding: 0,
+                        }, '<')
+                        .to(cics, {
+                            borderRadius: '0px',
+                        }, '<');
+                } else {
+                    console.error("No 'data-target' attribute found on the link.");
+                }
+            });
+        });
+    });
 </script>
 
 <section class="section-wrapper bg-pink color-pink" id="hero-wrapper">
@@ -97,13 +136,13 @@ var upcomingEvent: EventProps | null = (() => {
             <img src="/images/loveless-pink.png" id="hero-logo" class="loveless-logo" alt="">
             <ul class="nav-list" id="hero-navlist">
                 <li class="stroke-pink">
-                    <a href="/events">
+                    <a href="/events" class="animated-link" data-target='/events'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75L12 13.5z"/></svg>
                         <span class="li-text">EVENTS</span>
                     </a>
                 </li>
                 <li class="stroke-pink">
-                    <a href="/gallery">
+                    <a href="/gallery" class="animated-link" data-target='/gallery'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m15.75 10.5l4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25"/></svg>                        
                         <span class="li-text">GALLERY</span>
                     </a>

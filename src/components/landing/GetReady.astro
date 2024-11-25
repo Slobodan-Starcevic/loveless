@@ -18,6 +18,10 @@ function getRandomItems(array: string[], count: number): string[]{
 
 ---
 <script>
+    import {gsap} from 'gsap';
+    import ScrollTrigger from 'gsap/ScrollTrigger';
+    gsap.registerPlugin(ScrollTrigger);
+
     document.addEventListener('mousemove', (e) => {
         const header = document.getElementById('floating-header') as HTMLElement;
         const rect = header.getBoundingClientRect();
@@ -30,10 +34,7 @@ function getRandomItems(array: string[], count: number): string[]{
         header.style.transform = `translate(${moveX}px, ${moveY}px)`;
     });
 
-    import {gsap} from 'gsap';
-    import ScrollTrigger from 'gsap/ScrollTrigger';
-
-    gsap.registerPlugin(ScrollTrigger);
+    
     const wrapper = document.getElementById('getReady-wrapper');
     const cic = document.getElementById('getReady-cic');
     const timeline = gsap.timeline({
@@ -41,16 +42,22 @@ function getRandomItems(array: string[], count: number): string[]{
             trigger: wrapper,
             start: 'top 60%',
             once: true
-        }
+        },
     });
 
     timeline
+        .to(wrapper, {
+            autoAlpha: 1,
+            duration: .1
+        })
         .from(wrapper, {
-            padding: '0px'
+            padding: '0px',
+            duration: 1.5
         })
         .from(cic, {
-            borderRadius: '0px'
-        }, 0)
+            borderRadius: '0px',
+            duration: 1.5
+        }, '<')
         .from('#getReady-wrapper .background-image', {
             opacity: 0,
             scale: 1.1,
@@ -64,7 +71,7 @@ function getRandomItems(array: string[], count: number): string[]{
             stagger: 0.3
         }, 1)
         .to('#getReady-wrapper .header-wrapper', {
-            scale: 1.3,
+            scale: 1.2,
             duration: 1,
             ease: 'power4.out',
             yoyo: true,
@@ -73,21 +80,11 @@ function getRandomItems(array: string[], count: number): string[]{
         .to('#getReady-wrapper #floating-header', {
             x: -10,
             y: 8,
-            duration: 1,
+            delay: 0.2,
+            duration: .8,
             ease: 'power4.out',
             yoyo: true,
             repeat: 1
-        }, '<')
-        .from('#getReady-wrapper .cta-text p', {
-            opacity: 0,
-            duration: 2,
-            ease: 'power1.out',
-            stagger: 0.3
-        }, '<')
-        .from('#getReady-wrapper .cta-button .button', {
-            opacity: 0,
-            duration: 2,
-            ease: 'power1.out'
         }, '<')
         .from('#getReady-wrapper .image-wrapper', {
             opacity: 0,
@@ -95,7 +92,53 @@ function getRandomItems(array: string[], count: number): string[]{
             duration: 1,
             stagger: .2,
             ease: 'power1.out'
-        }, '-=1')
+        }, '<+2')
+        .from('#getReady-wrapper .cta-text p', {
+            opacity: 0,
+            duration: 2,
+            ease: 'power1.out',
+            stagger: 0.3
+        })
+        .from('#getReady-wrapper .cta-button .button', {
+            opacity: 0,
+            duration: 2,
+            ease: 'power1.out'
+        }, '<')
+
+        document.addEventListener('DOMContentLoaded', () => {
+        const links = document.querySelectorAll('.animated-link');
+
+        links.forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const target = link.getAttribute('data-target');
+                if (target) {
+                    const wrappers = document.querySelectorAll('.section-wrapper');
+                    const cics = document.querySelectorAll('.cic');
+
+                    const timeline = gsap.timeline({
+                        defaults: { duration: 0.5, ease: "power1.inOut" },
+                        onComplete: () => {
+                            window.location.href = target;
+                        },
+                    });
+
+                    timeline
+                        .to('.cic > *', {
+                            opacity: 0,
+                        })
+                        .to(wrappers, {
+                            padding: 0,
+                        }, '<')
+                        .to(cics, {
+                            borderRadius: '0px',
+                        }, '<');
+                } else {
+                    console.error("No 'data-target' attribute found on the link.");
+                }
+            });
+        });
+    });
 </script>
 
 <section class="section-wrapper bg-pink color-pink" id="getReady-wrapper">
@@ -121,7 +164,7 @@ function getRandomItems(array: string[], count: number): string[]{
                     <p class="row-2">COME CLOSE</p>
                 </div>
                 <div class="cta-button">
-                    <a href={links.gallery} class="button">OUR GALLERY</a>
+                    <a href={links.gallery} class="button animated-link"  data-target='/gallery'>OUR GALLERY</a>
                 </div>
             </div>
         </div>

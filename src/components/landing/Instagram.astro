@@ -9,58 +9,51 @@ const {} = Astro.props
 
 ---
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-  const scroller2 = document.querySelector(".scroller2") as HTMLElement;
+    const scroller2 = document.querySelector(".scroller2") as HTMLElement;
 
-  if (scroller2) {
-    const scrollerInner = scroller2.querySelector(".scroller2-inner") as HTMLElement;
-    const scrollerContent = Array.from(scrollerInner.children) as HTMLElement[];
+    if (scroller2) {
+        const scrollerInner = scroller2.querySelector(".scroller2-inner") as HTMLElement;
+        const scrollerContent = Array.from(scrollerInner.children) as HTMLElement[];
 
-    // Set initial opacity to 0 for all items
-    scrollerContent.forEach((item) => {
-      item.style.opacity = "0";
-    });
-
-    // Duplicate items and ensure duplicates also start with opacity 0
-    scrollerContent.forEach((item) => {
-      const duplicatedItem = item.cloneNode(true) as HTMLElement;
-      duplicatedItem.setAttribute("aria-hidden", "true");
-      duplicatedItem.style.opacity = "0";
-      scrollerInner.appendChild(duplicatedItem);
-    });
-
-    const allItems = Array.from(scrollerInner.children) as HTMLElement[];
-
-    // Intersection Observer
-    const observer = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Start the staggered effect with a 1-second delay
-            setTimeout(() => {
-              allItems.forEach((item, index) => {
-                setTimeout(() => {
-                  item.style.transition = "opacity 0.5s";
-                  item.style.opacity = "1";
-                }, index * 200); // Stagger effect with 0.2s delay per item
-              });
-            }, 1000); // 1-second delay before starting the stagger
-
-            // Unobserve the element once the animation starts
-            observer.unobserve(scroller2);
-          }
+        scrollerContent.forEach((item) => {
+        item.style.opacity = "0";
         });
-      },
-      { threshold: 0.1 } // Trigger when 10% of the scroller is visible
-    );
 
-    observer.observe(scroller2);
-  }
-});
+        scrollerContent.forEach((item) => {
+            const duplicatedItem = item.cloneNode(true) as HTMLElement;
+            duplicatedItem.setAttribute("aria-hidden", "true");
+            duplicatedItem.style.opacity = "0";
+            scrollerInner.appendChild(duplicatedItem);
+        });
+
+        const allItems = Array.from(scrollerInner.children) as HTMLElement[];
+
+        const observer = new IntersectionObserver(
+            (entries, observer) => {
+                entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        allItems.forEach((item, index) => {
+                            setTimeout(() => {
+                                item.style.transition = "opacity 0.5s";
+                                item.style.opacity = "1";
+                            }, index * 200);
+                        });
+                    }, 1000);
+
+                    observer.unobserve(scroller2);
+                }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        observer.observe(scroller2);
+    }
 
 
 
-  import {gsap} from 'gsap';
+    import {gsap} from 'gsap';
     import ScrollTrigger from 'gsap/ScrollTrigger';
 
     gsap.registerPlugin(ScrollTrigger);
@@ -75,6 +68,9 @@ const {} = Astro.props
     });
 
     timeline
+        .to(wrapper, {
+                autoAlpha: 1
+            })
         .from(wrapper, {
             padding: '0px'
         })

@@ -43,11 +43,17 @@ const description = (upcomingEvents.length === 1
     });
 
     timeline
+        .to(wrapper, {
+                autoAlpha: 1,
+                duration: .1
+            })
         .from(wrapper, {
-            padding: '0px'
+            padding: '0px',
+            duration: 1.5
         })
         .from(cic, {
-            borderRadius: '0px'
+            borderRadius: '0px',
+            duration: 1.5
         }, 0)
         .from('#whatsOn-wrapper .header-wrapper', {
             opacity: 0,
@@ -89,6 +95,42 @@ const description = (upcomingEvents.length === 1
             opacity: 0,
             
         })
+
+        document.addEventListener('DOMContentLoaded', () => {
+        const links = document.querySelectorAll('.animated-link');
+
+        links.forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const target = link.getAttribute('data-target');
+                if (target) {
+                    const wrappers = document.querySelectorAll('.section-wrapper');
+                    const cics = document.querySelectorAll('.cic');
+
+                    const timeline = gsap.timeline({
+                        defaults: { duration: 0.5, ease: "power1.inOut" },
+                        onComplete: () => {
+                            window.location.href = target;
+                        },
+                    });
+
+                    timeline
+                        .to('.cic > *', {
+                            opacity: 0,
+                            stagger: 0.1,
+                        })
+                        .to(wrappers, {
+                            padding: 0,
+                        }, '<')
+                        .to(cics, {
+                            borderRadius: '0px',
+                        }, '<');
+                } else {
+                    console.error("No 'data-target' attribute found on the link.");
+                }
+            });
+        });
+    });
 </script>
 
 <section class="section-wrapper bg-blue color-blue section-helper" id="whatsOn-wrapper">
@@ -105,8 +147,8 @@ const description = (upcomingEvents.length === 1
                     <p>{description}</p>
                 </div>
                 {upcomingEvents.length == 1
-                    ? (<a href={links.tickets} class="button whatsOn-one" target="_blank">GET TICKETS NOW</a> <a href={links.events} class="button-secondary whatsOn-one">OUR EVENTS</a>)
-                    : (<a href={links.instagram} class="button whatsOn-one" target="_blank">STAY IN TOUCH</a> <a href={links.events} class="button-secondary whatsOn-one">CHECK PAST EVENTS</a>)
+                    ? (<a href={links.tickets} class="button whatsOn-one" target="_blank">GET TICKETS NOW</a> <a href={links.events} class="button-secondary whatsOn-one animated-link" data-target='/events'>OUR EVENTS</a>)
+                    : (<a href={links.instagram} class="button whatsOn-one" target="_blank">STAY IN TOUCH</a> <a href={links.events} class="button-secondary whatsOn-one animated-link" data-target='/events'>CHECK PAST EVENTS</a>)
                 }
             </div>
             <WhatsOnScroller events={upcomingEvents} client:visible/>

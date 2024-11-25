@@ -12,7 +12,9 @@
     font-weight: normal;
     font-style: normal;
 }
-
+html{
+    background-color: var(--loveless-black);
+}
 * {
     scroll-behavior: smooth;
     
@@ -160,6 +162,7 @@ a{
     padding: var(--spacing-s);
     display: flex;
     flex-direction: column;
+    visibility: hidden;
 }
 .cic {
     position: relative;

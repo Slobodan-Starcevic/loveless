@@ -7,8 +7,57 @@ type Props = {
 const {} = Astro.props
 
 ---
-<section class="wrapper">
-    <!-- <div class="mail-wrapper">
+<script>
+    import {gsap} from 'gsap';
+    import ScrollTrigger from 'gsap/ScrollTrigger';
+
+    gsap.registerPlugin(ScrollTrigger);
+    const wrapper = document.getElementById('footer-wrapper');
+    const timeline = gsap.timeline({
+        scrollTrigger: {
+            trigger: wrapper,
+            start: 'top bottom',
+            once: true
+        }
+    });
+
+    timeline
+        .to(wrapper, {
+            autoAlpha: 1
+        })
+
+        document.addEventListener('DOMContentLoaded', () => {
+        const links = document.querySelectorAll('.animated-link');
+
+        links.forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const target = link.getAttribute('data-target');
+                if (target) {
+                    const wrappers = document.querySelectorAll('.section-wrapper');
+                    const cics = document.querySelectorAll('.cic');
+
+                    const timeline = gsap.timeline({
+                        defaults: { duration: 0.5, ease: "power1.inOut" },
+                        onComplete: () => {
+                            window.location.href = target;
+                        },
+                    });
+
+                    timeline
+                        .to('#footer-wrapper > *', {
+                            opacity: 0,
+                            stagger: 0.1,
+                        })
+                } else {
+                    console.error("No 'data-target' attribute found on the link.");
+                }
+            });
+        });
+    });
+</script>
+<section class="wrapper" id="footer-wrapper">
+<!-- <div class="mail-wrapper">
         <div class="left bg-black">
             <div class="cic-left">
                 <div class="header-wrapper">
@@ -50,9 +99,9 @@ const {} = Astro.props
             <ul>
                 <li id="header235623" class="stroke-pink">PAGES</li>
 
-                <li><a href={links.home}>HOME</a></li>
-                <li><a href={links.events}>EVENTS</a></li>
-                <li><a href={links.gallery}>GALLERY</a></li>
+                <li><a href={links.home} class="animated-link" data-target='/'>HOME</a></li>
+                <li><a href={links.events} class="animated-link" data-target='/events'>EVENTS</a></li>
+                <li><a href={links.gallery} class="animated-link" data-target='/gallery'>GALLERY</a></li>
                 <li><a href={links.tickets}>TICKETS</a></li>
                 <li><a href={links.merch}>MERCH</a></li>
             </ul>
@@ -61,9 +110,10 @@ const {} = Astro.props
 </section>
 
 <style lang="scss">
-    .wrapper{
+    #footer-wrapper{
         width: 100%;
         height: 100vh;
+        visibility: hidden;
     }
 
     .mail-wrapper{
