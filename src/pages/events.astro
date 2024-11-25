@@ -103,8 +103,7 @@ const pastEvents = allEvents.filter(event => new Date(event.data.date) < now);
                 } else {
                     // Handle the case where no data-target exists
                     const referrer = document.referrer;
-                    const allowedPaths = ['/events', '/gallery']; // Ensure correct paths
-                    const isInternal = allowedPaths.some(path => referrer.includes(window.location.origin + path));
+                    const isInternal = referrer.includes(window.location.origin);
 
                     if (isInternal) {
                         const timeline = gsap.timeline({
