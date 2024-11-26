@@ -1,6 +1,7 @@
 ---
 import { links } from '../../utils/links'
 import type {EventProps} from '../../types/event'
+import { Picture } from 'astro:assets'
 
 type Props = {
     events: Array<EventProps>
@@ -133,6 +134,10 @@ var upcomingEvent: EventProps | null = (() => {
                 <h1>LOVELESS</h1>
                 <h1>BRISBANE</h1>
             </div>
+            <Picture 
+            src="/images/loveless-pink.png"
+            formats={["webp", "avif"]}
+            alt="Torn heart logo"/>
             <img src="/images/loveless-pink.png" id="hero-logo" class="loveless-logo" alt="">
             <ul class="nav-list" id="hero-navlist">
                 <li class="stroke-pink">
