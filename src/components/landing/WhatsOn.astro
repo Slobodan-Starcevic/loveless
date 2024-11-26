@@ -58,23 +58,23 @@ const description = (upcomingEvents.length === 1
         .from('#whatsOn-wrapper .header-wrapper', {
             opacity: 0,
             duration: 1,
-        })
+        }, .2)
         .to('#whatsOn-wrapper .front', {
             scale: 1.3,
             yoyo: true,
             repeat: 1,
             ease: 'power2.inOut'
-        }, 0.5)
+        }, '<')
         .from('#whatsOn-wrapper .back-1', {
             y: 0,
-        })
+        }, '<+1')
         .from('#whatsOn-wrapper .back-2', {
             y: 0,
         }, '<')
         .from('#whatsOn-wrapper .scroller-wrapper', {
             opacity: 0,
             duration: 1
-        }, '<.5')
+        }, '<')
         .from('#whatsOn-wrapper .whatsOn-one', {
             opacity: 0,
             duration: 1
@@ -137,7 +137,11 @@ const description = (upcomingEvents.length === 1
 
 <section class="section-wrapper bg-blue color-blue section-helper" id="whatsOn-wrapper">
     <div class="cic" id="whatsOn-cic">
-        <img src="/images/radial-lines.png" class="background-image-2" alt=""  loading="lazy" decoding="async">
+        <picture>
+            <source srcset="/images/radial-lines.webp" type="image/webp">
+            <source srcset="/images/radial-lines.avif" type="image/avif">
+            <img src="/images/radial-lines.png" class="background-image-2" aria-hidden="true" loading="lazy" decoding="async">
+        </picture>          
         <div class="content-wrapper">
             <div class="text-wrapper">
                 <div class="header-wrapper">
@@ -154,7 +158,11 @@ const description = (upcomingEvents.length === 1
                 }
             </div>
             <WhatsOnScroller events={upcomingEvents} client:visible/>
-            <img src="/images/surprise.svg" class="mobile-image mobile-content" alt=""  loading="lazy" decoding="async">
+            <picture>
+                <source srcset="/images/surprise.webp" type="image/webp">
+                <source srcset="/images/surprise.avif" type="image/avif">
+                <img src="/images/surprise.svg" class="mobile-image mobile-content" alt=""  loading="lazy" decoding="async">
+            </picture>   
         </div>
     </div>
 </section>

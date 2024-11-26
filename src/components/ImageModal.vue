@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { getImageVariant } from '../utils/imageConverter';
 
 const props = defineProps<{
     eventImages: { image: string }[] | undefined;
@@ -57,7 +58,11 @@ onMounted(() => {
             <div class="">
                 <img src="/images/chevron.svg" @click="imageHandler(1)" class="chevron chevron-right" alt="Button to next image">
             </div>
-            <img :src="focusedImage" class="focused-image" alt="Event images">
+            <picture>
+                <source :srcset="getImageVariant(focusedImage, 'webp')" type="image/webp" />
+                <source :srcset="getImageVariant(focusedImage, 'avif')" type="image/avif" />
+                <img :src="focusedImage" class="focused-image" alt="Event image" />
+            </picture>
         </div>
     </div>
 </template>

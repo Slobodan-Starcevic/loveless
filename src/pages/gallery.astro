@@ -39,24 +39,24 @@ const query = Astro.url.searchParams.get('id');
     timeline
         .to(wrapper, {
                 autoAlpha: 1,
-                duration: .5
+                duration: .1
             })
         .from(wrapper, {
             padding: '0px',
-            duration: 2
+            duration: 1
         })
         .from(cic, {
             borderRadius: '0px',
-            duration: 2
+            duration: 1
         }, '<')
         .from('.gallery-wrapper .header-wrapper', {
             opacity: 0,
             duration: 1,
-        }, 1.5)
+        }, .5)
         .from('.card-wrapper', {
             opacity: 0,
             stagger: 0.3
-        }, '<')
+        }, '-=.5')
         .from('.gallery-wrapper .return-wrapper', {
             x: '-150%',
             duration: 1

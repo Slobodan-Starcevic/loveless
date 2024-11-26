@@ -86,7 +86,11 @@ const {} = Astro.props
     </div> -->
     <div class="footer-wrapper">
         <div class="logo-block">
-            <img src="/images/loveless-pink.png" alt=""  loading="lazy" decoding="async">
+            <picture>
+                <source srcset="/images/loveless-pink.webp" type="image/webp">
+                <source srcset="/images/loveless-pink.avif" type="image/avif">
+                <img src="/images/loveless-pink.png" alt="Loveless logo"  loading="lazy" decoding="async">
+            </picture>
             <div class="logo-texts">
                 <div class="loveless-header stroke-pink">
                     <h1 class="desktop-tablet-content">MR LOVELESS</h1>
@@ -116,127 +120,127 @@ const {} = Astro.props
         visibility: hidden;
     }
 
-    .mail-wrapper{
-        display: flex;
-        width: 100%;
-        height: 70vh;
+    // .mail-wrapper{
+    //     display: flex;
+    //     width: 100%;
+    //     height: 70vh;
 
-        .header-wrapper{
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: end;
+    //     .header-wrapper{
+    //         flex: 1;
+    //         display: flex;
+    //         flex-direction: column;
+    //         justify-content: end;
             
-            .big-words{
-                font-family: 'Mortend', 'sans-serif';
-                font-size: 10rem;
-            }
-        }
+    //         .big-words{
+    //             font-family: 'Mortend', 'sans-serif';
+    //             font-size: 10rem;
+    //         }
+    //     }
 
-        .bottom{
-            flex: 0 0 30%;
-            display: flex;
-            width: 100%;
-            justify-content: end;
-            align-items: center;
-            flex-direction: column;
-            color: var(--loveless-blue);
-            p{
-                font-family: 'Mortend', 'sans-serif';
-            }
-        }
-    }
+    //     .bottom{
+    //         flex: 0 0 30%;
+    //         display: flex;
+    //         width: 100%;
+    //         justify-content: end;
+    //         align-items: center;
+    //         flex-direction: column;
+    //         color: var(--loveless-blue);
+    //         p{
+    //             font-family: 'Mortend', 'sans-serif';
+    //         }
+    //     }
+    // }
 
-    .left{
-        flex: 0 0 60%;
-        padding: var(--spacing-s) 0 var(--spacing-s) var(--spacing-s);
-        .cic-left {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            justify-content: center;
-            align-items: flex-end;
-            border-radius: var(--radius-2xl) 0 0 var(--radius-2xl);
-            background-color: var(--loveless-blue-dark);
-            overflow: hidden;
-            .header-wrapper{
-                margin-right: var(--spacing-m);
-            }
+    // .left{
+    //     flex: 0 0 60%;
+    //     padding: var(--spacing-s) 0 var(--spacing-s) var(--spacing-s);
+    //     .cic-left {
+    //         position: relative;
+    //         width: 100%;
+    //         height: 100%;
+    //         display: flex;
+    //         flex-direction: column;
+    //         flex-grow: 1;
+    //         justify-content: center;
+    //         align-items: flex-end;
+    //         border-radius: var(--radius-2xl) 0 0 var(--radius-2xl);
+    //         background-color: var(--loveless-blue-dark);
+    //         overflow: hidden;
+    //         .header-wrapper{
+    //             margin-right: var(--spacing-m);
+    //         }
 
-            .content-wrapper{
-            display: flex;
-            gap: var(--spacing-l);
-            align-items: flex-end;
-            justify-content: end;
-            height: 100px;
-            width: 100%;
+    //         .content-wrapper{
+    //         display: flex;
+    //         gap: var(--spacing-l);
+    //         align-items: flex-end;
+    //         justify-content: end;
+    //         height: 100px;
+    //         width: 100%;
 
-            p{
-                font-size: var(--font-size-3xl);
-                font-family: 'Mortend', 'sans-serif';
-            }
+    //         p{
+    //             font-size: var(--font-size-3xl);
+    //             font-family: 'Mortend', 'sans-serif';
+    //         }
 
-            input{
-                height: var(--font-size-3xl);
-                width: 400px;
-                margin-bottom: 10px;
-                padding: 0 12px;
-                border: none;
-                border-radius: var(--radius-xs) 0 0 var(--radius-xs);
-                background: var(--loveless-black);
-                color: var(--loveless-blue);
-                outline: none;
-                appearance: none;
-            }
-        }
-        }
-    }
+    //         input{
+    //             height: var(--font-size-3xl);
+    //             width: 400px;
+    //             margin-bottom: 10px;
+    //             padding: 0 12px;
+    //             border: none;
+    //             border-radius: var(--radius-xs) 0 0 var(--radius-xs);
+    //             background: var(--loveless-black);
+    //             color: var(--loveless-blue);
+    //             outline: none;
+    //             appearance: none;
+    //         }
+    //     }
+    //     }
+    // }
 
-    .right{
-        flex: 0 0 40%;
-        padding: var(--spacing-s) var(--spacing-s) var(--spacing-s) 0;
+    // .right{
+    //     flex: 0 0 40%;
+    //     padding: var(--spacing-s) var(--spacing-s) var(--spacing-s) 0;
 
-        .cic-right {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            justify-content: center;
-            align-items: flex-start;
-            border-radius: 0 var(--radius-2xl) var(--radius-2xl) 0;
-            background-color: var(--loveless-black);
-            overflow: hidden;
-            .header-wrapper{
-                margin-right: var(--spacing-m);
-            }
+    //     .cic-right {
+    //         position: relative;
+    //         width: 100%;
+    //         height: 100%;
+    //         display: flex;
+    //         flex-direction: column;
+    //         flex-grow: 1;
+    //         justify-content: center;
+    //         align-items: flex-start;
+    //         border-radius: 0 var(--radius-2xl) var(--radius-2xl) 0;
+    //         background-color: var(--loveless-black);
+    //         overflow: hidden;
+    //         .header-wrapper{
+    //             margin-right: var(--spacing-m);
+    //         }
 
-            .content-wrapper{
-                display: flex;
-                flex-direction: row;
-                gap: var(--spacing-l);
-                align-items: flex-end;
-                height: 100px;
-                width: 100%;
-                padding-bottom: 10px;
+    //         .content-wrapper{
+    //             display: flex;
+    //             flex-direction: row;
+    //             gap: var(--spacing-l);
+    //             align-items: flex-end;
+    //             height: 100px;
+    //             width: 100%;
+    //             padding-bottom: 10px;
 
-                button{
-                    height: var(--font-size-3xl);
-                    padding: 0 12px;
-                    background-color: var(--loveless-blue-dark);
-                    border: none;
-                    border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
-                    color: var(--loveless-black);
-                    text-decoration: none;
-                    cursor: pointer;
-                }
-            }
-        }
-    }
+    //             button{
+    //                 height: var(--font-size-3xl);
+    //                 padding: 0 12px;
+    //                 background-color: var(--loveless-blue-dark);
+    //                 border: none;
+    //                 border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+    //                 color: var(--loveless-black);
+    //                 text-decoration: none;
+    //                 cursor: pointer;
+    //             }
+    //         }
+    //     }
+    // }
 
     .footer-wrapper{
         width: 100%;
@@ -276,10 +280,18 @@ const {} = Astro.props
                     cursor: default;
                 }
             }
+            picture {
+                display: flex; /* Ensure proper layout */
+                justify-content: center;
+                align-items: center;
 
-            img{
-                max-height: 90%;
+                img {
+                    max-width: 100%; /* Scale the image relative to its container */
+                    max-height: 90%; /* Maintain a maximum height */
+                    height: auto; /* Maintain aspect ratio */
+                }
             }
+            
         }
         .pages-block{
             display: flex;
@@ -345,7 +357,7 @@ const {} = Astro.props
                 text-align: center;
             }
 
-            img{
+            picture img{
                 max-width: 250px;
             }
         }
@@ -400,7 +412,7 @@ const {} = Astro.props
                 }
             }
 
-            img{
+            picture img{
                 max-height: 90%;
             }
         }
@@ -461,10 +473,11 @@ const {} = Astro.props
                 }
             }
 
-            img{
+            picture {
+                img{
                 max-height: 90%;
                 max-width: 300px;
-            }
+            }}
         }
         .pages-block{
             display: flex;

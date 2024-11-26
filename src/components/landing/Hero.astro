@@ -52,7 +52,7 @@ var upcomingEvent: EventProps | null = (() => {
 
         
         const heroTimeline = gsap.timeline();
-        const wrapperTimeline = gsap.timeline({defaults: {duration: 2, ease: "power1.inOut"}});
+        const wrapperTimeline = gsap.timeline({defaults: {duration: 1, ease: "power1.inOut"}});
 
         wrapperTimeline
             .to(sectionWrapper, {
@@ -99,7 +99,7 @@ var upcomingEvent: EventProps | null = (() => {
                     const cics = document.querySelectorAll('.cic');
 
                     const timeline = gsap.timeline({
-                        defaults: { duration: 0.5, ease: "power1.inOut" },
+                        defaults: { duration: 0.2, ease: "power1.inOut" },
                         onComplete: () => {
                             window.location.href = target;
                         },
@@ -112,9 +112,11 @@ var upcomingEvent: EventProps | null = (() => {
                         })
                         .to(wrappers, {
                             padding: 0,
+                            duration: 1
                         }, '<')
                         .to(cics, {
                             borderRadius: '0px',
+                            duration: 1
                         }, '<');
                 } else {
                     console.error("No 'data-target' attribute found on the link.");
@@ -133,7 +135,11 @@ var upcomingEvent: EventProps | null = (() => {
                 <h1>LOVELESS</h1>
                 <h1>BRISBANE</h1>
             </div>
-            <img src="/images/loveless-pink.png" id="hero-logo" class="loveless-logo" alt="">
+            <picture>
+                <source srcset="/images/loveless-pink.webp" type="image/webp">
+                <source srcset="/images/loveless-pink.avif" type="image/avif">
+                <img src="/images/loveless-pink.png" id="hero-logo" class="loveless-logo" alt="Loveless logo">
+            </picture>
             <ul class="nav-list" id="hero-navlist">
                 <li class="stroke-pink">
                     <a href="/events" class="animated-link" data-target='/events'>
@@ -220,9 +226,12 @@ var upcomingEvent: EventProps | null = (() => {
             }
         }
 
-        .loveless-logo {
-            z-index: 10;
-            cursor: pointer;
+        picture{
+            overflow: visible;
+            .loveless-logo {
+                z-index: 10;
+                cursor: pointer;
+            }
         }
 
         .heartbeat-zero {

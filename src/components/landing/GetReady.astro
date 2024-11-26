@@ -1,5 +1,6 @@
 ---
 import { EventProps } from '../../types/event'
+import { getImageVariant } from '../../utils/imageConverter'
 import { links } from '../../utils/links'
 
 type Props = {
@@ -71,7 +72,7 @@ function getRandomItems(array: string[], count: number): string[]{
             duration: 1,
             ease: 'power1.out',
             stagger: 0.3
-        }, 1)
+        }, .2)
         .to('#getReady-wrapper .header-wrapper', {
             scale: 1.2,
             duration: 1,
@@ -94,13 +95,13 @@ function getRandomItems(array: string[], count: number): string[]{
             duration: 1,
             stagger: .2,
             ease: 'power1.out'
-        }, '<+2')
+        }, '<+1')
         .from('#getReady-wrapper .cta-text p', {
             opacity: 0,
             duration: 2,
             ease: 'power1.out',
             stagger: 0.3
-        })
+        }, '<+1')
         .from('#getReady-wrapper .cta-button .button', {
             opacity: 0,
             duration: 2,
@@ -145,7 +146,7 @@ function getRandomItems(array: string[], count: number): string[]{
 
 <section class="section-wrapper bg-pink color-pink" id="getReady-wrapper">
     <div class="cic" id="getReady-cic">
-        <img src="/images/waves.png" class="background-image" alt=""  loading="lazy" decoding="async">
+        <img src="/images/waves.jpg" class="background-image" alt="Wavy background"  loading="lazy" decoding="async">
         <div class="content-container">
             <div class="header-wrapper">
                 <h1 id="floating-header" class="stroke-pink">GET READY</h1>
@@ -155,7 +156,11 @@ function getRandomItems(array: string[], count: number): string[]{
                 <div class="inner-scroller">
                     {randomizedImage.map((image, index)=> (
                         <div class={`image-wrapper ${index === 0 ? 'desktop-content' : ''}`}>
-                            <img src={image} class={`${index === 0 ? 'desktop-content' : ''}`} alt="Gallery image"  loading="lazy" decoding="async"/>
+                            <picture>
+                                <source srcset={getImageVariant(image, 'webp')} type="image/webp" />
+                                <source srcset={getImageVariant(image, 'avif')} type="image/avif" />
+                                <img src={image} class={`${index === 0 ? 'desktop-content' : ''}`} alt="Gallery image"  loading="lazy" decoding="async"/>
+                            </picture>
                         </div>
                     ))}
                 </div>

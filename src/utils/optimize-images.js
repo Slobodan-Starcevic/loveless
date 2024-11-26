@@ -3,6 +3,9 @@ import fs from "fs-extra";
 import path from "path";
 
 const uploadsFolder = path.join(process.cwd(), "public/images/uploads");
+const MAX_FILE_SIZE = 200 * 1024;
+const QUALITY_STEP = 10;
+const MIN_QUALITY = 10;
 
 async function processFiles() {
   try {
@@ -15,91 +18,101 @@ async function processFiles() {
 
     const files = await fs.readdir(uploadsFolder);
 
-    for (const file of files) {
-      const filePath = path.join(uploadsFolder, file);
-      const ext = path.extname(filePath).toLowerCase();
-      const fileName = path.basename(filePath, ext);
-      const webpPath = path.join(uploadsFolder, `${fileName}.webp`);
-      const avifPath = path.join(uploadsFolder, `${fileName}.avif`);
+    await Promise.all(
+      files.map(async (file) => {
+        const filePath = path.join(uploadsFolder, file);
+        const ext = path.extname(filePath).toLowerCase();
+        const fileName = path.basename(filePath, ext);
+        const jpgPath = path.join(uploadsFolder, `${fileName}.jpg`);
+        const webpPath = path.join(uploadsFolder, `${fileName}.webp`);
+        const avifPath = path.join(uploadsFolder, `${fileName}.avif`);
 
-      let compress = true;
-      let webp = true;
-      let avif = true;
-
-      console.log(`Processing file: ${filePath}`);
-
-      if ([".webp", ".avif"].includes(ext)) {
-        console.log(`File ${filePath} is already optimized. Skipping...`);
-        continue;
-      }
-
-      const stats = await fs.stat(filePath);
-      if (stats.size < 200 * 1024) {
-        compress = false;
-        console.log(`File ${filePath} is smaller than 200 KB. Skipping compression.`);
-      }
-
-      const webpExists = await fs.pathExists(webpPath);
-      if (webpExists) {
-        webp = false;
-        console.log(`File ${filePath} already has WebP version. Skipping WebP compression.`);
-      }
-
-      const avifExists = await fs.pathExists(avifPath);
-      if (avifExists) {
-        avif = false;
-        console.log(`File ${filePath} already has AVIF version. Skipping AVIF compression.`);
-      }
-
-      try {
-        if (compress) {
-          await compressAndOverwrite(filePath, ext);
+        if ([".webp", ".avif"].includes(ext)) {
+          console.log(`File ${filePath} is already optimized. Skipping...`);
+          return;
         }
-        if (webp) {
-          await createWebP(filePath, webpPath);
+
+        try {
+          if (ext === ".png") {
+            await convertPngToJpg(filePath, jpgPath);
+            await fs.remove(filePath);
+            console.log(`Converted PNG to JPG and deleted original: ${filePath}`);
+          }
+
+          const compress = ext === ".jpg" || (ext === ".png" && (await fs.pathExists(jpgPath)));
+          if (compress) {
+            const isBelowMaxSize = await isFileBelowSize(jpgPath, MAX_FILE_SIZE);
+            if (!isBelowMaxSize) {
+              await compressAndOverwrite(jpgPath);
+            } else {
+              console.log(`File ${jpgPath} is already below 200 KB. Skipping compression.`);
+            }
+          }
+
+          if (!(await fs.pathExists(webpPath) || await isFileBelowSize(webpPath, MAX_FILE_SIZE))) await createWebP(jpgPath, webpPath);
+          if (!(await fs.pathExists(avifPath) || await isFileBelowSize(webpPath, MAX_FILE_SIZE))) await createAVIF(jpgPath, avifPath);
+        } catch (error) {
+          console.error(`Error processing ${filePath}:`, error);
         }
-        if (avif) {
-          await createAVIF(filePath, avifPath);
-        }
-      } catch (error) {
-        console.error(`Error processing ${filePath}:`, error);
-      }
-    }
+      })
+    );
+
     console.log("Image optimization completed!");
   } catch (error) {
     console.error("Error during processing:", error);
   }
 }
 
-async function compressAndOverwrite(filePath, ext) {
-  const tempCompressedPath = `${filePath}-temp${ext}`;
-  console.log(`Compressing and overwriting: ${filePath}`);
-
-  await sharp(filePath)
-    .resize({ height: 1000 })
-    .toFormat(ext === ".png" ? "png" : "jpeg", { quality: 80, compressionLevel: 8 })
-    .toFile(tempCompressedPath);
-
-  await fs.move(tempCompressedPath, filePath, { overwrite: true });
-  console.log(`Original file ${filePath} replaced with compressed version.`);
+async function convertPngToJpg(inputPath, outputPath, quality = 80) {
+  await sharp(inputPath)
+    .jpeg({ quality })
+    .toFile(outputPath);
+  console.log(`Converted ${inputPath} to ${outputPath}`);
 }
 
-async function createWebP(filePath, webpPath) {
-  console.log(`Creating WebP version: ${webpPath}`);
+async function compressAndOverwrite(filePath, quality = 80) {
+  const tempCompressedPath = `${filePath}-temp`;
+
   await sharp(filePath)
-    .resize({ height: 1000 })
-    .webp({ quality: 80 })
+    .resize({ width: 1000, height: 1000, fit: "inside" })
+    .jpeg({ quality })
+    .toFile(tempCompressedPath);
+
+  const fileSize = (await fs.stat(tempCompressedPath)).size;
+
+  if (fileSize > MAX_FILE_SIZE && quality > MIN_QUALITY) {
+    console.log(`${tempCompressedPath} file size is ${fileSize} bytes, re-compressing...`);
+    return await compressAndOverwrite(filePath, quality - QUALITY_STEP);
+  }
+
+  await fs.move(tempCompressedPath, filePath, { overwrite: true });
+  console.log(`File compressed to: ${filePath} (${fileSize} bytes).`);
+}
+
+async function createWebP(filePath, webpPath, quality = 80) {
+  await sharp(filePath)
+    .resize({ width: 1000, height: 1000, fit: "inside" })
+    .webp({ quality })
     .toFile(webpPath);
   console.log(`WebP created: ${webpPath}`);
 }
 
-async function createAVIF(filePath, avifPath) {
-  console.log(`Creating AVIF version: ${avifPath}`);
+async function createAVIF(filePath, avifPath, quality = 80) {
   await sharp(filePath)
-    .resize({ height: 1000 })
-    .avif({ quality: 80 })
+    .resize({ width: 1000, height: 1000, fit: "inside" })
+    .avif({ quality })
     .toFile(avifPath);
   console.log(`AVIF created: ${avifPath}`);
+}
+
+async function isFileBelowSize(filePath, maxSize) {
+  try {
+    const stats = await fs.stat(filePath);
+    return stats.size < maxSize;
+  } catch (error) {
+    console.error(`Error checking file size for ${filePath}:`, error);
+    return false;
+  }
 }
 
 processFiles();

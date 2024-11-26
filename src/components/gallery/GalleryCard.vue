@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { EventProps } from '../../types/event';
+import { getImageVariant } from '../../utils/imageConverter';
 
 const props = defineProps<{
     event: EventProps;
@@ -8,7 +9,11 @@ const props = defineProps<{
 
 <template>
 <div class="card-wrapper" @click="$emit('eventChoice', props.event.id)">
-    <img :src="event.data.banner" alt=""  loading="lazy" decoding="async">
+    <picture>
+      <source :srcset="getImageVariant(event.data.banner, 'webp')" type="image/webp">
+      <source :srcset="getImageVariant(event.data.banner, 'avif')" type="image/avif">
+      <img :src="event.data.banner" alt="Event banner" loading="lazy" decoding="async">
+    </picture>
     <div class="card-content">
         <p class="card-title">{{ event.data.title }}</p>
         <p>{{ event.data.date }}</p>
@@ -29,12 +34,14 @@ const props = defineProps<{
     justify-content: center;
     align-items: center; 
     cursor: pointer;
-    img{
+    picture {
+        overflow: hidden;
+        img{
         width: 100%;
         height: 100%;
         object-fit: cover;
         transition: all 0.3s var(--custom-ease-1);
-    }
+    }}
 
     .card-content{
         position: absolute;

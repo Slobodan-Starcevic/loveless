@@ -1,14 +1,15 @@
 ---
 import { links } from '../utils/links';
 import type { EventProps } from '../types/event'
+import { getImageVariant } from '../utils/imageConverter';
 interface Props {
 	upcoming: boolean;
 	align: string;
-	event?: EventProps;
+	event: EventProps;
 }
 
 const { upcoming, align, event } = Astro.props;
-const eventDate = new Date(event?.data.date);
+const eventDate = new Date(event.data.date);
 const eventDay = eventDate.getDate()
 const eventMonth = eventDate.toLocaleString('default', {month: 'long'}).slice(0, 3).toUpperCase();
 ---
@@ -21,7 +22,11 @@ const eventMonth = eventDate.toLocaleString('default', {month: 'long'}).slice(0,
 				<p class="month">{eventMonth}</p>
 			</div>
 			<div class="card-image">
-				<img src={event?.data.banner} alt="Event Image"  loading="lazy" decoding="async">
+				<picture>
+					<source srcset={getImageVariant(event.data.banner, 'webp')} type="image/webp" />
+					<source srcset={getImageVariant(event.data.banner, 'avif')} type="image/avif" />
+					<img src={event?.data.banner} alt="Event Image"  loading="lazy" decoding="async">
+				</picture>
 			</div>
 			<div class="card-content">
 				<div class="text">

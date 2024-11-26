@@ -39,7 +39,7 @@ const {} = Astro.props
                                 item.style.opacity = "1";
                             }, index * 200);
                         });
-                    }, 2500);
+                    }, 1500);
 
                     observer.unobserve(scroller2);
                 }
@@ -80,7 +80,7 @@ const {} = Astro.props
         .from('#instagram-wrapper .header-wrapper', {
             opacity: 0,
             duration: 1,
-        })
+        }, .2)
         .from('#instagram-wrapper #insta-row-one', {
             y: '-100%',
             duration: 1,
@@ -108,12 +108,36 @@ const {} = Astro.props
             <div class="scroller2">
                 <a href={links.instagram} target="_blank">
                     <div class="scroller2-inner">
-                        <img src="/images/insta1.jpg" alt=""  loading="lazy" decoding="async">
-                        <img src="/images/insta2.jpg" alt=""  loading="lazy" decoding="async">
-                        <img src="/images/insta3.jpg" alt=""  loading="lazy" decoding="async">
-                        <img src="/images/insta4.jpg" alt=""  loading="lazy" decoding="async">
-                        <img src="/images/insta5.jpg" alt=""  loading="lazy" decoding="async">
-                        <img src="/images/insta6.jpg" alt=""  loading="lazy" decoding="async">
+                        <picture>
+                            <source srcset="/images/insta1.webp" type="image/webp">
+                            <source srcset="/images/insta1.avif" type="image/avif">
+                            <img src="/images/insta1.jpg" alt="Scrolling instagram post" loading="lazy" decoding="async">
+                        </picture>
+                        <picture>
+                            <source srcset="/images/insta2.webp" type="image/webp">
+                            <source srcset="/images/insta2.avif" type="image/avif">
+                            <img src="/images/insta2.jpg" alt="Scrolling instagram post" loading="lazy" decoding="async">
+                        </picture>
+                        <picture>
+                            <source srcset="/images/insta3.webp" type="image/webp">
+                            <source srcset="/images/insta3.avif" type="image/avif">
+                            <img src="/images/insta3.jpg" alt="Scrolling instagram post" loading="lazy" decoding="async">
+                        </picture>
+                        <picture>
+                            <source srcset="/images/insta4.webp" type="image/webp">
+                            <source srcset="/images/insta4.avif" type="image/avif">
+                            <img src="/images/insta4.jpg" alt="Scrolling instagram post" loading="lazy" decoding="async">
+                        </picture>
+                        <picture>
+                            <source srcset="/images/insta5.webp" type="image/webp">
+                            <source srcset="/images/insta5.avif" type="image/avif">
+                            <img src="/images/insta5.jpg" alt="Scrolling instagram post" loading="lazy" decoding="async">
+                        </picture>
+                        <picture>
+                            <source srcset="/images/insta6.webp" type="image/webp">
+                            <source srcset="/images/insta6.avif" type="image/avif">
+                            <img src="/images/insta6.jpg" alt="Scrolling instagram post" loading="lazy" decoding="async">
+                        </picture>
                     </div>
                 </a>
             </div>

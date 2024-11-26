@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import type { EventProps } from '../../types/event'
+import { getImageVariant } from '../../utils/imageConverter';
 
 const props = defineProps<{
     events: Array<EventProps>
@@ -41,28 +42,39 @@ const imageArray = computed(() => {
 <div class="scroller-wrapper desktop-tablet-content">
     <div class="scroller">
         <div class="scroller-inner s-one">
-            <img v-for="(image, index) in imageArray" 
-            :key="'scroll1-' + index"
-            :src="image" 
-            alt="" 
-            loading="lazy"
-            decoding="async">
+            <picture v-for="(image, index) in imageArray" :key="'scroll1-' + index">
+                <source :srcset="getImageVariant(image, 'webp')" type="image/webp" />
+                <source :srcset="getImageVariant(image, 'avif')" type="image/avif" />
+                <img :src="image" alt="Left cinema scroller" loading="lazy" decoding="async" />
+            </picture>
         </div>
     </div>
     <div class="still">
         <div class="still-inner">
-            <img :src="imageArray[0]" alt="" loading="lazy" decoding="async">
-            <img src="images/surprise.svg" alt="" loading="lazy" decoding="async">
-            <img :src="imageArray[1]" alt="" loading="lazy" decoding="async">
+            <picture v-if="imageArray[0]">
+                <source :srcset="getImageVariant(imageArray[0], 'webp')" type="image/webp" />
+                <source :srcset="getImageVariant(imageArray[0], 'avif')" type="image/avif" />
+                <img :src="imageArray[0]" aria-hidden="true" loading="lazy" decoding="async" />
+            </picture>
+            <picture>
+                <source srcset="images/surprise.webp" type="image/webp">
+                <source srcset="images/surprise.avif" type="image/avif">
+                <img src="images/surprise.svg" alt="Surprise image" loading="lazy" decoding="async">
+            </picture>
+            <picture v-if="imageArray[1]">
+                <source :srcset="getImageVariant(imageArray[1], 'webp')" type="image/webp" />
+                <source :srcset="getImageVariant(imageArray[1], 'avif')" type="image/avif" />
+                <img :src="imageArray[1]" aria-hidden="true" loading="lazy" decoding="async" />
+            </picture>
         </div>
     </div>
     <div class="scroller" data-direction="down">
         <div class="scroller-inner s-two">
-            <img v-for="(image, index) in imageArray" 
-            :key="'scroll2-' + index"
-            :src="image" 
-            alt="" 
-            loading="lazy" decoding="async">
+            <picture v-for="(image, index) in imageArray" :key="'scroll2-' + index">
+                <source :srcset="getImageVariant(image, 'webp')" type="image/webp" />
+                <source :srcset="getImageVariant(image, 'avif')" type="image/avif" />
+                <img :src="image" alt="Right cinema scroller" loading="lazy" decoding="async" />
+            </picture>
         </div>
     </div>
 </div>
@@ -95,13 +107,15 @@ const imageArray = computed(() => {
             &:hover {
                 animation-play-state: paused;
             }
-
-            img {
+            
+            picture {
                 border: 2px solid var(--loveless-blue);
                 border-radius: var(--radius-xs);
                 filter: brightness(60%);
                 transition: transform 0.3s var(--custom-ease-1), filter 0.3s var(--custom-ease-1);
-
+                img{
+                    width: 100%;
+                }
                 &:hover {
                     filter: brightness(80%);
                 }
@@ -136,11 +150,13 @@ const imageArray = computed(() => {
             flex-direction: column;
             height: max-content;
 
-            img {
+            picture {
                 border: 3px solid var(--loveless-blue);
                 border-radius: var(--radius-xs);
                 transition: transform 0.3s var(--custom-ease-1), filter 0.3s var(--custom-ease-1);
-
+                img{
+                    width: 100%;
+                }
                 &:nth-child(1) {
                     filter: brightness(60%);
                     &:hover {
