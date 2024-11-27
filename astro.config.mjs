@@ -4,17 +4,17 @@ import vue from '@astrojs/vue';
 
 import playformInline from '@playform/inline';
 
-import playformCompress from '@playform/compress';
-
 import playformFormat from '@playform/format';
 
 import sitemap from '@astrojs/sitemap';
+
+import compressor from 'astro-compressor';
 
 // https://astro.build/config
 export default defineConfig({
     site: 'https://mrloveless.netlify.app/',
     devToolbar: { enabled: false },
-    integrations: [vue(), sitemap(), playformInline({}), playformFormat({}), playformCompress()],
+    integrations: [vue(), sitemap(), playformInline({}), playformFormat({}), compressor({})],
     vite: {
         css: {
           preprocessorOptions: {
