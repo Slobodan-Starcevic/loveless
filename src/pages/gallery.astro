@@ -38,13 +38,13 @@ const query = Astro.url.searchParams.get('id');
 
     timeline
         .to(wrapper, {
-                autoAlpha: 1,
-                duration: .1
-            })
+            autoAlpha: 1,
+            duration: .3
+        })
         .from(wrapper, {
             padding: '0px',
             duration: 1
-        })
+        }, 0)
         .from(cic, {
             borderRadius: '0px',
             duration: 1

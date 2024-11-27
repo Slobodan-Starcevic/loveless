@@ -57,11 +57,12 @@ var upcomingEvent: EventProps | null = (() => {
         wrapperTimeline
             .to(sectionWrapper, {
                 autoAlpha: 1,
-                duration: .1
+                duration: .1,
+                delay: .3
             })
             .from(sectionWrapper, {
                 padding: '0px'
-            })
+            }, 0)
             .from(cicWrapper, {
                 borderRadius: '0px'
             }, '<')
