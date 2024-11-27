@@ -12,7 +12,8 @@ const props = defineProps<{
     <picture>
       <source :srcset="getImageVariant(event.data.banner, 'webp')" type="image/webp">
       <source :srcset="getImageVariant(event.data.banner, 'avif')" type="image/avif">
-      <img :src="event.data.banner" alt="Event banner" loading="lazy" decoding="async">
+      <img 
+      :src="event.data.banner" alt="Event banner" loading="lazy" decoding="async">
     </picture>
     <div class="card-content">
         <p class="card-title">{{ event.data.title }}</p>

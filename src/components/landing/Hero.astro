@@ -29,30 +29,49 @@ var upcomingEvent: EventProps | null = (() => {
         const sectionWrapper = document.getElementById('hero-wrapper') as HTMLElement;
         const cicWrapper = document.getElementById('hero-cic') as HTMLElement;
         const heartElement = document.getElementById('hero-logo') as HTMLElement;
+        const messageBox = document.querySelector('.message-box');
         heartElement.classList.add('heartbeat-zero');
-
-        heartElement.addEventListener('click', () => {
-            clickCount++;
-
-            heartElement.classList.remove('heartbeat-zero', 'heartbeat-one', 'heartbeat-two', 'heartbeat-three');
-
-            switch (clickCount) {
-                case 1:
-                    heartElement.classList.add('heartbeat-one');
-                    break;
-                case 2:
-                    heartElement.classList.add('heartbeat-two');
-                    break;
-                case 3:
-                    heartElement.classList.add('heartbeat-three');
-                    clickCount = 2;
-                    break;
-            }
-        });
-
-        
         const heroTimeline = gsap.timeline();
         const wrapperTimeline = gsap.timeline({defaults: {duration: 1, ease: "power1.inOut"}});
+        let previousClick = 0;
+
+        heartElement.addEventListener('click', () => {
+            const now = Date.now();
+            if (clickCount < 4 && now - previousClick >= 2500){
+                clickCount++;
+                previousClick = now;
+
+                const timeline = gsap.timeline();
+
+                heartElement.classList.remove('heartbeat-zero', 'heartbeat-one', 'heartbeat-two', 'heartbeat-three');
+
+                const animateMessage = () => {
+                    timeline
+                        .to(messageBox, {opacity: 1, duration: .5})
+                        .from(messageBox, {y: 10, duration: 1}, 0)
+                        .to(messageBox, {opacity: 0, duration: .5, delay: 2})
+                };
+                switch (clickCount) {
+                    case 1:
+                        animateMessage();
+                        heartElement.classList.add('heartbeat-one');
+                        messageBox.textContent = "That’s not going to fix it";
+                        break;
+                    case 2:
+                        animateMessage();
+                        heartElement.classList.add('heartbeat-two');
+                        messageBox.textContent = "Seriously, it’s very broken";
+                        break;
+                    case 3:
+                        animateMessage();
+                        heartElement.classList.add('heartbeat-three');
+                        messageBox.textContent = "Alright, you’ve been ghosted…";
+                        break;
+                    default:
+                        heartElement.classList.add('heartbeat-three');
+                }
+            }
+        });
 
         wrapperTimeline
             .to(sectionWrapper, {
@@ -139,7 +158,7 @@ var upcomingEvent: EventProps | null = (() => {
             <picture>
                 <source srcset="/images/loveless-pink.webp" type="image/webp">
                 <source srcset="/images/loveless-pink.avif" type="image/avif">
-                <img src="/images/loveless-pink.png" id="hero-logo" class="loveless-logo" alt="Loveless logo">
+                <img src="/images/loveless-pink.png" id="hero-logo" width="250" height="250" class="loveless-logo" alt="Loveless logo">
             </picture>
             <ul class="nav-list" id="hero-navlist">
                 <li class="stroke-pink">
@@ -167,6 +186,7 @@ var upcomingEvent: EventProps | null = (() => {
                     </a>
                 </li>
             </ul>
+            <div class="message-box"></div>
         </div>
         <div class="scroll">
             <p>OR START SCROLLING</p>
@@ -227,11 +247,36 @@ var upcomingEvent: EventProps | null = (() => {
             }
         }
 
+        .message-box {
+            opacity: 0; /* Hidden by default */
+            display: block; /* Block is more natural for a div */
+            position: absolute; /* Position relative to its parent */
+            top: -50px; /* Position above the triggering element */
+            left: 50%; /* Horizontally center */
+            transform: translateX(-50%); /* Center alignment trick */
+            border: 2px solid var(--loveless-pink); /* Border matching the theme */
+            border-radius: 10px; /* Rounded corners */
+            padding: 10px 20px; /* Internal spacing */
+            color: var(--loveless-pink); /* Font color */
+            background-color: var(--loveless-black);
+            font-size: 1rem; /* Base font size */
+            text-align: center; /* Center text */
+            z-index: 10; /* Ensure it's above other elements */
+            white-space: normal; /* Allow text to wrap on smaller screens */
+            overflow-wrap: break-word; /* Prevent text overflow */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow for better visibility */
+            font-family: 'Mortend'; /* Ensure consistent font */
+            max-width: 80%; /* Prevent overflow on smaller screens */
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+
         picture{
             overflow: visible;
             .loveless-logo {
                 z-index: 10;
                 cursor: pointer;
+                
             }
         }
 
@@ -374,7 +419,13 @@ var upcomingEvent: EventProps | null = (() => {
         .background-image{
             display: none;
         }
-        
+        .message-box{
+            font-size: var(--font-size-s) !important;
+            padding: 10px !important;
+            width: max-content;
+            max-width: 250px;
+            top: 100px !important;
+        }
     }
     @media screen and (min-width: 768px) and (max-width: 1079px) {
         h1{ 
@@ -410,7 +461,10 @@ var upcomingEvent: EventProps | null = (() => {
         .background-image{
             display: none;
         }
-        
+        .message-box{
+            width: max-content;
+            top: 100px !important;
+        }
     }
     @media screen and (min-width : 1080px) {
         h1{ 

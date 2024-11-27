@@ -104,9 +104,11 @@ const pastEvents = allEvents.filter(event => new Date(event.data.date) < now);
                             duration: 1
                         }, '<');
                 } else {
-                    // Handle the case where no data-target exists
                     const referrer = document.referrer;
-                    const isInternal = referrer.includes(window.location.origin);
+                    const origin = window.location.origin;
+
+                    const isInternal = referrer.startsWith(`${origin}/events`) || referrer.startsWith(`${origin}/gallery`);
+
 
                     if (isInternal) {
                         const timeline = gsap.timeline({

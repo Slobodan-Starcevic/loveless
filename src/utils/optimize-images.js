@@ -63,7 +63,7 @@ async function processFiles() {
   }
 }
 
-async function convertPngToJpg(inputPath, outputPath, quality = 80) {
+async function convertPngToJpg(inputPath, outputPath, quality = 100) {
   await sharp(inputPath)
     .jpeg({ quality })
     .toFile(outputPath);
@@ -74,7 +74,7 @@ async function compressAndOverwrite(filePath, quality = 80) {
   const tempCompressedPath = `${filePath}-temp`;
 
   await sharp(filePath)
-    .resize({ width: 1000, height: 1000, fit: "inside" })
+    .resize({ width: 800, height: 800, fit: "inside" })
     .jpeg({ quality })
     .toFile(tempCompressedPath);
 
