@@ -1,11 +1,22 @@
 ---
 import { links } from '../utils/links'
-type Props = {
+import type {EventProps} from '../types/event' 
+import { getCollection } from 'astro:content';
 
-}
+const events = await getCollection('events');
 
-const {} = Astro.props
-
+var upcomingEvent: EventProps | null = (() => {
+    if (events && events.length > 0) {
+        const now = new Date();
+        const result = events.reduce((maxEvent, currentEvent) => {
+            const maxEventDate = new Date(maxEvent.data.date);
+            const currentEventDate = new Date(currentEvent.data.date);
+            return currentEventDate > maxEventDate ? currentEvent : maxEvent;
+        });
+        return new Date(result.data.date) > now ? result : null;
+    }
+    return null;
+})();
 ---
 <script>
     import {gsap} from 'gsap';
@@ -106,8 +117,8 @@ const {} = Astro.props
                 <li><a href={links.home} class="animated-link" data-target='/'>HOME</a></li>
                 <li><a href={links.events} class="animated-link" data-target='/events'>EVENTS</a></li>
                 <li><a href={links.gallery} class="animated-link" data-target='/gallery'>GALLERY</a></li>
-                <li><a href={links.tickets}>TICKETS</a></li>
                 <li><a href={links.merch}>MERCH</a></li>
+                {upcomingEvent &&  <li><a href={upcomingEvent.data.ticketLink}>TICKETS</a></li>}
             </ul>
         </div>
     </div>
