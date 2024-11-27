@@ -14,7 +14,7 @@ import compressor from 'astro-compressor';
 export default defineConfig({
     site: 'https://mrloveless.netlify.app/',
     devToolbar: { enabled: false },
-    integrations: [vue(), sitemap(), playformInline({}), playformFormat({}), compressor({})],
+    integrations: [vue(), sitemap(), playformInline({}), playformFormat({})],
     vite: {
         css: {
           preprocessorOptions: {
