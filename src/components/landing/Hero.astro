@@ -96,8 +96,8 @@ var upcomingEvent: EventProps | null = (() => {
                 event.preventDefault();
                 const target = link.getAttribute('data-target');
                 if (target) {
-                    const wrappers = document.querySelectorAll('.section-wrapper');
-                    const cics = document.querySelectorAll('.cic');
+                    const wrappers = document.getElementById('hero-wrapper');
+                    const cics = document.getElementById('hero-cic');
 
                     const timeline = gsap.timeline({
                         defaults: { duration: 0.2, ease: "power1.inOut" },

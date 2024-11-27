@@ -106,8 +106,8 @@ const description = (upcomingEvents.length === 1
                 event.preventDefault();
                 const target = link.getAttribute('data-target');
                 if (target) {
-                    const wrappers = document.querySelectorAll('.section-wrapper');
-                    const cics = document.querySelectorAll('.cic');
+                    const wrappers = document.getElementById('whatsOn-wrapper');
+                    const cics = document.getElementById('whatsOn-cic');
 
                     const timeline = gsap.timeline({
                         defaults: { duration: 0.5, ease: "power1.inOut" },

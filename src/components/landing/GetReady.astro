@@ -75,7 +75,7 @@ function getRandomItems(array: string[], count: number): string[]{
         }, .2)
         .to('#getReady-wrapper .header-wrapper', {
             scale: 1.2,
-            duration: 1,
+            duration: .7,
             ease: 'power4.out',
             yoyo: true,
             repeat: 1
@@ -84,7 +84,7 @@ function getRandomItems(array: string[], count: number): string[]{
             x: -5,
             y: 5,
             delay: 0.2,
-            duration: .8,
+            duration: .5,
             ease: 'power4.out',
             yoyo: true,
             repeat: 1
@@ -116,8 +116,8 @@ function getRandomItems(array: string[], count: number): string[]{
                 event.preventDefault();
                 const target = link.getAttribute('data-target');
                 if (target) {
-                    const wrappers = document.querySelectorAll('.section-wrapper');
-                    const cics = document.querySelectorAll('.cic');
+                    const wrappers = document.getElementById('getReady-wrapper');
+                    const cics = document.getElementById('getReady-cic');
 
                     const timeline = gsap.timeline({
                         defaults: { duration: 0.5, ease: "power1.inOut" },
