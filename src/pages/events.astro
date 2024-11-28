@@ -104,53 +104,7 @@ const pastEvents = allEvents.filter(event => new Date(event.data.date) < now);
                             duration: 1
                         }, '<');
                 } else {
-                    const referrer = document.referrer;
-                    const origin = window.location.origin;
-
-                    const isInternal = referrer.startsWith(`${origin}/events`) || referrer.startsWith(`${origin}/gallery`);
-
-
-                    if (isInternal) {
-                        const timeline = gsap.timeline({
-                            defaults: { duration: 0.2, ease: "power1.inOut" },
-                            onComplete: () => {
-                                history.back();
-                            },
-                        });
-
-                        timeline
-                            .to('.events-cic > *', {
-                                opacity: 0
-                            })
-                            .to(wrappers, {
-                                padding: 0,
-                                duration: 1
-                            }, '<')
-                            .to(cics, {
-                                borderRadius: '0px',
-                                duration: 1
-                            }, '<');
-                    } else {
-                        const timeline = gsap.timeline({
-                            defaults: { duration: 0.2, ease: "power1.inOut" },
-                            onComplete: () => {
-                                window.location.href = '/';
-                            },
-                        });
-
-                        timeline
-                            .to('.events-cic > *', {
-                                opacity: 0
-                            })
-                            .to(wrappers, {
-                                padding: 0,
-                                duration: 1
-                            }, '<')
-                            .to(cics, {
-                                borderRadius: '0px',
-                                duration: 1
-                            }, '<');
-                    }
+                    console.error("error navigating from events")
                 }
             });
         });

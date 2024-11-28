@@ -23,7 +23,7 @@ const {color} = Astro.props;
 
     window.addEventListener('load', handler, false);
 </script>
-<a class={`return-wrapper bg-${color} animated-link`} href="#" data-color={color}>
+<a class={`return-wrapper bg-${color} animated-link`} href="#" data-color={color} data-target="/">
     <span></span>
     <img src="/images/back-arrow.svg" alt="Return icon" loading="lazy" decoding="async">
 </a>

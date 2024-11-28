@@ -14,9 +14,8 @@ const formattedDateEvents = allEvents.map(event => ({
         date: dateFormatterDDMY(event.data.date)
     }
 }))
-
-const query = Astro.url.searchParams.get('id');
 ---
+
 <script>
     document.addEventListener('mousemove', (e) => {
         const header = document.getElementById('floating-header') as HTMLElement;
@@ -96,56 +95,7 @@ const query = Astro.url.searchParams.get('id');
                             duration: 1
                         }, '<');
                 }  else {
-                    const referrer = document.referrer;
-                    const isInternal = referrer.includes(window.location.origin);
-
-                    if (isInternal) {
-                        const timeline = gsap.timeline({
-                            defaults: { duration: 0.2, ease: "power1.inOut" },
-                            onComplete: () => {
-                                history.back();
-                            },
-                        });
-
-                        timeline
-                            .to('.gallery-cic-123 > *', {
-                                opacity: 0
-                            })
-                            .to('.gallery-cards-wrapper', {
-                                opacity: 0
-                            }, '<')
-                            .to(wrapper, {
-                                padding: 0,
-                                duration: 1
-                            }, '<')
-                            .to(cic, {
-                                borderRadius: '0px',
-                                duration: 1
-                            }, '<');
-                    } else {
-                        const timeline = gsap.timeline({
-                            defaults: { duration: 0.2, ease: "power1.inOut" },
-                            onComplete: () => {
-                                window.location.href = '/';
-                            },
-                        });
-
-                        timeline
-                            .to('.gallery-cic-123 > *', {
-                                opacity: 0
-                            })
-                            .to('.gallery-cards-wrapper', {
-                                opacity: 0
-                            }, '<')
-                            .to(wrapper, {
-                                padding: 0,
-                                duration: 1
-                            }, '<')
-                            .to(cic, {
-                                borderRadius: '0px',
-                                duration: 1
-                            }, '<');
-                    }
+                    console.error("error navigating from events")
                 }
             });
         });
