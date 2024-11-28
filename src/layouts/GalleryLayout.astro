@@ -1,0 +1,94 @@
+---
+import "../../src/styles/global.css"
+import Footer from "../components/Footer.astro";
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+		<link rel="manifest" href="/site.webmanifest">
+		<link rel="preload" href="/images/chevron.svg" as="image" type="image/svg+xml">
+		<link rel="preload" href="/images/cross.svg" as="image" type="image/svg+xml">
+		<meta name="apple-mobile-web-app-title" content="Mr Loveless" />
+		<link rel="preload" href="/fonts/mortend.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+		<link rel="preload" href="/fonts/TT.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+	</head>
+	<body>
+		<div class="grain">
+			<div class="grain-texture"></div>
+		</div>
+		<slot />
+		<Footer/>
+	</body>
+</html>
+
+<style lang="scss">
+	.grain {
+		z-index: 9999;
+		justify-content: center;
+		align-items: center;
+		display: flex;
+		position: fixed;
+		inset: 0%;
+		overflow: hidden;
+		pointer-events: none;
+	}
+	.grain-texture {
+		background-image: url('/images/grain.png');
+		background-position: 50%;
+		background-size: 256px;
+		flex: none;
+		width: 300%;
+		max-width: none;
+		height: 300%;
+		position: absolute;
+		inset: -150% 0% 0% -150%;
+		animation: 2s steps(1) infinite noise;
+	}
+	@keyframes noise {
+		0%, 100% {
+		background-position: 0 0;
+		}
+		10% {
+		background-position: -5% -10%;
+		}
+		20% {
+		background-position: -15% 5%;
+		}
+		30% {
+		background-position: 7% -25%;
+		}
+		40% {
+		background-position: 20% 25%;
+		}
+		50% {
+		background-position: -25% 10%;
+		}
+		60% {
+		background-position: 15% 5%;
+		}
+		70% {
+		background-position: 0% 15%;
+		}
+		80% {
+		background-position: 25% 35%;
+		}
+		90% {
+		background-position: -10% 10%;
+		}
+	}
+</style>
