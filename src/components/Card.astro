@@ -30,8 +30,8 @@ const eventMonth = eventDate.toLocaleString('default', {month: 'long'}).slice(0,
 			</div>
 			<div class="card-content">
 				<div class="text">
-					<h3 class="card-title">{event?.data.title}</h3>
-					<p class="card-description">{event?.data.description}</p>
+					<h3 class="card-title">{event?.data.title.toUpperCase()}</h3>
+					<p class="card-description">{event?.data.description.toUpperCase()}</p>
 				</div>
 				<div class="buttons">
 					{upcoming ?
