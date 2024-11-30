@@ -8,11 +8,18 @@ import { links } from '../utils/links';
 
 const allEvents = await getCollection('events') as Array<EventProps>;
 
+const filteredEvents = allEvents.sort((a: EventProps, b: EventProps) => {
+  const dateA = new Date(a.data.date).getTime();
+  const dateB = new Date(b.data.date).getTime();
+  return dateB - dateA;
+});
+
+
 const now = new Date()
 
-const upcomingEvents = allEvents.filter(event => new Date(event.data.date) > now);
+const upcomingEvents = filteredEvents.filter(event => new Date(event.data.date) > now);
 
-const pastEvents = allEvents.filter(event => new Date(event.data.date) < now);
+const pastEvents = filteredEvents.filter(event => new Date(event.data.date) < now);
 ---
 <script>
     import {gsap} from 'gsap';

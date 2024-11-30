@@ -4,10 +4,17 @@ import ImageGallery from '../components/gallery/ImageGallery.vue';
 import Return from '../components/Return.astro';
 import {getCollection} from 'astro:content'
 import {dateFormatterDDMY} from '../utils/dateFormatter' 
+import type { EventProps } from '../types/event';
 
 const allEvents = await getCollection('events');
 
-const formattedDateEvents = allEvents.map(event => ({
+const filteredEvents = allEvents.sort((a: EventProps, b: EventProps) => {
+  const dateA = new Date(a.data.date).getTime();
+  const dateB = new Date(b.data.date).getTime();
+  return dateB - dateA;
+});
+
+const formattedDateEvents = filteredEvents.map(event => ({
     ...event,
     data: {
         ...event.data,
