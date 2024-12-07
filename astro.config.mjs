@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://mrloveless.netlify.app/',
+    site: 'https://mrloveless.com.au',
     devToolbar: { enabled: false },
     integrations: [vue(), sitemap()],
     vite: {
