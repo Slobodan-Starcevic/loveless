@@ -3,7 +3,6 @@ backend:
     branch: main
 
 local_backend: true
-logo_url: https://drive.google.com/file/d/14i8aMNmcTQeONL2tw4Gt-WPwebT86prS/view?usp=sharing
 
 public_folder: "/images/uploads"
 media_folder: "public/images/uploads"
