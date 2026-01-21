@@ -1,0 +1,245 @@
+
+---
+import Layout from '../layouts/GalleryLayout.astro';
+import Return from '../components/Return.astro';
+---
+
+<script>
+    document.addEventListener('mousemove', (e) => {
+        const header = document.getElementById('floating-header');
+        if (!header) return;
+
+        const rect = header.getBoundingClientRect();
+        const titleCenterX = rect.left + rect.width / 2;
+        const titleCenterY = rect.top + rect.height / 2;
+        const deltaX = e.clientX - titleCenterX;
+        const deltaY = e.clientY - titleCenterY;
+        const moveX = Math.min(Math.max(deltaX * 0.05, -8), 8);
+        const moveY = Math.min(Math.max(deltaY * 0.05, -6), 6);
+        header.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    });
+
+    import { gsap } from 'gsap';
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const wrapper = document.querySelector('.gallery-wrapper');
+        const cic = document.querySelector('.gallery-cic-123');
+
+        const timeline = gsap.timeline();
+        timeline
+            .to(wrapper, { autoAlpha: 1, duration: 0.3 })
+            .from(wrapper, { padding: '0px', duration: 1 }, 0)
+            .from(cic, { borderRadius: '0px', duration: 1 }, "<")
+            .from('.gallery-wrapper .header-wrapper', { opacity: 0, duration: 1 }, 0.5)
+            .from('.gallery-wrapper .return-wrapper', { x: '-150%', duration: 1 });
+    });
+</script>
+
+<Layout 
+    title="Loveless in the Wild – Terms & Conditions" 
+    description="Terms and conditions for the Mr Loveless 'Loveless in the Wild' Giveaway"
+>
+    <main>
+        <div class="grain">
+            <div class="grain-texture"></div>
+        </div>
+
+        <section class="gallery-wrapper bg-pink color-pink">
+            <div class="gallery-cic-123">
+                <Return color="pink" />
+
+                <div class="header-wrapper">
+                    <h1 id="floating-header" class="stroke-pink">Mr Loveless <br> in the Wild</h1>
+                    <h1>Mr Loveless <br> in the Wild</h1>
+                </div>
+
+                <div class="terms-wrapper">
+                    <h1 style="text-align: center;">TERMS &amp; CONDITIONS</h1>
+
+                    <h2>1. Promoter</h2>
+                    <p>
+                        This competition is run by Mr Loveless (the “Promoter”).<br />
+                        Contact: mailto:admin@mrloveless.com.auadmin@mrloveless.com.au</a>
+                    </p>
+                    <p>
+                        This competition is in no way sponsored, endorsed, or administered by, 
+                        or associated with Instagram, Meta, or any other platform.
+                    </p>
+
+                    <h2>2. Eligibility</h2>
+                    <p>Entry is open to Australian residents aged 18 years or over.</p>
+                    <p>Participants must be subscribed to the Mr Loveless newsletter (“The Loveless Letter”).</p>
+                    <p>The submission must be sent from the same email address used for newsletter subscription.</p>
+                    <p>Employees, contractors, or immediate family members of the Promoter are not eligible.</p>
+                    <p>By entering, you confirm that you meet these eligibility requirements.</p>
+
+                    <h2>3. How to Enter</h2>
+                    <p>To enter the competition, participants must:</p>
+                    <p>
+                        • Be subscribed to The Loveless Letter newsletter.<br />
+                        • Recreate the Mr Loveless broken heart logo somewhere in Brisbane (in any creative, safe, and legal way).<br />
+                        • Take a photo of your creation.<br />
+                        • Email the photo to 
+                        mailto:admin@mrloveless.com.auadmin@mrloveless.com.au</a>
+                    </p>
+
+                    <p>Include:</p>
+                    <ul>
+                        <li>Your full name</li>
+                        <li>The location where the photo was taken</li>
+                        <li>Subject line: “Loveless in the Wild”</li>
+                    </ul>
+
+                    <p>The entry must be sent from the same email used for subscription.</p>
+                    <p>Entries close at 11:59pm Brisbane time (AEST) on January 31st.</p>
+                    <p>One entry per person. Multiple entries result in disqualification.</p>
+
+                    <h2>4. Judging Criteria</h2>
+                    <p>This is a game of skill, not chance.</p>
+                    <p>Creativity, originality, effort, humour, impact, and “wow” factor will determine the winner.</p>
+                    <p>All judging decisions are final.</p>
+
+                    <h2>5. Prize</h2>
+                    <p>One (1) winner will receive $200 AUD cash.</p>
+                    <p>The prize is not transferable or exchangeable.</p>
+                    <p>Payment will be made via bank transfer or similar agreed method.</p>
+
+                    <h2>6. Winner Notification</h2>
+                    <p>The winner will be notified via email.</p>
+                    <p>The winner may be announced publicly.</p>
+                    <p>If no reply is received within 7 days, another winner may be selected.</p>
+
+                    <h2>7. Content Usage & Rights</h2>
+                    <p>
+                        By entering, you grant the Promoter a royalty-free, perpetual, worldwide licence 
+                        to use your photo and name for promotional purposes.
+                    </p>
+                    <p>You confirm that:</p>
+                    <p>
+                        • The photo is your original work<br />
+                        • You have permission from any person appearing in the photo<br />
+                        • The photo does not infringe third‑party rights
+                    </p>
+
+                    <h2>8. Safety, Legality & Permissions</h2>
+                    <p>Entries must not:</p>
+                    <p>
+                        • Be created in unsafe, dangerous, or illegal ways<br />
+                        • Involve trespassing, vandalism, or property damage<br />
+                        • Put anyone at risk
+                    </p>
+
+                    <p>You must obtain all necessary permissions needed for your entry.</p>
+                    <p>The Promoter is not responsible for any injury, loss, or legal issues arising from participation.</p>
+
+                    <h2>9. Privacy</h2>
+                    <p>
+                        Personal information is used only for administering the competition 
+                        and contacting the winner.
+                    </p>
+                    <p>Information will not be shared with third parties unless required by law.</p>
+
+                    <h2>10. Disqualification</h2>
+                    <p>Entries may be disqualified if they:</p>
+                    <p>
+                        • Are not submitted from the subscribed email<br />
+                        • Breach these Terms & Conditions<br />
+                        • Are offensive, defamatory, or inappropriate<br />
+                        • Are fraudulent, copied, or misleading
+                    </p>
+
+                    <h2>11. General</h2>
+                    <p>The Promoter reserves the right to verify entries and subscription status.</p>
+                    <p>The Promoter may modify, suspend, or cancel the competition if required.</p>
+                    <p>By entering, you agree to these Terms & Conditions.</p>
+                    <p>This competition is governed by the laws of Australia.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style lang="scss">
+    .header-wrapper {
+        position: relative;
+        overflow: visible;
+        padding: var(--spacing-6xl) 0 var(--spacing-3xl) 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        #floating-header {
+            position: absolute;
+            color: var(--loveless-black);
+            transition: transform 0.2s ease-out;
+        }
+    }
+
+    .terms-wrapper {
+        color: var(--loveless-pink);
+        padding: var(--spacing-l);
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-s);
+
+        h1, h2, p, li {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        p {
+            color: hsl(302, 100%, 89%)
+        }
+
+        ul {
+            padding-left: 1.4rem;
+        }
+    }
+
+    .gallery-wrapper {
+        width: 100%;
+        min-height: 100vh;
+        padding: var(--spacing-s);
+        display: flex;
+        visibility: hidden;
+
+        .gallery-cic-123 {
+            width: 100%;
+            padding: var(--spacing-l) 0;
+            background-color: var(--loveless-black);
+            border-radius: var(--radius-2xl);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    /* Grain effect */
+    .grain {
+        z-index: 9999;
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        display: flex;
+    }
+
+    .grain-texture {
+        background-image: url('/images/grain.png');
+        background-size: 256px;
+        width: 300%;
+        height: 300%;
+        position: absolute;
+        inset: -150% 0 0 -150%;
+        animation: 2s steps(1) infinite noise;
+    }
+
+    @keyframes noise {
+        0%, 100% { background-position: 0 0; }
+        10% { background-position: -5% -10%; }
+        20% { background-position: -15% 5%; }
+        30% { background-position: 7% -25%; }
+        40% { background-position: 20% 25%; }
+    }
+       
